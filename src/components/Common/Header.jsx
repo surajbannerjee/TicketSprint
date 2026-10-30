@@ -12,6 +12,8 @@ import {
   Menu,
   X,
 } from "lucide-react";
+import Image from "next/image";
+import { LOGO } from "@/constants/images";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -32,8 +34,15 @@ export default function Header() {
           {/* Logo Container */}
           <Link href="/" className="flex items-center gap-2.5 group">
             <div className="w-9 h-9 rounded-lg bg-black border border-white/10 flex items-center justify-center shadow-md relative overflow-hidden group-hover:border-[#FF2E63]/50 transition-all">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#FF2E63]/20 to-transparent" />
-              <Ticket className="w-5 h-5 text-[#FF2E63] transform -rotate-12 group-hover:scale-110 transition-transform" />
+              <Image
+                src={LOGO}
+                alt=""
+                width={180}
+                height={180}
+                className=""
+                priority
+              />
+
             </div>
             <span className="font-heading font-extrabold text-lg sm:text-xl text-white tracking-tight">
               TicketSprint
@@ -50,7 +59,7 @@ export default function Header() {
           >
             <Crosshair className="w-4 h-4 text-[#10B981] shrink-0 animate-pulse" />
             <div className="flex flex-col leading-none">
-              <span className="text-[9px] font-bold tracking-wider text-[#10B981] uppercase font-mono">
+              <span className="text-[9px] font-bold tracking-wider text-[#10B981] uppercase ">
                 AUTO GPS
               </span>
               <div className="flex items-center gap-1 mt-0.5">
@@ -86,11 +95,10 @@ export default function Header() {
                 <button
                   key={link.name}
                   onClick={() => setActiveTab(link.name)}
-                  className={`text-sm font-medium transition-colors whitespace-nowrap ${
-                    isActive
-                      ? "text-[#FFA4B6] font-semibold"
-                      : "text-slate-300 hover:text-white"
-                  }`}
+                  className={`text-sm font-medium transition-colors whitespace-nowrap ${isActive
+                    ? "text-[#FFA4B6] font-semibold"
+                    : "text-slate-300 hover:text-white"
+                    }`}
                 >
                   {link.name}
                 </button>
@@ -170,7 +178,7 @@ export default function Header() {
             <div className="flex items-center gap-2.5">
               <Crosshair className="w-4 h-4 text-[#10B981]" />
               <div>
-                <div className="text-[9px] font-bold text-[#10B981] uppercase font-mono">
+                <div className="text-[9px] font-bold text-[#10B981] uppercase ">
                   AUTO GPS
                 </div>
                 <div className="text-xs font-medium text-white">
@@ -192,11 +200,10 @@ export default function Header() {
                     setActiveTab(link.name);
                     setMobileMenuOpen(false);
                   }}
-                  className={`text-left px-3 py-2 rounded-lg text-sm transition-colors ${
-                    isActive
-                      ? "bg-white/5 text-[#FFA4B6] font-semibold"
-                      : "text-slate-300 hover:bg-white/5 hover:text-white"
-                  }`}
+                  className={`text-left px-3 py-2 rounded-lg text-sm transition-colors ${isActive
+                    ? "bg-white/5 text-[#FFA4B6] font-semibold"
+                    : "text-slate-300 hover:bg-white/5 hover:text-white"
+                    }`}
                 >
                   {link.name}
                 </button>

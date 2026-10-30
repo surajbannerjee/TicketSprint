@@ -6,7 +6,8 @@ import { Bookmark, Play, Calendar } from "lucide-react";
 
 /**
  * MovieCard Component
- * Reusable movie card with poster, tags, ratings, trailer play, and booking button.
+ * Reusable movie card with equal height, custom #121522 matched gradient,
+ * tags, ratings, trailer play, and booking action.
  *
  * @param {object} movie - Movie data object
  * @param {string} className - Optional container class
@@ -32,18 +33,24 @@ export default function MovieCard({
 
   return (
     <div
-      className={`group relative flex flex-col rounded-2xl bg-[#121522] border border-white/10 hover:border-white/20 p-3 sm:p-3.5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#0B0D14]/80 ${className}`}
+      className={`group relative flex flex-col justify-between h-full w-full rounded-2xl overflow-hidden bg-[#121522] border border-white/10 hover:border-white/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#0B0D14]/80 ${className}`}
     >
       {/* 1. Poster Image Container */}
-      <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden bg-black/60">
+      <div className="relative w-full aspect-[3/4] overflow-hidden bg-[#121522]">
         <img
           src={movie.posterImage}
           alt={movie.title}
-          className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+          className="h-full w-full aspect-[3/4] object-cover object-center transition-transform duration-500 group-hover:scale-105"
         />
 
-        {/* Cinematic subtle gradient overlay on poster */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 pointer-events-none" />
+        {/* Gradient matched to #121522: subtle on top, heavy and seamless on bottom */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(18, 21, 34, 0.45) 0%, rgba(18, 21, 34, 0.08) 18%, rgba(18, 21, 34, 0) 40%, rgba(18, 21, 34, 0.45) 68%, rgba(18, 21, 34, 0.88) 88%, #121522 100%)",
+          }}
+        />
 
         {/* Top Badges Row */}
         <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between z-10">
@@ -58,7 +65,7 @@ export default function MovieCard({
 
             {/* Format Pill (IMAX, 4DX, Dolby, ScreenX) */}
             {movie.format && (
-              <span className="px-2 py-0.5 rounded-md bg-black/70 border border-white/20 text-white text-[10px] font-extrabold uppercase tracking-wide backdrop-blur-md">
+              <span className="px-2 py-0.5 rounded-md bg-black/60 border border-white/20 text-white text-[10px] font-extrabold uppercase tracking-wide backdrop-blur-md">
                 {movie.format}
               </span>
             )}
@@ -87,7 +94,7 @@ export default function MovieCard({
         {/* Bottom Poster Row: Rating Pill & Play Trailer Button */}
         <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between z-10">
           {/* Rating & Duration */}
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/75 border border-white/15 backdrop-blur-md text-xs text-white">
+          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#121522]/85 border border-white/15 backdrop-blur-md text-xs text-white shadow-sm">
             {movie.rating && (
               <span className="font-bold text-[#10B981] flex items-center gap-1">
                 <span>🍃</span>
@@ -112,8 +119,8 @@ export default function MovieCard({
         </div>
       </div>
 
-      {/* 2. Movie Info Area */}
-      <div className="pt-3 pb-3 space-y-1 flex-1">
+      {/* 2. Movie Info Area (Flex grow with uniform height) */}
+      <div className="px-4 pt-3.5 pb-2 flex-1 flex flex-col justify-between min-h-[76px] space-y-1.5">
         <Link href={movie.bookLink || "#"} className="block">
           <h3 className="font-heading font-bold text-base text-white hover:text-[#FFA4B6] transition-colors line-clamp-1">
             {movie.title}
@@ -135,8 +142,8 @@ export default function MovieCard({
         </div>
       </div>
 
-      {/* 3. Card Footer Action: Book Seats */}
-      <div className="pt-1">
+      {/* 3. Card Footer Action: Book Seats (Pinned to bottom) */}
+      <div className="px-4 pb-4 pt-1 mt-auto">
         <Link
           href={movie.bookLink || "#"}
           className="w-full py-2.5 px-4 rounded-xl bg-[#171B2A] hover:bg-[#FF2E63] text-slate-200 hover:text-white border border-white/10 hover:border-[#FF2E63] text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-2 group-hover:shadow-md group-hover:shadow-[#FF2E63]/25"

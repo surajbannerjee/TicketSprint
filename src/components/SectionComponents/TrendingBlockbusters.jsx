@@ -9,6 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import { Q50 } from "@/constants/images";
 
 // Initial Movie dataset matching the provided design images
 const DEFAULT_MOVIES = [
@@ -16,7 +17,7 @@ const DEFAULT_MOVIES = [
     id: "dune-awakening",
     title: "Dune: Awakening",
     posterImage:
-      "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=700&auto=format&fit=crop&q=80",
+      Q50,
     format: "IMAX",
     isNowShowing: true,
     rating: "94%",
@@ -148,7 +149,7 @@ export default function TrendingBlockbusters({
 
   return (
     <section
-      className={`w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-16 ${className}`}
+      className={`w-full max-w-[1440px] mx-auto mx-auto px-4 sm:px-6 lg:px-8 lg:py-15 py-5 ${className}`}
     >
       {/* 1. Reusable Section Header Component */}
       <SectionHeader
@@ -164,7 +165,7 @@ export default function TrendingBlockbusters({
       />
 
       {/* 2. Swiper Slider with Mapped MovieCard Components */}
-      <div className="relative mt-2">
+      <div className="relative">
         {isMounted ? (
           <Swiper
             modules={[Navigation, Autoplay]}
@@ -193,18 +194,18 @@ export default function TrendingBlockbusters({
                 spaceBetween: 24,
               },
             }}
-            className="pb-2 overflow-visible"
+            className="pt-5! overflow-visible"
           >
             {filteredMovies.map((movie) => (
-              <SwiperSlide key={movie.id} className="h-auto">
-                <MovieCard movie={movie} className="h-full" />
+              <SwiperSlide key={movie.id} className="!h-auto flex items-stretch">
+                <MovieCard movie={movie} className="w-full h-full" />
               </SwiperSlide>
             ))}
           </Swiper>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 items-stretch">
             {filteredMovies.slice(0, 4).map((movie) => (
-              <MovieCard key={movie.id} movie={movie} />
+              <MovieCard key={movie.id} movie={movie} className="w-full h-full" />
             ))}
           </div>
         )}

@@ -122,7 +122,7 @@ export default function HeroSection({
               <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-black/40 border border-white/10 text-slate-200">
                 <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
                 <span className="font-bold text-white">{movie.imdbRating}</span>
-                <span className="text-[10px] text-slate-400 uppercase font-mono">
+                <span className="text-[10px] text-slate-400 uppercase ">
                   IMDb
                 </span>
               </div>
@@ -171,7 +171,7 @@ export default function HeroSection({
             {movie.audioVisualSpec && (
               <div className="hidden md:flex items-center gap-2 px-3 py-2 rounded-xl bg-black/50 border border-white/10 backdrop-blur-md text-xs text-slate-300">
                 <Volume2 className="w-3.5 h-3.5 text-[#10B981]" />
-                <span className="font-mono text-[11px] text-slate-300">
+                <span className=" text-[11px] text-slate-300">
                   {movie.audioVisualSpec}
                 </span>
               </div>
@@ -193,8 +193,8 @@ export default function HeroSection({
                   type="button"
                   onClick={() => handleFormatClick(fmt.id)}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 ${isActive
-                      ? "bg-[#FF2E63] text-white shadow-md shadow-[#FF2E63]/30"
-                      : "bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white"
+                    ? "bg-[#FF2E63] text-white shadow-md shadow-[#FF2E63]/30"
+                    : "bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white"
                     }`}
                 >
                   {fmt.hasIcon && (

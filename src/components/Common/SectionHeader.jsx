@@ -55,12 +55,12 @@ export default function SectionHeader({
 
   return (
     <div
-      className={`w-full flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 ${className}`}
+      className={`w-full flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-10 ${className}`}
     >
       {/* Left: Badge & Heading */}
       <div className="space-y-1.5">
         {badge && (
-          <div className="flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-widest text-[#FF2E63] font-mono">
+          <div className="flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-widest text-[#FF2E63] ">
             {badgeIcon || <Film className="w-3.5 h-3.5 text-[#FF2E63]" />}
             <span>{badge}</span>
           </div>
@@ -78,11 +78,10 @@ export default function SectionHeader({
             <button
               type="button"
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 ${
-                dropdownOpen || activeFilter !== "All"
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 ${dropdownOpen || activeFilter !== "All"
                   ? "bg-[#1E2438] border-[#FF2E63]/50 text-white shadow-md shadow-[#FF2E63]/20"
                   : "bg-[#121522] border-white/10 text-slate-300 hover:text-white hover:border-white/20"
-              }`}
+                }`}
             >
               <span>{activeFilter === "All" ? "Filter Genre" : activeFilter}</span>
               <SlidersHorizontal className="w-3.5 h-3.5 text-slate-400" />
@@ -93,7 +92,7 @@ export default function SectionHeader({
               <div
                 className="absolute right-0 top-full mt-2 w-48 rounded-xl bg-[#121522] border border-white/10 p-1.5 shadow-2xl z-50 backdrop-blur-xl animate-in fade-in zoom-in-95 duration-150"
               >
-                <div className="px-2.5 py-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider font-mono border-b border-white/10 mb-1">
+                <div className="px-2.5 py-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider  border-b border-white/10 mb-1">
                   Filter by Genre
                 </div>
                 <div className="space-y-0.5">
@@ -107,11 +106,10 @@ export default function SectionHeader({
                           if (onFilterSelect) onFilterSelect(option);
                           setDropdownOpen(false);
                         }}
-                        className={`w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                          isSelected
+                        className={`w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${isSelected
                             ? "bg-[#FF2E63] text-white font-semibold"
                             : "text-slate-300 hover:bg-white/5 hover:text-white"
-                        }`}
+                          }`}
                       >
                         <span>{option}</span>
                         {isSelected && <Check className="w-3.5 h-3.5" />}
@@ -160,3 +158,4 @@ export default function SectionHeader({
     </div>
   );
 }
+

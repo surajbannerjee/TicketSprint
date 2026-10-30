@@ -40,7 +40,7 @@ export default function SprintPassBanner({
 
   return (
     <div
-      className={`w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 mt-6 ${className}`}
+      className={`w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 lg:py-15 py-5 ${className}`}
     >
       <div className="relative w-full rounded-2xl bg-[#121520] border border-white/10 p-3.5 sm:p-4 md:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xl backdrop-blur-md">
 
@@ -60,7 +60,7 @@ export default function SprintPassBanner({
                 {title}
               </span>
               {badgeText && (
-                <span className="px-2 py-0.5 rounded-full bg-[#10B981] text-[#042417] text-[10px] font-black tracking-wider uppercase font-mono">
+                <span className="px-2 py-0.5 rounded-full bg-[#10B981] text-[#042417] text-[10px] font-black tracking-wider uppercase ">
                   {badgeText}
                 </span>
               )}

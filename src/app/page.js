@@ -108,7 +108,7 @@ export default function Home() {
 
       {/* Main Content Section */}
       <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 mt-8">
-        
+
         {/* Reusable ActionButton Demonstration */}
         <section className="space-y-6">
           <div className="flex items-center gap-2 pb-2 border-b border-white/10">
@@ -121,7 +121,7 @@ export default function Home() {
           <Card className="bg-[#131620] border-white/10 text-white p-6 shadow-xl">
             <div className="space-y-4">
               <p className="text-sm text-slate-300">
-                এই <code className="text-[#FF2E63] bg-black/50 px-1.5 py-0.5 rounded font-mono">&lt;ActionButton /&gt;</code> কম্পোনেন্টটি আপনার প্রজেক্টের যেকোনো জায়গায় <code className="text-[#10B981] font-mono">title</code> (বা text) এবং <code className="text-[#10B981] font-mono">link</code> (বা href) প্রপ দিয়ে সহজেই রিইউজ করতে পারবেন:
+                এই <code className="text-[#FF2E63] bg-black/50 px-1.5 py-0.5 rounded ">&lt;ActionButton /&gt;</code> কম্পোনেন্টটি আপনার প্রজেক্টের যেকোনো জায়গায় <code className="text-[#10B981] ">title</code> (বা text) এবং <code className="text-[#10B981] ">link</code> (বা href) প্রপ দিয়ে সহজেই রিইউজ করতে পারবেন:
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
@@ -131,7 +131,7 @@ export default function Home() {
                     <Badge className="bg-[#FF2E63]/20 text-[#FF2E63] border-[#FF2E63]/40">
                       Variant: &quot;primary&quot;
                     </Badge>
-                    <span className="text-xs text-slate-400 font-mono">Vibrant Neon Glow</span>
+                    <span className="text-xs text-slate-400 ">Vibrant Neon Glow</span>
                   </div>
                   <div className="py-3 flex items-center justify-center">
                     <ActionButton
@@ -140,7 +140,7 @@ export default function Home() {
                       variant="primary"
                     />
                   </div>
-                  <pre className="text-[11px] p-2.5 rounded bg-black/80 text-slate-300 font-mono overflow-x-auto">
+                  <pre className="text-[11px] p-2.5 rounded bg-black/80 text-slate-300  overflow-x-auto">
                     {`<ActionButton\n  title="BOOK TICKETS NOW"\n  link="/book-tickets"\n  variant="primary"\n/>`}
                   </pre>
                 </div>
@@ -151,7 +151,7 @@ export default function Home() {
                     <Badge className="bg-[#6366F1]/20 text-[#818CF8] border-[#6366F1]/40">
                       Variant: &quot;secondary&quot;
                     </Badge>
-                    <span className="text-xs text-slate-400 font-mono">Glassmorphism Play</span>
+                    <span className="text-xs text-slate-400 ">Glassmorphism Play</span>
                   </div>
                   <div className="py-3 flex items-center justify-center">
                     <ActionButton
@@ -160,7 +160,7 @@ export default function Home() {
                       variant="secondary"
                     />
                   </div>
-                  <pre className="text-[11px] p-2.5 rounded bg-black/80 text-slate-300 font-mono overflow-x-auto">
+                  <pre className="text-[11px] p-2.5 rounded bg-black/80 text-slate-300  overflow-x-auto">
                     {`<ActionButton\n  title="WATCH TRAILER"\n  link="/watch-trailer"\n  variant="secondary"\n/>`}
                   </pre>
                 </div>
@@ -223,7 +223,7 @@ export default function Home() {
                       <div>
                         <div className="font-heading font-bold text-base flex items-center gap-2">
                           {swatch.name}
-                          <span className="font-mono text-xs px-2 py-0.5 rounded bg-black/40 text-slate-300">
+                          <span className=" text-xs px-2 py-0.5 rounded bg-black/40 text-slate-300">
                             {swatch.hex}
                           </span>
                         </div>
