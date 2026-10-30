@@ -4,18 +4,19 @@ import React, { useState } from "react";
 import ActionButton from "@/components/Common/ActionButton";
 import {
   Star,
-  Sparkles,
   Volume2,
   Armchair,
-  Layers,
-  Circle,
 } from "lucide-react";
 
 /**
  * Reusable HeroSection Component
- * Modeled accurately after the TicketSprint cinematic hero design.
+ * Full-screen edge-to-edge cinematic banner with inner content constrained to a responsive container.
  *
- * Supports complete customization via props, or runs with default Cyber Runner 2099 content.
+ * @param {object} movie - Movie details, badges, and action buttons
+ * @param {array} formats - List of cinema format filters
+ * @param {string} locationStatus - Real-time location text
+ * @param {function} onFormatChange - Format switch callback
+ * @param {string} className - Optional custom class
  */
 export default function HeroSection({
   movie = {
@@ -62,29 +63,29 @@ export default function HeroSection({
   };
 
   return (
-    <section className={`relative w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-8 ${className}`}>
-      {/* Cinematic Main Banner Container */}
-      <div className="relative w-full min-h-[580px] sm:min-h-[640px] lg:min-h-[680px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 bg-[#0B0D14] shadow-2xl flex flex-col justify-between">
-        
-        {/* Background Image with Depth & Fallback */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 hover:scale-105"
-          style={{
-            backgroundImage: `url('${movie.backdropImage}')`,
-          }}
-        >
-          {/* Cyberpunk Atmospheric Color Tints */}
-          <div className="absolute inset-0 bg-[#0B0D14]/40 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-tr from-[#FF2E63]/20 via-transparent to-[#6366F1]/20" />
-        </div>
+    <section
+      className={`relative w-full min-h-[calc(100vh-72px)] sm:min-h-[660px] lg:min-h-[740px] flex flex-col justify-between overflow-hidden bg-[#0B0D14] border-b border-white/10 ${className}`}
+    >
+      {/* 1. Full-Screen Background Image with Cinematic Cyberpunk Lighting */}
+      <div
+        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat transition-transform duration-1000 ease-out"
+        style={{
+          backgroundImage: `url('${movie.backdropImage}')`,
+        }}
+      >
+        {/* Subtle Cyberpunk Atmospheric Color Grades */}
+        <div className="absolute inset-0 bg-[#0B0D14]/40 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-[#FF2E63]/25 via-transparent to-[#6366F1]/20" />
+      </div>
 
-        {/* Deep Multi-stop Vignette Overlays for Crisp Text Legibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B0D14] via-[#0B0D14]/75 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0B0D14] via-[#0B0D14]/80 to-transparent w-full md:w-3/4" />
+      {/* Multi-layered Vignette Gradients for High Readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0B0D14] via-[#0B0D14]/75 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0B0D14] via-[#0B0D14]/85 to-transparent w-full md:w-3/4 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0B0D14]/80 via-transparent to-transparent h-28 pointer-events-none" />
 
-        {/* Content Area */}
-        <div className="relative z-10 p-6 sm:p-10 lg:p-14 flex-1 flex flex-col justify-end max-w-3xl space-y-5">
-          
+      {/* 2. Main Hero Content Constrained Inside Container */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col justify-end pt-16 pb-10">
+        <div className="max-w-3xl space-y-5">
           {/* Top Meta Badges & Ratings Row */}
           <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 text-xs">
             {/* Exclusive Badge */}
@@ -106,11 +107,13 @@ export default function HeroSection({
               {movie.genre} • {movie.duration}
             </span>
 
-            {/* Critic Score / Rotten Tomatoes Style Green Icon */}
+            {/* Critic Score */}
             {movie.criticScore && (
               <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-black/40 border border-white/10 text-slate-200">
                 <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
-                <span className="font-semibold text-[#10B981]">{movie.criticScore}</span>
+                <span className="font-semibold text-[#10B981]">
+                  {movie.criticScore}
+                </span>
               </div>
             )}
 
@@ -119,14 +122,16 @@ export default function HeroSection({
               <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-black/40 border border-white/10 text-slate-200">
                 <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
                 <span className="font-bold text-white">{movie.imdbRating}</span>
-                <span className="text-[10px] text-slate-400 uppercase font-mono">IMDb</span>
+                <span className="text-[10px] text-slate-400 uppercase font-mono">
+                  IMDb
+                </span>
               </div>
             )}
           </div>
 
           {/* Faint Watermark Background Title */}
           {movie.watermark && (
-            <div className="select-none pointer-events-none -mb-6 text-xs sm:text-sm font-extrabold tracking-[0.25em] text-white/10 uppercase">
+            <div className="select-none pointer-events-none -mb-6 text-xs sm:text-sm font-extrabold tracking-[0.25em] text-white/10 uppercase font-heading">
               {movie.watermark}
             </div>
           )}
@@ -139,14 +144,14 @@ export default function HeroSection({
             )}
           </h1>
 
-          {/* Description */}
+          {/* Synopsis Description */}
           <p className="font-sans text-slate-300 text-sm sm:text-base leading-relaxed max-w-xl">
             {movie.description}
           </p>
 
-          {/* Call to Action Buttons Row */}
+          {/* Action Buttons Row */}
           <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2">
-            {/* Primary Action Button using Reusable ActionButton */}
+            {/* Primary Action Button */}
             <ActionButton
               title={movie.ticketButton?.title || "BOOK TICKETS NOW"}
               link={movie.ticketButton?.link || "#book"}
@@ -154,7 +159,7 @@ export default function HeroSection({
               size="md"
             />
 
-            {/* Secondary Action Button using Reusable ActionButton */}
+            {/* Secondary Action Button */}
             <ActionButton
               title={movie.trailerButton?.title || "WATCH TRAILER"}
               link={movie.trailerButton?.link || "#trailer"}
@@ -173,9 +178,11 @@ export default function HeroSection({
             )}
           </div>
         </div>
+      </div>
 
-        {/* Bottom Format Filters Bar */}
-        <div className="relative z-10 w-full bg-[#0B0D14]/90 border-t border-white/10 backdrop-blur-md px-4 sm:px-8 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3">
+      {/* 3. Bottom Format Filters Bar (Edge-to-Edge with Inner Container) */}
+      <div className="relative z-10 w-full bg-[#0B0D14]/90 border-t border-white/10 backdrop-blur-md py-3.5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
           {/* Format Selection Pills */}
           <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 no-scrollbar">
             {formats.map((fmt) => {
