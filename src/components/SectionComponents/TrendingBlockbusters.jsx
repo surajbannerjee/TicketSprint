@@ -9,7 +9,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Q50 } from "@/constants/images";
 
 // Initial Movie dataset matching the provided design images
 const DEFAULT_MOVIES = [
@@ -17,7 +16,7 @@ const DEFAULT_MOVIES = [
     id: "dune-awakening",
     title: "Dune: Awakening",
     posterImage:
-      Q50,
+      "https://www.movy.sx/img/w342/6izwz7rsy95ARzTR3poZ8H6c5pp.jpg/q50.webp",
     format: "IMAX",
     isNowShowing: true,
     rating: "94%",
@@ -32,7 +31,7 @@ const DEFAULT_MOVIES = [
     id: "neon-velocity",
     title: "Neon Velocity",
     posterImage:
-      "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=700&auto=format&fit=crop&q=80",
+      "https://www.movy.sx/img/w342/bR8ISy1O9XQxqiy0fQFw2BX72RQ.jpg/q50.webp",
     format: "4DX",
     isNowShowing: true,
     rating: "91%",
@@ -47,7 +46,7 @@ const DEFAULT_MOVIES = [
     id: "the-midnight-symphony",
     title: "The Midnight Symphony",
     posterImage:
-      "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=700&auto=format&fit=crop&q=80",
+      "https://www.movy.sx/img/w342/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg/q50.webp",
     format: "Dolby",
     isNowShowing: true,
     rating: "88%",
@@ -62,7 +61,7 @@ const DEFAULT_MOVIES = [
     id: "quantum-heist",
     title: "Quantum Heist",
     posterImage:
-      "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=700&auto=format&fit=crop&q=80",
+      "https://www.movy.sx/img/w342/gaet1xQ2nxrG0V1Ep9T20ZMNEIC.jpg/q50.webp",
     format: "ScreenX",
     isNowShowing: true,
     rating: "93%",
@@ -77,7 +76,7 @@ const DEFAULT_MOVIES = [
     id: "solaris-vanguard",
     title: "Solaris: Vanguard",
     posterImage:
-      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=700&auto=format&fit=crop&q=80",
+      "https://www.movy.sx/img/w342/qJ2tW6WMUDux911r6m7haRef0WH.jpg/q50.webp",
     format: "IMAX",
     isNowShowing: true,
     rating: "95%",
@@ -92,7 +91,7 @@ const DEFAULT_MOVIES = [
     id: "tokyo-drift-zero",
     title: "Tokyo Cyber Drift",
     posterImage:
-      "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=700&auto=format&fit=crop&q=80",
+      "https://www.movy.sx/img/w342/6Ryitt95xrO8KXuqRGm1fUuNwqF.jpg/q50.webp",
     format: "4DX",
     isNowShowing: true,
     rating: "89%",

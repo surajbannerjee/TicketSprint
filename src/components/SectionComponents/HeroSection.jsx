@@ -26,7 +26,7 @@ export default function HeroSection({
     description:
       "In a fractured neo-megacity, an augmented black-ops runner uncovers an artificial consciousness syndicate threatening to dismantle humanity's neural grid.",
     backdropImage:
-      "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1920&q=80&auto=format&fit=crop",
+      "https://www.movy.sx/img/original/58v1KFe3rxvHrYM1hLH5ScpwqNR.jpg/w780-h1092-q72-fx50-fy28.webp",
     exclusiveBadge: "IMAX 3D EXCLUSIVE",
     certificate: "UA 16+",
     genre: "Sci-Fi / Action / Thriller",
@@ -74,14 +74,14 @@ export default function HeroSection({
         }}
       >
         {/* Subtle Cyberpunk Atmospheric Color Grades */}
-        <div className="absolute inset-0 bg-[#0B0D14]/40 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-[#FF2E63]/25 via-transparent to-[#6366F1]/20" />
+        <div className="absolute inset-0 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-[#FF2E63]/10 via-transparent to-[#6366F1]/20" />
       </div>
 
       {/* Multi-layered Vignette Gradients for High Readability */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#0B0D14] via-[#0B0D14]/75 to-transparent pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0B0D14] via-[#0B0D14]/85 to-transparent w-full md:w-3/4 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0B0D14]/80 via-transparent to-transparent h-28 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0B0D14] via-[#0B0D14]/60 to-transparent w-full md:w-3/4 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0B0D14]/50 via-transparent to-transparent h-28 pointer-events-none" />
 
       {/* 2. Main Hero Content Constrained Inside Container */}
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col justify-end pt-16 pb-10">
