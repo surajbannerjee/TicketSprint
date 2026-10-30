@@ -84,7 +84,7 @@ export default function HeroSection({
       <div className="absolute inset-0 bg-gradient-to-b from-[#0B0D14]/80 via-transparent to-transparent h-28 pointer-events-none" />
 
       {/* 2. Main Hero Content Constrained Inside Container */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col justify-end pt-16 pb-10">
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col justify-end pt-16 pb-10">
         <div className="max-w-3xl space-y-5">
           {/* Top Meta Badges & Ratings Row */}
           <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 text-xs">
@@ -182,7 +182,7 @@ export default function HeroSection({
 
       {/* 3. Bottom Format Filters Bar (Edge-to-Edge with Inner Container) */}
       <div className="relative z-10 w-full bg-[#0B0D14]/90 border-t border-white/10 backdrop-blur-md py-3.5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
           {/* Format Selection Pills */}
           <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 no-scrollbar">
             {formats.map((fmt) => {
@@ -192,17 +192,15 @@ export default function HeroSection({
                   key={fmt.id}
                   type="button"
                   onClick={() => handleFormatClick(fmt.id)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 ${
-                    isActive
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 ${isActive
                       ? "bg-[#FF2E63] text-white shadow-md shadow-[#FF2E63]/30"
                       : "bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white"
-                  }`}
+                    }`}
                 >
                   {fmt.hasIcon && (
                     <Armchair
-                      className={`w-3.5 h-3.5 ${
-                        isActive ? "text-white" : "text-[#10B981]"
-                      }`}
+                      className={`w-3.5 h-3.5 ${isActive ? "text-white" : "text-[#10B981]"
+                        }`}
                     />
                   )}
                   {fmt.label}

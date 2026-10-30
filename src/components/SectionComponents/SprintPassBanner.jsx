@@ -40,10 +40,10 @@ export default function SprintPassBanner({
 
   return (
     <div
-      className={`w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 ${className}`}
+      className={`w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 mt-6 ${className}`}
     >
       <div className="relative w-full rounded-2xl bg-[#121520] border border-white/10 p-3.5 sm:p-4 md:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xl backdrop-blur-md">
-        
+
         {/* Left Side: Glowing Star Icon + Title + Description */}
         <div className="flex items-center gap-3.5 sm:gap-4 flex-1">
           {/* Glowing Pink Icon Box */}
@@ -106,3 +106,4 @@ export default function SprintPassBanner({
     </div>
   );
 }
+

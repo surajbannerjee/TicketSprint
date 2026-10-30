@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import HeroSection from "@/components/SectionComponents/HeroSection";
 import SprintPassBanner from "@/components/SectionComponents/SprintPassBanner";
+import TrendingBlockbusters from "@/components/SectionComponents/TrendingBlockbusters";
 import ActionButton from "@/components/Common/ActionButton";
 import { Button } from "@/components/ui/button";
 import {
@@ -101,6 +102,9 @@ export default function Home() {
 
       {/* 2. SprintPass VIP Tier Banner Component */}
       <SprintPassBanner />
+
+      {/* 3. Trending Blockbusters Section (Swiper Slider + MovieCard Map + Filter Dropdown) */}
+      <TrendingBlockbusters />
 
       {/* Main Content Section */}
       <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 mt-8">
