@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import HeroSection from "@/components/SectionComponents/HeroSection";
+import ActionButton from "@/components/Common/ActionButton";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -13,15 +15,12 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import {
-  Ticket,
   Sparkles,
   ArrowRight,
   CheckCircle2,
   Layers,
-  Code2,
   Palette,
-  Type,
-  Zap,
+  MousePointerClick,
 } from "lucide-react";
 
 export default function Home() {
@@ -81,7 +80,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#0B0D14] text-[#F8FAFC] selection:bg-[#FF2E63] selection:text-white overflow-hidden">
+    <div className="relative min-h-screen bg-[#0B0D14] text-[#F8FAFC] selection:bg-[#FF2E63] selection:text-white overflow-hidden pb-16">
       {/* Background dot pattern matching user image */}
       <div
         className="pointer-events-none absolute inset-0 opacity-25"
@@ -96,43 +95,102 @@ export default function Home() {
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#FF2E63]/15 blur-[120px] rounded-full" />
       <div className="pointer-events-none absolute top-96 right-0 w-[450px] h-[300px] bg-[#6366F1]/15 blur-[120px] rounded-full" />
 
-      {/* Hero Section */}
-      <main className="relative z-10 max-w-6xl mx-auto px-6 py-12 space-y-16">
-        <section className="text-center space-y-6 max-w-3xl mx-auto pt-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-slate-300">
-            <Sparkles className="w-3.5 h-3.5 text-[#FF2E63]" />
-            Configured with Custom Colors & Typography
+      {/* 1. Cinematic Hero Section (Exact Replica of Uploaded Image) */}
+      <HeroSection />
+
+      {/* Main Content Section */}
+      <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 mt-8">
+        
+        {/* Reusable ActionButton Demonstration */}
+        <section className="space-y-6">
+          <div className="flex items-center gap-2 pb-2 border-b border-white/10">
+            <MousePointerClick className="w-5 h-5 text-[#FF2E63]" />
+            <h2 className="font-heading text-xl font-bold tracking-tight text-white">
+              Reusable ActionButton Component (2 Styles)
+            </h2>
           </div>
 
-          <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-            Build sprint-ready apps with{" "}
+          <Card className="bg-[#131620] border-white/10 text-white p-6 shadow-xl">
+            <div className="space-y-4">
+              <p className="text-sm text-slate-300">
+                এই <code className="text-[#FF2E63] bg-black/50 px-1.5 py-0.5 rounded font-mono">&lt;ActionButton /&gt;</code> কম্পোনেন্টটি আপনার প্রজেক্টের যেকোনো জায়গায় <code className="text-[#10B981] font-mono">title</code> (বা text) এবং <code className="text-[#10B981] font-mono">link</code> (বা href) প্রপ দিয়ে সহজেই রিইউজ করতে পারবেন:
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                {/* Variant 1: Primary Neon Glow Button */}
+                <div className="p-5 rounded-xl bg-black/40 border border-white/10 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <Badge className="bg-[#FF2E63]/20 text-[#FF2E63] border-[#FF2E63]/40">
+                      Variant: &quot;primary&quot;
+                    </Badge>
+                    <span className="text-xs text-slate-400 font-mono">Vibrant Neon Glow</span>
+                  </div>
+                  <div className="py-3 flex items-center justify-center">
+                    <ActionButton
+                      title="BOOK TICKETS NOW"
+                      link="#book-tickets"
+                      variant="primary"
+                    />
+                  </div>
+                  <pre className="text-[11px] p-2.5 rounded bg-black/80 text-slate-300 font-mono overflow-x-auto">
+                    {`<ActionButton\n  title="BOOK TICKETS NOW"\n  link="/book-tickets"\n  variant="primary"\n/>`}
+                  </pre>
+                </div>
+
+                {/* Variant 2: Secondary Dark Glass Button */}
+                <div className="p-5 rounded-xl bg-black/40 border border-white/10 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <Badge className="bg-[#6366F1]/20 text-[#818CF8] border-[#6366F1]/40">
+                      Variant: &quot;secondary&quot;
+                    </Badge>
+                    <span className="text-xs text-slate-400 font-mono">Glassmorphism Play</span>
+                  </div>
+                  <div className="py-3 flex items-center justify-center">
+                    <ActionButton
+                      title="WATCH TRAILER"
+                      link="#watch-trailer"
+                      variant="secondary"
+                    />
+                  </div>
+                  <pre className="text-[11px] p-2.5 rounded bg-black/80 text-slate-300 font-mono overflow-x-auto">
+                    {`<ActionButton\n  title="WATCH TRAILER"\n  link="/watch-trailer"\n  variant="secondary"\n/>`}
+                  </pre>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        {/* Quick Ticket Input */}
+        <section className="text-center space-y-6 max-w-2xl mx-auto pt-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-slate-300">
+            <Sparkles className="w-3.5 h-3.5 text-[#FF2E63]" />
+            Fast Component Architecture
+          </div>
+
+          <h2 className="font-heading text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+            Ready to scale with{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E63] via-[#6366F1] to-[#10B981]">
               TicketSprint
             </span>
-          </h1>
+          </h2>
 
-          <p className="font-sans text-slate-300 text-base sm:text-lg leading-relaxed">
-            Your Next.js project is fully set up with Tailwind CSS, Shadcn UI, and
-            100% pure JavaScript. No TypeScript, configured with your exact design palette and fonts.
-          </p>
-
-          {/* Quick Input Action */}
           <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto pt-2">
             <Input
               type="text"
-              placeholder="e.g. Implement user authentication..."
+              placeholder="Enter sprint task or movie title..."
               value={ticketInput}
               onChange={(e) => setTicketInput(e.target.value)}
               className="bg-white/5 border-white/15 text-white placeholder:text-slate-500 focus-visible:ring-[#FF2E63]"
             />
             <Button className="bg-[#FF2E63] hover:bg-[#FF2E63]/90 text-white shrink-0">
-              Create Ticket
+              Submit Task
               <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
           </div>
         </section>
 
-        {/* Design System Preview (Matching the User's Image) */}
+        {/* Design System Preview */}
         <section className="space-y-6">
           <div className="flex items-center gap-2 pb-2 border-b border-white/10">
             <Palette className="w-5 h-5 text-[#FF2E63]" />
@@ -142,7 +200,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Color Swatches Column */}
+            {/* Color Swatches */}
             <div className="space-y-4">
               <h3 className="font-sans text-xs uppercase tracking-wider text-slate-400 font-semibold">
                 Color Tokens
@@ -170,7 +228,6 @@ export default function Home() {
                         style={{ backgroundColor: swatch.hex }}
                       />
                     </div>
-                    {/* Gradient strip preview */}
                     <div
                       className="h-3 w-full bg-gradient-to-r"
                       style={{
@@ -182,7 +239,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Typography Column */}
+            {/* Typography */}
             <div className="space-y-4">
               <h3 className="font-sans text-xs uppercase tracking-wider text-slate-400 font-semibold">
                 Typography Families
@@ -218,115 +275,35 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Shadcn UI Showcase */}
+        {/* Configuration Checklist */}
         <section className="space-y-6">
           <div className="flex items-center gap-2 pb-2 border-b border-white/10">
             <Layers className="w-5 h-5 text-[#6366F1]" />
             <h2 className="font-heading text-xl font-bold tracking-tight text-white">
-              Installed Shadcn UI Components
+              Project Architecture
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {/* Component 1: Button Collection */}
-            <Card className="bg-[#131620] border-white/10 text-white">
-              <CardHeader>
-                <CardTitle>Buttons</CardTitle>
-                <CardDescription>
-                  Custom styled using brand variables
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-2.5">
-                <Button className="w-full bg-[#FF2E63] hover:bg-[#FF2E63]/90 text-white">
-                  Primary Button
-                </Button>
-                <Button className="w-full bg-[#6366F1] hover:bg-[#6366F1]/90 text-white">
-                  Secondary Button
-                </Button>
-                <Button className="w-full bg-[#10B981] hover:bg-[#10B981]/90 text-white">
-                  Tertiary Button
-                </Button>
-                <Button
-                  variant="outline"
-                  className="w-full border-white/20 bg-transparent text-white hover:bg-white/10"
-                >
-                  Outline Button
-                </Button>
-              </CardContent>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <Card className="bg-[#131620] border-white/10 text-white p-4">
+              <CheckCircle2 className="w-5 h-5 text-[#10B981] mb-2" />
+              <div className="font-bold text-sm">Next.js 16</div>
+              <p className="text-xs text-slate-400 mt-1">App router with Turbopack engine</p>
             </Card>
-
-            {/* Component 2: Ticket Card Sample */}
-            <Card className="bg-[#131620] border-white/10 text-white flex flex-col justify-between">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <Badge className="bg-[#FF2E63]/20 text-[#FF2E63] border-[#FF2E63]/40">
-                    High Priority
-                  </Badge>
-                  <span className="text-xs text-slate-400 font-mono">#TS-102</span>
-                </div>
-                <CardTitle className="pt-2">Setup Authentication Flow</CardTitle>
-                <CardDescription>
-                  Integrate OAuth login and user sessions for Sprint 1.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2 text-xs text-slate-300">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
-                    <span>Next.js App Router configured</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
-                    <span>Pure JavaScript components</span>
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter className="border-t border-white/10 flex justify-between items-center text-xs text-slate-400">
-                <span>Due in 2 days</span>
-                <Badge className="bg-[#6366F1]/20 text-[#818CF8] border-[#6366F1]/30">
-                  In Progress
-                </Badge>
-              </CardFooter>
+            <Card className="bg-[#131620] border-white/10 text-white p-4">
+              <CheckCircle2 className="w-5 h-5 text-[#10B981] mb-2" />
+              <div className="font-bold text-sm">Tailwind CSS v4</div>
+              <p className="text-xs text-slate-400 mt-1">Custom brand color variables</p>
             </Card>
-
-            {/* Component 3: Project Checklist */}
-            <Card className="bg-[#131620] border-white/10 text-white">
-              <CardHeader>
-                <CardTitle>Configuration Status</CardTitle>
-                <CardDescription>
-                  Checked and verified setup details
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm">
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#10B981] mt-0.5 shrink-0" />
-                  <div>
-                    <span className="font-semibold text-white">Next.js 16 & Turbopack</span>
-                    <p className="text-xs text-slate-400">Fast local build and App router</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#10B981] mt-0.5 shrink-0" />
-                  <div>
-                    <span className="font-semibold text-white">Tailwind CSS v4</span>
-                    <p className="text-xs text-slate-400">Theme variables & utility engine</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#10B981] mt-0.5 shrink-0" />
-                  <div>
-                    <span className="font-semibold text-white">No TypeScript</span>
-                    <p className="text-xs text-slate-400">100% JavaScript (.js / .jsx)</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#10B981] mt-0.5 shrink-0" />
-                  <div>
-                    <span className="font-semibold text-white">Google Fonts Loaded</span>
-                    <p className="text-xs text-slate-400">Plus Jakarta Sans & Inter</p>
-                  </div>
-                </div>
-              </CardContent>
+            <Card className="bg-[#131620] border-white/10 text-white p-4">
+              <CheckCircle2 className="w-5 h-5 text-[#10B981] mb-2" />
+              <div className="font-bold text-sm">Shadcn UI</div>
+              <p className="text-xs text-slate-400 mt-1">Pure JavaScript (.jsx) components</p>
+            </Card>
+            <Card className="bg-[#131620] border-white/10 text-white p-4">
+              <CheckCircle2 className="w-5 h-5 text-[#10B981] mb-2" />
+              <div className="font-bold text-sm">Google Fonts</div>
+              <p className="text-xs text-slate-400 mt-1">Plus Jakarta Sans & Inter</p>
             </Card>
           </div>
         </section>

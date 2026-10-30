@@ -1,0 +1,96 @@
+"use client";
+
+import React from "react";
+import Link from "next/link";
+import { Ticket, Play } from "lucide-react";
+
+/**
+ * ActionButton Component
+ * Reusable across the app with 2 distinct variants:
+ * 1. "primary" - Vibrant pink gradient with neon glow (e.g. BOOK TICKETS NOW)
+ * 2. "secondary" / "glass" - Dark translucent glass with border & backdrop blur (e.g. WATCH TRAILER)
+ *
+ * @param {string} title - The text displayed on the button (also supports `text`)
+ * @param {string} link - URL link to navigate (supports `href`)
+ * @param {"primary" | "secondary" | "glass"} variant - Button style variant
+ * @param {React.ReactNode} icon - Optional custom icon component
+ * @param {string} className - Optional custom CSS classes
+ * @param {function} onClick - Optional click handler
+ * @param {"sm" | "md" | "lg"} size - Button size
+ */
+export default function ActionButton({
+  title,
+  text,
+  link,
+  href,
+  variant = "primary",
+  icon,
+  className = "",
+  onClick,
+  size = "md",
+  disabled = false,
+  ...props
+}) {
+  const buttonText = title || text;
+  const targetLink = link || href;
+
+  // Size styling
+  const sizeClasses = {
+    sm: "px-4 py-2 text-xs gap-2 rounded-lg",
+    md: "px-6 py-3 text-xs sm:text-sm gap-2.5 rounded-xl",
+    lg: "px-8 py-3.5 text-sm sm:text-base gap-3 rounded-2xl",
+  }[size] || "px-6 py-3 text-xs sm:text-sm gap-2.5 rounded-xl";
+
+  // Variant styling
+  const variantClasses = {
+    primary:
+      "bg-gradient-to-r from-[#FF2E63] via-[#FF3B6F] to-[#FF4B72] text-white font-extrabold uppercase tracking-wider shadow-[0_8px_25px_-4px_rgba(255,46,99,0.55)] hover:shadow-[0_12px_32px_-4px_rgba(255,46,99,0.75)] hover:brightness-110 active:scale-[0.98] border border-white/20",
+    secondary:
+      "bg-[#121520]/80 hover:bg-[#1a1f30] text-white font-bold uppercase tracking-wider border border-white/20 hover:border-white/40 backdrop-blur-md hover:brightness-110 active:scale-[0.98]",
+    glass:
+      "bg-black/40 hover:bg-black/60 text-white font-bold uppercase tracking-wider border border-white/20 hover:border-white/40 backdrop-blur-md active:scale-[0.98]",
+  }[variant] || variantClasses.primary;
+
+  // Default icons if none passed
+  const renderIcon = () => {
+    if (icon !== undefined) return icon;
+    if (variant === "primary") {
+      return <Ticket className="w-4 h-4 shrink-0 transform -rotate-12" />;
+    }
+    if (variant === "secondary" || variant === "glass") {
+      return <Play className="w-4 h-4 shrink-0 fill-current" />;
+    }
+    return null;
+  };
+
+  const content = (
+    <>
+      {renderIcon()}
+      <span className="font-heading whitespace-nowrap">{buttonText}</span>
+    </>
+  );
+
+  const baseClasses = `inline-flex items-center justify-center transition-all duration-200 cursor-pointer select-none ${sizeClasses} ${variantClasses} ${className} ${
+    disabled ? "opacity-50 pointer-events-none" : ""
+  }`;
+
+  if (targetLink) {
+    return (
+      <Link href={targetLink} className={baseClasses} {...props}>
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className={baseClasses}
+      {...props}
+    >
+      {content}
+    </button>
+  );
+}
