@@ -1,5 +1,6 @@
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/Header";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -27,7 +28,8 @@ export default function RootLayout({ children }) {
       className={`${plusJakartaSans.variable} ${inter.variable} dark h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground">
-        {children}
+        <Header />
+        <div className="flex-1">{children}</div>
       </body>
     </html>
   );

@@ -96,38 +96,8 @@ export default function Home() {
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#FF2E63]/15 blur-[120px] rounded-full" />
       <div className="pointer-events-none absolute top-96 right-0 w-[450px] h-[300px] bg-[#6366F1]/15 blur-[120px] rounded-full" />
 
-      {/* Navigation */}
-      <header className="relative z-10 border-b border-white/10 backdrop-blur-md bg-[#0B0D14]/80">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#FF2E63] to-[#6366F1] flex items-center justify-center shadow-lg shadow-[#FF2E63]/25">
-              <Ticket className="w-5 h-5 text-white" />
-            </div>
-            <span className="font-heading text-xl font-bold tracking-tight text-white flex items-center gap-2">
-              TicketSprint
-              <Badge className="bg-[#FF2E63]/20 text-[#FF2E63] border border-[#FF2E63]/30 text-[10px] font-semibold py-0.5 px-2">
-                JS Only
-              </Badge>
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <Badge variant="outline" className="border-white/15 text-slate-300 gap-1.5 py-1 px-3 hidden sm:flex">
-              <Code2 className="w-3.5 h-3.5 text-[#10B981]" />
-              JavaScript + React 19 + Next.js 16
-            </Badge>
-            <Button
-              className="bg-[#FF2E63] hover:bg-[#FF2E63]/90 text-white shadow-md shadow-[#FF2E63]/30"
-              size="sm"
-            >
-              Get Started
-            </Button>
-          </div>
-        </div>
-      </header>
-
       {/* Hero Section */}
-      <main className="relative z-10 max-w-6xl mx-auto px-6 py-14 space-y-16">
+      <main className="relative z-10 max-w-6xl mx-auto px-6 py-12 space-y-16">
         <section className="text-center space-y-6 max-w-3xl mx-auto pt-6">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-slate-300">
             <Sparkles className="w-3.5 h-3.5 text-[#FF2E63]" />
