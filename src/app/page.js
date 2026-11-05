@@ -5,6 +5,7 @@ import HeroSection from "@/components/SectionComponents/HeroSection";
 import SprintPassBanner from "@/components/SectionComponents/SprintPassBanner";
 import TrendingBlockbusters from "@/components/SectionComponents/TrendingBlockbusters";
 import UpcomingBuzzSection from "@/components/SectionComponents/UpcomingBuzzSection";
+import LiveSpectaclesSection from "@/components/SectionComponents/LiveSpectaclesSection";
 import ActionButton from "@/components/Common/ActionButton";
 import { Button } from "@/components/ui/button";
 import {
@@ -109,6 +110,9 @@ export default function Home() {
 
       {/* 4. Upcoming Blockbusters & Buzz Section (Fan Anticipation Meter) */}
       <UpcomingBuzzSection />
+
+      {/* 5. Live Spectacles: Concerts & Arena Sports + Venue Experience Discovery */}
+      <LiveSpectaclesSection />
 
 
     </div>

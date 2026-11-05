@@ -56,14 +56,14 @@ export default function UpcomingCard({
 
   return (
     <div
-      className={`group relative flex flex-col justify-between h-full w-full rounded-2xl overflow-hidden bg-[#121522] border border-white/10 hover:border-white/20 p-3 sm:p-3.5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#0B0D14]/80 ${className}`}
+      className={`group relative flex flex-col justify-between h-full w-full rounded-2xl overflow-hidden bg-[#121522] border border-white/10 hover:border-white/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#0B0D14]/80 ${className}`}
     >
       {/* 1. Landscape Media / Poster with Top Countdown Badge */}
       <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden bg-[#0B0D14]">
         <img
           src={item.image}
           alt={item.title}
-          className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+          className="h-full w-full object-cover object-center transition-transform duration-700"
         />
 
         {/* Multi-stop Gradient matched to #121522 for seamless blend */}
@@ -79,7 +79,7 @@ export default function UpcomingCard({
         {item.releaseBadge && (
           <div className="absolute top-2.5 left-2.5 z-10">
             <span
-              className={`px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-wider font-mono ${badgeClasses}`}
+              className={`px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-wider ${badgeClasses}`}
             >
               {item.releaseBadge}
             </span>
@@ -88,7 +88,7 @@ export default function UpcomingCard({
       </div>
 
       {/* 2. Middle Content: Title, Meta & Fan Anticipation Meter */}
-      <div className="pt-3 pb-2 flex-1 flex flex-col justify-between space-y-3">
+      <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
         {/* Title and Subtitle */}
         <div className="space-y-1">
           <h3 className="font-heading font-bold text-base sm:text-lg text-white group-hover:text-[#FFA4B6] transition-colors line-clamp-1">
@@ -109,7 +109,7 @@ export default function UpcomingCard({
                 {item.fansWaiting}
               </span>
             </div>
-            <span className="text-[11px] font-bold text-white font-mono">
+            <span className="text-[11px] font-bold text-white ">
               {item.buzzIndex}% Buzz Index
             </span>
           </div>
@@ -125,15 +125,14 @@ export default function UpcomingCard({
       </div>
 
       {/* 3. Footer Action: Notify Me at Drop */}
-      <div className="pt-1 mt-auto">
+      <div className="p-5">
         <button
           type="button"
           onClick={() => setIsNotified(!isNotified)}
-          className={`w-full py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-2 border ${
-            isNotified
+          className={`w-full py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-2 border ${isNotified
               ? "bg-[#10B981]/20 border-[#10B981]/50 text-[#10B981]"
               : "bg-[#171B2A] hover:bg-[#FF2E63] text-slate-200 hover:text-white border-white/10 hover:border-[#FF2E63] group-hover:shadow-md group-hover:shadow-[#FF2E63]/25"
-          }`}
+            }`}
         >
           {isNotified ? (
             <>
@@ -151,3 +150,4 @@ export default function UpcomingCard({
     </div>
   );
 }
+
