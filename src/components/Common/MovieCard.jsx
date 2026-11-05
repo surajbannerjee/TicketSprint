@@ -101,7 +101,7 @@ export default function MovieCard({
               </span>
             )}
             {movie.duration && (
-              <span className="text-slate-300 font-medium text-[11px]">
+              <span className="text-pinkT font-medium text-[11px]">
                 • {movie.duration}
               </span>
             )}
@@ -121,7 +121,7 @@ export default function MovieCard({
       {/* 2. Movie Info Area (Flex grow with uniform height) */}
       <div className="px-4 pt-3.5 pb-2 flex-1 flex flex-col justify-start min-h-[76px] space-y-1.5">
         <Link href={movie.bookLink || "#"} className="block">
-          <h3 className="font-heading font-bold text-base text-white hover:text-[#FFA4B6] transition-colors line-clamp-1">
+          <h3 className="font-heading font-bold text-base text-white hover:text-pinkT transition-colors line-clamp-1">
             {movie.title}
           </h3>
         </Link>
@@ -129,7 +129,7 @@ export default function MovieCard({
         {/* Languages and Showtimes info */}
         <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-xs">
           {movie.languages && (
-            <span className="text-slate-400 font-medium">
+            <span className="text-pinkT font-medium">
               {movie.languages}
             </span>
           )}
@@ -148,7 +148,7 @@ export default function MovieCard({
           className="w-full py-2.5 px-4 rounded-xl bg-[#171B2A] hover:bg-[#FF2E63] text-slate-200 hover:text-white border border-white/10 hover:border-[#FF2E63] text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-2 group-hover:shadow-md group-hover:shadow-[#FF2E63]/25"
         >
           <span>Book Seats</span>
-          <Calendar className="w-3.5 h-3.5 text-slate-400 group-hover:text-white" />
+          <Calendar className="w-3.5 h-3.5 text-pinkT group-hover:text-white" />
         </Link>
       </div>
     </div>

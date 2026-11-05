@@ -18,7 +18,8 @@
   --color-tertiary: var(--tertiary);
   --color-tertiary-foreground: var(--tertiary-foreground);
   --color-neutral: var(--neutral);
-
+  --color-pink: var(--pink);
+  --color-pinkT: var(--pinkT);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -77,7 +78,8 @@
   --destructive: #ef4444;
   --border: #e2e8f0;
   --input: #e2e8f0;
-  --ring: #ff2e63;
+  --pink: #FFB2BA;
+  --pinkT: #E5BDC0;
   --chart-1: #ff2e63;
   --chart-2: #6366f1;
   --chart-3: #10b981;
@@ -140,11 +142,18 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-sans);
   }
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-heading);
   }
 }

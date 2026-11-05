@@ -79,12 +79,12 @@ export default function SectionHeader({
               type="button"
               onClick={() => setDropdownOpen(!dropdownOpen)}
               className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 ${dropdownOpen || activeFilter !== "All"
-                  ? "bg-[#1E2438] border-[#FF2E63]/50 text-white shadow-md shadow-[#FF2E63]/20"
-                  : "bg-[#121522] border-white/10 text-slate-300 hover:text-white hover:border-white/20"
+                ? "bg-[#1E2438] border-[#FF2E63]/50 text-white shadow-md shadow-[#FF2E63]/20"
+                : "bg-[#121522] border-white/10 text-pinkT hover:text-white hover:border-white/20"
                 }`}
             >
               <span>{activeFilter === "All" ? "Filter Genre" : activeFilter}</span>
-              <SlidersHorizontal className="w-3.5 h-3.5 text-slate-400" />
+              <SlidersHorizontal className="w-3.5 h-3.5 text-pinkT" />
             </button>
 
             {/* Animated Dropdown Menu */}
@@ -92,7 +92,7 @@ export default function SectionHeader({
               <div
                 className="absolute right-0 top-full mt-2 w-48 rounded-xl bg-[#121522] border border-white/10 p-1.5 shadow-2xl z-50 backdrop-blur-xl animate-in fade-in zoom-in-95 duration-150"
               >
-                <div className="px-2.5 py-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider  border-b border-white/10 mb-1">
+                <div className="px-2.5 py-1.5 text-[10px] font-bold text-pinkT uppercase tracking-wider  border-b border-white/10 mb-1">
                   Filter by Genre
                 </div>
                 <div className="space-y-0.5">
@@ -107,8 +107,8 @@ export default function SectionHeader({
                           setDropdownOpen(false);
                         }}
                         className={`w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${isSelected
-                            ? "bg-[#FF2E63] text-white font-semibold"
-                            : "text-slate-300 hover:bg-white/5 hover:text-white"
+                          ? "bg-[#FF2E63] text-white font-semibold"
+                          : "text-pinkT hover:bg-white/5 hover:text-white"
                           }`}
                       >
                         <span>{option}</span>
@@ -140,7 +140,7 @@ export default function SectionHeader({
               id={prevButtonId}
               type="button"
               aria-label="Previous slide"
-              className="p-1.5 rounded-full bg-[#121522] hover:bg-[#1a1f32] border border-white/10 text-slate-300 hover:text-white transition-colors disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
+              className="p-1.5 rounded-full bg-[#121522] hover:bg-[#1a1f32] border border-white/10 text-pinkT hover:text-white transition-colors disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
@@ -148,7 +148,7 @@ export default function SectionHeader({
               id={nextButtonId}
               type="button"
               aria-label="Next slide"
-              className="p-1.5 rounded-full bg-[#121522] hover:bg-[#1a1f32] border border-white/10 text-slate-300 hover:text-white transition-colors disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
+              className="p-1.5 rounded-full bg-[#121522] hover:bg-[#1a1f32] border border-white/10 text-pinkT hover:text-white transition-colors disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
             >
               <ChevronRight className="w-4 h-4" />
             </button>

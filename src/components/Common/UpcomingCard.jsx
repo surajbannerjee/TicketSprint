@@ -91,10 +91,10 @@ export default function UpcomingCard({
       <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
         {/* Title and Subtitle */}
         <div className="space-y-1">
-          <h3 className="font-heading font-bold text-base sm:text-lg text-white group-hover:text-[#FFA4B6] transition-colors line-clamp-1">
+          <h3 className="font-heading font-bold text-base sm:text-lg text-white group-hover:text-pinkT transition-colors line-clamp-1">
             {item.title}
           </h3>
-          <p className="font-sans text-xs text-slate-400 font-medium line-clamp-1">
+          <p className="font-sans text-xs text-pinkT font-medium line-clamp-1">
             {item.meta}
           </p>
         </div>
@@ -103,7 +103,7 @@ export default function UpcomingCard({
         <div className="rounded-xl bg-[#0B0D14]/90 border border-white/5 p-2.5 sm:p-3 space-y-2">
           {/* Top row: Fans Count + Buzz Index */}
           <div className="flex items-center justify-between text-xs font-medium">
-            <div className="flex items-center gap-1.5 text-slate-300">
+            <div className="flex items-center gap-1.5 text-pinkT">
               <Users className={`w-3.5 h-3.5 ${meterBarStyles.text}`} />
               <span className={`text-[11px] font-semibold ${meterBarStyles.text}`}>
                 {item.fansWaiting}
@@ -130,8 +130,8 @@ export default function UpcomingCard({
           type="button"
           onClick={() => setIsNotified(!isNotified)}
           className={`w-full py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-2 border ${isNotified
-              ? "bg-[#10B981]/20 border-[#10B981]/50 text-[#10B981]"
-              : "bg-[#171B2A] hover:bg-[#FF2E63] text-slate-200 hover:text-white border-white/10 hover:border-[#FF2E63] group-hover:shadow-md group-hover:shadow-[#FF2E63]/25"
+            ? "bg-[#10B981]/20 border-[#10B981]/50 text-[#10B981]"
+            : "bg-[#171B2A] hover:bg-[#FF2E63] text-slate-200 hover:text-white border-white/10 hover:border-[#FF2E63] group-hover:shadow-md group-hover:shadow-[#FF2E63]/25"
             }`}
         >
           {isNotified ? (

@@ -66,7 +66,7 @@ export default function Header() {
                 <span className="text-xs font-medium text-white">
                   San Francisco, CA
                 </span>
-                <ChevronDown className="w-3 h-3 text-slate-400" />
+                <ChevronDown className="w-3 h-3 text-pinkT" />
               </div>
             </div>
           </button>
@@ -76,7 +76,7 @@ export default function Header() {
         <div className="hidden lg:flex items-center gap-6 xl:gap-8">
           {/* Compact Search Bar with LIVE Tag */}
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#151928] border border-white/10 hover:border-white/20 transition-all cursor-pointer">
-            <Search className="w-4 h-4 text-slate-400" />
+            <Search className="w-4 h-4 text-pinkT" />
             <span className="text-[10px] font-bold tracking-wide uppercase px-2 py-0.5 rounded-full bg-[#20253b] text-slate-200">
               LIVE
             </span>
@@ -96,8 +96,8 @@ export default function Header() {
                   key={link.name}
                   onClick={() => setActiveTab(link.name)}
                   className={`text-sm font-medium transition-colors whitespace-nowrap ${isActive
-                    ? "text-[#FFA4B6] font-semibold"
-                    : "text-slate-300 hover:text-white"
+                    ? "text-pinkT font-semibold"
+                    : "text-pinkT hover:text-white"
                     }`}
                 >
                   {link.name}
@@ -113,9 +113,9 @@ export default function Header() {
           <button
             type="button"
             aria-label="Bookmarks"
-            className="relative p-2 rounded-lg hover:bg-white/5 text-slate-300 hover:text-white transition-colors"
+            className="relative p-2 rounded-lg hover:bg-white/5 text-pinkT hover:text-white transition-colors"
           >
-            <Bookmark className="w-5 h-5 text-slate-300" />
+            <Bookmark className="w-5 h-5 text-pinkT" />
             <span className="absolute 0 top-1 right-0.5 min-w-[16px] h-4 px-1 rounded-full bg-[#FF2E63] text-white text-[10px] font-bold flex items-center justify-center leading-none shadow-sm">
               3
             </span>
@@ -125,9 +125,9 @@ export default function Header() {
           <button
             type="button"
             aria-label="Notifications"
-            className="relative p-2 rounded-lg hover:bg-white/5 text-slate-300 hover:text-white transition-colors"
+            className="relative p-2 rounded-lg hover:bg-white/5 text-pinkT hover:text-white transition-colors"
           >
-            <Bell className="w-5 h-5 text-slate-300" />
+            <Bell className="w-5 h-5 text-pinkT" />
             <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#FF2E63] ring-2 ring-[#0B0D14]" />
           </button>
 
@@ -158,7 +158,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5"
+            className="lg:hidden p-2 rounded-lg text-pinkT hover:text-white hover:bg-white/5"
             aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? (
@@ -186,7 +186,7 @@ export default function Header() {
                 </div>
               </div>
             </div>
-            <ChevronDown className="w-4 h-4 text-slate-400" />
+            <ChevronDown className="w-4 h-4 text-pinkT" />
           </div>
 
           {/* Mobile Nav Links */}
@@ -201,8 +201,8 @@ export default function Header() {
                     setMobileMenuOpen(false);
                   }}
                   className={`text-left px-3 py-2 rounded-lg text-sm transition-colors ${isActive
-                    ? "bg-white/5 text-[#FFA4B6] font-semibold"
-                    : "text-slate-300 hover:bg-white/5 hover:text-white"
+                    ? "bg-white/5 text-pinkT font-semibold"
+                    : "text-pinkT hover:bg-white/5 hover:text-white"
                     }`}
                 >
                   {link.name}

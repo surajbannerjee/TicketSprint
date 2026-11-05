@@ -210,7 +210,7 @@ export default function TrendingBlockbusters({
         )}
 
         {filteredMovies.length === 0 && (
-          <div className="py-12 text-center text-slate-400 text-sm">
+          <div className="py-12 text-center text-pinkT text-sm">
             No blockbusters found for the &quot;{selectedGenre}&quot; genre.
           </div>
         )}

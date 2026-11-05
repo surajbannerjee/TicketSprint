@@ -80,7 +80,7 @@ export default function UpcomingBuzzSection({
 
           {/* Right: Description Text */}
           {description && (
-            <p className="font-sans text-xs sm:text-sm text-slate-400 max-w-md md:text-left leading-relaxed">
+            <p className="font-sans text-xs sm:text-sm text-pinkT max-w-md md:text-left leading-relaxed">
               {description}
             </p>
           )}

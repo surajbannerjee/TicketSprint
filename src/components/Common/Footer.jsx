@@ -9,6 +9,8 @@ import {
   Smartphone,
   Play,
 } from "lucide-react";
+import { LOGO } from "@/constants/images";
+import Image from "next/image";
 
 /**
  * Footer Component
@@ -47,22 +49,31 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full bg-[#0B0D14] border-t border-white/5 pt-10 pb-12 text-slate-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        
+    <footer className="w-full bg-[#0B0D14] border-t border-white/5 pt-10 pb-12 text-pinkT">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+
         {/* 1. Top Card: Brand & Security Verification Badges */}
         <div className="rounded-2xl bg-[#121520] border border-white/10 p-5 sm:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 shadow-xl">
           {/* Brand Info */}
           <div className="space-y-1">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-black border border-white/10 flex items-center justify-center shadow-md">
-                <Ticket className="w-4 h-4 text-[#FF2E63] transform -rotate-12" />
+            {/* Logo Container */}
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <div className="w-9 h-9 rounded-lg bg-black border border-white/10 flex items-center justify-center shadow-md relative overflow-hidden group-hover:border-[#FF2E63]/50 transition-all">
+                <Image
+                  src={LOGO}
+                  alt=""
+                  width={180}
+                  height={180}
+                  className=""
+                  priority
+                />
+
               </div>
-              <span className="font-heading font-extrabold text-lg text-white tracking-tight">
+              <span className="font-heading font-extrabold text-lg sm:text-xl text-white tracking-tight">
                 TicketSprint
               </span>
-            </div>
-            <p className="font-sans text-xs sm:text-sm text-slate-400">
+            </Link>
+            <p className="font-sans text-xs sm:text-sm text-pinkT">
               Instant tickets. Zero lines. Pure entertainment.
             </p>
           </div>
@@ -70,7 +81,7 @@ export default function Footer() {
           {/* Security Certifications */}
           <div className="flex flex-wrap items-center gap-3">
             {/* 256-bit SSL */}
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#181D2D] border border-white/10 text-xs text-slate-200">
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#181D2D] border border-white/10 text-sx text-slate-200">
               <ShieldCheck className="w-4 h-4 text-[#10B981]" />
               <span className="font-medium text-[11px] sm:text-xs">
                 256-bit SSL Encrypted
@@ -78,7 +89,7 @@ export default function Footer() {
             </div>
 
             {/* PCI-DSS Level 1 */}
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#181D2D] border border-white/10 text-xs text-slate-200">
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#181D2D] border border-white/10 text-sx text-slate-200">
               <CreditCard className="w-4 h-4 text-[#818CF8]" />
               <span className="font-medium text-[11px] sm:text-xs">
                 PCI-DSS Level 1 Certified
@@ -91,7 +102,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-6 pt-2">
           {/* Column 1: Experiences */}
           <div className="space-y-3">
-            <h4 className="font-heading font-bold text-xs uppercase tracking-wider text-white">
+            <h4 className="font-heading font-bold text-sx uppercase tracking-wider text-white">
               Experiences
             </h4>
             <ul className="space-y-2 text-xs sm:text-sm">
@@ -99,7 +110,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-slate-400 hover:text-white transition-colors"
+                    className="text-pinkT hover:text-white transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -110,7 +121,7 @@ export default function Footer() {
 
           {/* Column 2: Venues */}
           <div className="space-y-3">
-            <h4 className="font-heading font-bold text-xs uppercase tracking-wider text-white">
+            <h4 className="font-heading font-bold text-sx uppercase tracking-wider text-white">
               Venues
             </h4>
             <ul className="space-y-2 text-xs sm:text-sm">
@@ -118,7 +129,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-slate-400 hover:text-white transition-colors"
+                    className="text-pinkT hover:text-white transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -129,7 +140,7 @@ export default function Footer() {
 
           {/* Column 3: Corporate */}
           <div className="space-y-3">
-            <h4 className="font-heading font-bold text-xs uppercase tracking-wider text-white">
+            <h4 className="font-heading font-bold text-sx uppercase tracking-wider text-white">
               Corporate
             </h4>
             <ul className="space-y-2 text-xs sm:text-sm">
@@ -137,7 +148,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-slate-400 hover:text-white transition-colors"
+                    className="text-pinkT hover:text-white transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -148,7 +159,7 @@ export default function Footer() {
 
           {/* Column 4: Support */}
           <div className="space-y-3">
-            <h4 className="font-heading font-bold text-xs uppercase tracking-wider text-white">
+            <h4 className="font-heading font-bold text-sx uppercase tracking-wider text-white">
               Support
             </h4>
             <ul className="space-y-2 text-xs sm:text-sm">
@@ -156,7 +167,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-slate-400 hover:text-white transition-colors"
+                    className="text-pinkT hover:text-white transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -167,10 +178,10 @@ export default function Footer() {
 
           {/* Column 5: Mobile Experience */}
           <div className="col-span-2 sm:col-span-1 space-y-3">
-            <h4 className="font-heading font-bold text-xs uppercase tracking-wider text-white">
+            <h4 className="font-heading font-bold text-sx uppercase tracking-wider text-white">
               Mobile Experience
             </h4>
-            <p className="font-sans text-xs text-slate-400 leading-relaxed">
+            <p className="font-sans text-xs text-pinkT leading-relaxed">
               Download tickets directly to Apple Wallet or Google Pay.
             </p>
 
@@ -182,7 +193,7 @@ export default function Footer() {
               >
                 <Smartphone className="w-5 h-5 text-white shrink-0" />
                 <div className="leading-tight">
-                  <div className="text-[9px] uppercase tracking-wider text-slate-400 font-mono">
+                  <div className="text-[9px] uppercase tracking-wider text-pinkT">
                     Download on
                   </div>
                   <div className="text-xs font-bold text-white font-heading">
@@ -198,7 +209,7 @@ export default function Footer() {
               >
                 <Play className="w-4 h-4 fill-white text-white shrink-0 ml-0.5" />
                 <div className="leading-tight">
-                  <div className="text-[9px] uppercase tracking-wider text-slate-400 font-mono">
+                  <div className="text-[9px] uppercase tracking-wider text-pinkT">
                     Get it on
                   </div>
                   <div className="text-xs font-bold text-white font-heading">
@@ -211,7 +222,7 @@ export default function Footer() {
         </div>
 
         {/* 3. Bottom Legal & Copyright Bar */}
-        <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-pinkT">
           <div>
             © 2025 TicketSprint Inc. All rights reserved.
           </div>
@@ -219,19 +230,19 @@ export default function Footer() {
           <div className="flex flex-wrap items-center gap-5 sm:gap-6">
             <Link
               href="#cookie-preferences"
-              className="text-slate-400 hover:text-white transition-colors"
+              className="text-pinkT hover:text-white transition-colors"
             >
               Cookie Preferences
             </Link>
             <Link
               href="#accessibility"
-              className="text-slate-400 hover:text-white transition-colors"
+              className="text-pinkT hover:text-white transition-colors"
             >
               Accessibility
             </Link>
             <Link
               href="#security-trust-center"
-              className="text-slate-400 hover:text-white transition-colors"
+              className="text-pinkT hover:text-white transition-colors"
             >
               Security Trust Center
             </Link>

@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import ActionButton from "@/components/Common/ActionButton";
 import {
   Ticket,
   MapPin,
@@ -54,12 +55,12 @@ export default function LiveSpectaclesSection({
 }) {
   return (
     <section
-      className={`w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-16 ${className}`}
+      className={`w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 lg:py-15 py-5 ${className}`}
     >
       {/* 1. Section Header */}
       <div className="w-full flex items-end justify-between gap-4 pb-6">
         <div className="space-y-1.5">
-          <div className="flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-widest text-[#10B981] font-mono">
+          <div className="flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-widest text-[#10B981]">
             <Ticket className="w-3.5 h-3.5 text-[#10B981]" />
             <span>{badge}</span>
           </div>
@@ -107,11 +108,10 @@ export default function LiveSpectaclesSection({
               {event.badge && (
                 <div className="absolute top-2.5 left-2.5 z-10">
                   <span
-                    className={`px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-wider font-mono shadow-md ${
-                      event.badgeColor === "pink"
-                        ? "bg-[#FF2E63] text-white shadow-[#FF2E63]/30"
-                        : "bg-[#10B981] text-[#052E16] shadow-[#10B981]/30"
-                    }`}
+                    className={`px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-wider shadow-md ${event.badgeColor === "pink"
+                      ? "bg-[#FF2E63] text-white shadow-[#FF2E63]/30"
+                      : "bg-[#10B981] text-[#052E16] shadow-[#10B981]/30"
+                      }`}
                   >
                     {event.badge}
                   </span>
@@ -123,23 +123,23 @@ export default function LiveSpectaclesSection({
             <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
               <div className="space-y-2">
                 {/* Category tag */}
-                <span className="text-[10px] font-bold tracking-wider text-slate-400 uppercase font-mono">
+                <span className="text-[10px] font-bold tracking-wider text-pinkT uppercase">
                   {event.category}
                 </span>
 
                 {/* Event Title */}
-                <h3 className="font-heading font-bold text-lg sm:text-xl text-white group-hover:text-[#FFA4B6] transition-colors leading-snug">
+                <h3 className="font-heading font-bold text-lg sm:text-xl text-white group-hover:text-pinkT transition-colors leading-snug">
                   {event.title}
                 </h3>
 
                 {/* Venue and Schedule Info */}
-                <div className="space-y-1.5 pt-1 text-xs text-slate-300">
+                <div className="space-y-1.5 pt-1 text-xs text-pinkT">
                   <div className="flex items-center gap-2">
                     <MapPin className="w-3.5 h-3.5 text-[#10B981] shrink-0" />
                     <span className="line-clamp-1">{event.venue}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Calendar className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                    <Calendar className="w-3.5 h-3.5 text-pinkT shrink-0" />
                     <span>{event.date}</span>
                   </div>
                 </div>
@@ -148,7 +148,7 @@ export default function LiveSpectaclesSection({
               {/* Bottom Price & Find Seats Action */}
               <div className="flex items-center justify-between pt-3 border-t border-white/5">
                 <div>
-                  <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
+                  <span className="text-[10px] text-pinkT uppercase tracking-wider block">
                     Tickets from
                   </span>
                   <span className="font-heading font-black text-lg text-white">
@@ -156,12 +156,13 @@ export default function LiveSpectaclesSection({
                   </span>
                 </div>
 
-                <Link
-                  href={event.link}
-                  className="px-5 py-2 rounded-full bg-gradient-to-r from-[#FF2E63] via-[#FF3B6F] to-[#FF4B72] text-white text-xs font-extrabold uppercase tracking-wider shadow-[0_6px_20px_rgba(255,46,99,0.45)] hover:shadow-[0_8px_25px_rgba(255,46,99,0.65)] hover:brightness-110 active:scale-[0.98] transition-all"
-                >
-                  FIND SEATS
-                </Link>
+                <ActionButton
+                  title="FIND SEATS"
+                  link={event.link}
+                  variant="primary"
+                  icon={null}
+                  size="sm"
+                />
               </div>
             </div>
           </div>
@@ -169,10 +170,10 @@ export default function LiveSpectaclesSection({
       </div>
 
       {/* 3. Venue Experience Discovery Bar */}
-      <div className="mt-6 w-full rounded-2xl bg-[#121520] border border-white/10 p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xl backdrop-blur-md">
+      <div className="mt-6 w-full rounded-2xl bg-[#121520] border border-white/10 p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xl backdrop-blur-md">
         <div className="flex items-center gap-3.5 sm:gap-4 flex-1">
           {/* Green Map Icon Circle */}
-          <div className="w-11 h-11 rounded-xl bg-[#10B981] flex items-center justify-center shrink-0 shadow-[0_6px_18px_rgba(16,185,129,0.35)]">
+          <div className="w-11 h-11 rounded-full bg-[#10B981] flex items-center justify-center shrink-0 shadow-[0_6px_18px_rgba(16,185,129,0.35)]">
             <Map className="w-5 h-5 text-[#042417] stroke-[2.5]" />
           </div>
 
@@ -181,7 +182,7 @@ export default function LiveSpectaclesSection({
             <h4 className="font-heading font-bold text-sm sm:text-base text-white tracking-tight">
               Looking for a specific theater experience?
             </h4>
-            <p className="font-sans text-xs text-slate-400 leading-snug">
+            <p className="font-sans text-xs text-pinkT leading-snug">
               Browse by screen technology: IMAX Laser 70mm, Dolby Vision, Barco
               Escape, and boutique dine-in lounges.
             </p>
@@ -189,13 +190,14 @@ export default function LiveSpectaclesSection({
         </div>
 
         {/* Find Venues Near SF Button */}
-        <Link
-          href="#venues-near-sf"
-          className="flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full bg-[#1C2234] hover:bg-[#252D45] text-slate-200 hover:text-white text-xs sm:text-sm font-semibold border border-white/10 transition-colors shrink-0 self-end sm:self-auto"
-        >
-          <Navigation className="w-3.5 h-3.5 text-[#10B981]" />
-          <span>Find Venues Near SF</span>
-        </Link>
+        <ActionButton
+          title="Find Venues Near SF"
+          link="#venues-near-sf"
+          variant="secondary"
+          icon={<Navigation className="w-3.5 h-3.5 text-[#10B981]" />}
+          size="sm"
+          className="shrink-0 self-end sm:self-auto font-medium lowercase first-letter:uppercase"
+        />
       </div>
     </section>
   );

@@ -103,7 +103,7 @@ export default function HeroSection({
             )}
 
             {/* Genre & Duration */}
-            <span className="text-slate-300 font-medium hidden xs:inline">
+            <span className="text-pinkT font-medium hidden xs:inline">
               {movie.genre} • {movie.duration}
             </span>
 
@@ -122,7 +122,7 @@ export default function HeroSection({
               <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-black/40 border border-white/10 text-slate-200">
                 <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
                 <span className="font-bold text-white">{movie.imdbRating}</span>
-                <span className="text-[10px] text-slate-400 uppercase ">
+                <span className="text-[10px] text-pinkT uppercase ">
                   IMDb
                 </span>
               </div>
@@ -140,12 +140,12 @@ export default function HeroSection({
           <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl tracking-tight text-white leading-none">
             {movie.title}{" "}
             {movie.highlight && (
-              <span className="text-[#FFA4B6]">{movie.highlight}</span>
+              <span className="text-pink">{movie.highlight}</span>
             )}
           </h1>
 
           {/* Synopsis Description */}
-          <p className="font-sans text-slate-300 text-sm sm:text-base leading-relaxed max-w-xl">
+          <p className="font-sans text-pinkT text-sm sm:text-base leading-relaxed max-w-xl">
             {movie.description}
           </p>
 
@@ -169,9 +169,9 @@ export default function HeroSection({
 
             {/* Audio/Video Specs Tag */}
             {movie.audioVisualSpec && (
-              <div className="hidden md:flex items-center gap-2 px-3 py-2 rounded-xl bg-black/50 border border-white/10 backdrop-blur-md text-xs text-slate-300">
+              <div className="hidden md:flex items-center gap-2 px-3 py-2  text-xs text-pinkT">
                 <Volume2 className="w-3.5 h-3.5 text-[#10B981]" />
-                <span className=" text-[11px] text-slate-300">
+                <span className=" text-[11px] text-pinkT">
                   {movie.audioVisualSpec}
                 </span>
               </div>
@@ -194,7 +194,7 @@ export default function HeroSection({
                   onClick={() => handleFormatClick(fmt.id)}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 ${isActive
                     ? "bg-[#FF2E63] text-white shadow-md shadow-[#FF2E63]/30"
-                    : "bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white"
+                    : "bg-white/5 hover:bg-white/10 text-pinkT hover:text-white"
                     }`}
                 >
                   {fmt.hasIcon && (
@@ -211,7 +211,7 @@ export default function HeroSection({
 
           {/* Real-time Status Notification */}
           {locationStatus && (
-            <div className="flex items-center gap-2 text-xs text-slate-400 shrink-0 self-start sm:self-auto">
+            <div className="flex items-center gap-2 text-xs text-pinkT shrink-0 self-start sm:self-auto">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10B981]"></span>

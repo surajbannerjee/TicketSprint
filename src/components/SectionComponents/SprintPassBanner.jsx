@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import ActionButton from "@/components/Common/ActionButton";
 import { Star, X } from "lucide-react";
 
 /**
@@ -65,7 +66,7 @@ export default function SprintPassBanner({
                 </span>
               )}
             </div>
-            <p className="font-sans text-xs sm:text-sm text-slate-400 leading-snug line-clamp-2 md:line-clamp-none">
+            <p className="font-sans text-xs sm:text-sm text-pinkT leading-snug line-clamp-2 md:line-clamp-none">
               {description}
             </p>
           </div>
@@ -73,30 +74,21 @@ export default function SprintPassBanner({
 
         {/* Right Side: Claim Button + Dismiss (X) */}
         <div className="flex items-center gap-3 self-end md:self-center shrink-0">
-          {buttonLink ? (
-            <Link
-              href={buttonLink}
-              onClick={onClaim}
-              className="px-4 sm:px-5 py-2 rounded-full bg-[#1C2234] hover:bg-[#252D45] text-slate-200 hover:text-white text-xs sm:text-sm font-semibold border border-white/10 transition-colors shadow-sm"
-            >
-              {buttonText}
-            </Link>
-          ) : (
-            <button
-              type="button"
-              onClick={onClaim}
-              className="px-4 sm:px-5 py-2 rounded-full bg-[#1C2234] hover:bg-[#252D45] text-slate-200 hover:text-white text-xs sm:text-sm font-semibold border border-white/10 transition-colors shadow-sm"
-            >
-              {buttonText}
-            </button>
-          )}
+          <ActionButton
+            title={buttonText}
+            link={buttonLink}
+            onClick={onClaim}
+            variant="secondary"
+            icon={null}
+            size="sm"
+          />
 
           {dismissible && (
             <button
               type="button"
               onClick={handleDismiss}
               aria-label="Dismiss banner"
-              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+              className="p-1.5 rounded-lg text-pinkT hover:text-white hover:bg-white/5 transition-colors"
             >
               <X className="w-4 h-4" />
             </button>

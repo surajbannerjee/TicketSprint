@@ -84,7 +84,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#0B0D14] text-[#F8FAFC] selection:bg-[#FF2E63] selection:text-white overflow-hidden pb-16">
+    <div className="relative min-h-screen bg-[#0B0D14] text-[#F8FAFC] selection:bg-[#FF2E63] selection:text-white overflow-hidden">
       {/* Background dot pattern matching user image */}
       <div
         className="pointer-events-none absolute inset-0 opacity-25"
