@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Users, Bell, BellRing, Check } from "lucide-react";
+import { Users, BellRing, Check } from "lucide-react";
+import ActionButton from "./ActionButton";
 
 /**
  * UpcomingCard Component
@@ -126,26 +127,20 @@ export default function UpcomingCard({
 
       {/* 3. Footer Action: Notify Me at Drop */}
       <div className="p-5">
-        <button
-          type="button"
-          onClick={() => setIsNotified(!isNotified)}
-          className={`w-full py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-2 border ${isNotified
-            ? "bg-[#10B981]/20 border-[#10B981]/50 text-[#10B981]"
-            : "bg-[#171B2A] hover:bg-[#FF2E63] text-slate-200 hover:text-white border-white/10 hover:border-[#FF2E63] group-hover:shadow-md group-hover:shadow-[#FF2E63]/25"
-            }`}
-        >
-          {isNotified ? (
-            <>
-              <Check className="w-3.5 h-3.5 text-[#10B981]" />
-              <span>Notified for Premiere</span>
-            </>
-          ) : (
-            <>
+        <ActionButton
+          title={isNotified ? "Notified for Premiere" : "Notify Me at Drop"}
+          variant={isNotified ? "tertiary" : "secondary"}
+          size="sm"
+          icon={
+            isNotified ? (
+              <Check className="w-3.5 h-3.5 text-[#052E16]" />
+            ) : (
               <BellRing className="w-3.5 h-3.5 text-[#FF2E63] group-hover:text-white transition-colors" />
-              <span>Notify Me at Drop</span>
-            </>
-          )}
-        </button>
+            )
+          }
+          onClick={() => setIsNotified(!isNotified)}
+          className="w-full rounded-xl py-2.5 text-xs sm:text-sm font-semibold"
+        />
       </div>
     </div>
   );

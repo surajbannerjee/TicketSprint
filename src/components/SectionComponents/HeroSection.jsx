@@ -36,11 +36,11 @@ export default function HeroSection({
     audioVisualSpec: "Dolby Atmos • 70mm Dual Laser",
     ticketButton: {
       title: "BOOK TICKETS NOW",
-      link: "#book-tickets",
+      link: "/movies/dune-part-two",
     },
     trailerButton: {
       title: "WATCH TRAILER",
-      link: "#watch-trailer",
+      link: "/movies/dune-part-two",
     },
   },
   formats = [

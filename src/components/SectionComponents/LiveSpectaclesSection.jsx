@@ -24,7 +24,7 @@ const LIVE_EVENTS = [
     venue: "Chase Center • San Francisco, CA",
     date: "Fri, Nov 14 • 8:00 PM PST",
     startingPrice: "$78",
-    link: "#find-seats-starlight",
+    link: "/seat-selection?event=starlight-world-tour-2025",
   },
   {
     id: "warriors-lakers",
@@ -37,7 +37,7 @@ const LIVE_EVENTS = [
     venue: "Chase Center • San Francisco, CA",
     date: "Sun, Nov 16 • 5:30 PM PST",
     startingPrice: "$115",
-    link: "#find-seats-warriors",
+    link: "/seat-selection?event=warriors-vs-lakers",
   },
 ];
 

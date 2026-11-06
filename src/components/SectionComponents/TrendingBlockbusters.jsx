@@ -13,8 +13,8 @@ import "swiper/css/navigation";
 // Initial Movie dataset matching the provided design images
 const DEFAULT_MOVIES = [
   {
-    id: "dune-awakening",
-    title: "Dune: Awakening",
+    id: "dune-part-two",
+    title: "Dune: Part Two",
     posterImage:
       "https://www.movy.sx/img/w342/6izwz7rsy95ARzTR3poZ8H6c5pp.jpg/q50.webp",
     format: "IMAX",
@@ -24,7 +24,7 @@ const DEFAULT_MOVIES = [
     languages: "English • Spanish Dub",
     showtimes: "14 Showtimes Today",
     genre: "Sci-Fi",
-    bookLink: "#book-seats",
+    bookLink: "/movies/dune-part-two",
     trailerLink: "#watch-trailer",
   },
   {
@@ -39,7 +39,7 @@ const DEFAULT_MOVIES = [
     languages: "Action • English",
     showtimes: "9 Showtimes Today",
     genre: "Action",
-    bookLink: "#book-seats",
+    bookLink: "/movies/neon-velocity",
     trailerLink: "#watch-trailer",
   },
   {
@@ -54,7 +54,7 @@ const DEFAULT_MOVIES = [
     languages: "Drama / Musical • Italian Sub",
     showtimes: "6 Showtimes Today",
     genre: "Drama",
-    bookLink: "#book-seats",
+    bookLink: "/movies/the-midnight-symphony",
     trailerLink: "#watch-trailer",
   },
   {
@@ -69,7 +69,7 @@ const DEFAULT_MOVIES = [
     languages: "Sci-Fi / Heist • English",
     showtimes: "11 Showtimes Today",
     genre: "Sci-Fi",
-    bookLink: "#book-seats",
+    bookLink: "/movies/quantum-heist",
     trailerLink: "#watch-trailer",
   },
   {
@@ -84,7 +84,7 @@ const DEFAULT_MOVIES = [
     languages: "Sci-Fi • English Dub",
     showtimes: "8 Showtimes Today",
     genre: "Sci-Fi",
-    bookLink: "#book-seats",
+    bookLink: "/movies/solaris-vanguard",
     trailerLink: "#watch-trailer",
   },
   {
@@ -99,7 +99,7 @@ const DEFAULT_MOVIES = [
     languages: "Action / Thriller • Japanese Sub",
     showtimes: "12 Showtimes Today",
     genre: "Action",
-    bookLink: "#book-seats",
+    bookLink: "/movies/tokyo-drift-zero",
     trailerLink: "#watch-trailer",
   },
 ];

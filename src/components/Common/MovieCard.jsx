@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Bookmark, Play, Calendar } from "lucide-react";
+import ActionButton from "./ActionButton";
 
 /**
  * MovieCard Component
@@ -142,14 +143,16 @@ export default function MovieCard({
       </div>
 
       {/* 3. Card Footer Action: Book Seats (Pinned to bottom) */}
-      <div className="px-4 pb-4 pt-3 ">
-        <Link
-          href={movie.bookLink || "#"}
-          className="w-full py-2.5 px-4 rounded-xl bg-[#171B2A] hover:bg-[#FF2E63] text-slate-200 hover:text-white border border-white/10 hover:border-[#FF2E63] text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-2 group-hover:shadow-md group-hover:shadow-[#FF2E63]/25"
-        >
-          <span>Book Seats</span>
-          <Calendar className="w-3.5 h-3.5 text-pinkT group-hover:text-white" />
-        </Link>
+      <div className="px-4 pb-4 pt-3">
+        <ActionButton
+          title="Book Seats"
+          link={movie.bookLink || `/movies/${movie.id}`}
+          variant="secondary"
+          size="sm"
+          icon={<Calendar className="w-3.5 h-3.5 text-pinkT group-hover:text-white" />}
+          iconPosition="right"
+          className="w-full rounded-xl py-2.5 bg-[#171B2A] hover:bg-[#FF2E63] text-slate-200 hover:text-white border border-white/10 hover:border-[#FF2E63] text-xs sm:text-sm font-semibold group-hover:shadow-md group-hover:shadow-[#FF2E63]/25"
+        />
       </div>
     </div>
   );
