@@ -185,7 +185,7 @@ export default function Footer() {
               Download tickets directly to Apple Wallet or Google Pay.
             </p>
 
-            <div className=" pt-1 max-w-xs flex items-center gap-2.5">
+            <div className=" pt-1 max-w-xs flex gap-2.5 md:flex-col flex-row">
               {/* App Store Button */}
               <Link
                 href="#app-store"

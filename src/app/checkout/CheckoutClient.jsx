@@ -127,7 +127,7 @@ export default function CheckoutClient() {
         {/* Step Indicator Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
           <div className="space-y-1">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <span className="text-[10px] uppercase tracking-widest text-[#ff2e63] font-black bg-[#ff4f72]/20 px-3 py-0.5 rounded-full border border-[#ff4f72]/30">
                 Step 2 of 3 • Add-ons & Checkout
               </span>
