@@ -22,15 +22,21 @@ export const metadata = {
   description: "TicketSprint - Fast and Modern Ticket Management",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
       className={`${plusJakartaSans.variable} ${inter.variable} dark h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans bg-background text-foreground">
+      <body className="min-h-full flex flex-col font-sans bg-background text-foreground overflow-x-hidden">
         <Header />
-        <div className="flex-1">{children}</div>
+        <div className="flex-1 w-full overflow-x-hidden">{children}</div>
         <Footer />
       </body>
     </html>

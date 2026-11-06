@@ -99,7 +99,7 @@ export default function Footer() {
         </div>
 
         {/* 2. Main Navigation Columns (5 columns) */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-6 pt-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 sm:gap-8 lg:gap-6 pt-2">
           {/* Column 1: Experiences */}
           <div className="space-y-3">
             <h4 className="font-heading font-bold text-sx uppercase tracking-wider text-white">
@@ -110,7 +110,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-pinkT hover:text-white transition-colors"
+                    className="text-pinkT hover:text-white transition-colors block truncate"
                   >
                     {link.name}
                   </Link>
@@ -129,7 +129,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-pinkT hover:text-white transition-colors"
+                    className="text-pinkT hover:text-white transition-colors block truncate"
                   >
                     {link.name}
                   </Link>
@@ -148,7 +148,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-pinkT hover:text-white transition-colors"
+                    className="text-pinkT hover:text-white transition-colors block truncate"
                   >
                     {link.name}
                   </Link>
@@ -167,7 +167,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-pinkT hover:text-white transition-colors"
+                    className="text-pinkT hover:text-white transition-colors block truncate"
                   >
                     {link.name}
                   </Link>
@@ -185,7 +185,7 @@ export default function Footer() {
               Download tickets directly to Apple Wallet or Google Pay.
             </p>
 
-            <div className="space-y-2 pt-1">
+            <div className=" pt-1 max-w-xs flex items-center gap-2.5">
               {/* App Store Button */}
               <Link
                 href="#app-store"
@@ -222,12 +222,12 @@ export default function Footer() {
         </div>
 
         {/* 3. Bottom Legal & Copyright Bar */}
-        <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-pinkT">
+        <div className="pt-6 sm:pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-xs text-pinkT text-center sm:text-left">
           <div>
             © 2025 TicketSprint Inc. All rights reserved.
           </div>
 
-          <div className="flex flex-wrap items-center gap-5 sm:gap-6">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3.5 sm:gap-6">
             <Link
               href="#cookie-preferences"
               className="text-pinkT hover:text-white transition-colors"

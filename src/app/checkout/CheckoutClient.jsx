@@ -101,11 +101,11 @@ export default function CheckoutClient() {
   const grandTotal = Math.max(
     0,
     ticketsSubtotal +
-      fnbSubtotal +
-      protectPrice +
-      convenienceFee +
-      taxes -
-      promoDiscount
+    fnbSubtotal +
+    protectPrice +
+    convenienceFee +
+    taxes -
+    promoDiscount
   );
 
   const handlePay = () => {
@@ -160,7 +160,7 @@ export default function CheckoutClient() {
           {/* Left Column: F&B, SprintProtect, Promo, Payment Form (7-8 cols) */}
           <div className="lg:col-span-7 xl:col-span-8 flex flex-col gap-6">
             {/* 1. Gourmet Concessions & F&B */}
-            <section className="bg-[#191b23] rounded-2xl p-6 border border-white/10 shadow-xl relative overflow-hidden">
+            <section className="bg-[#191b23] rounded-2xl md:p-6 p-4 border border-white/10 shadow-xl relative overflow-hidden">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 mb-6 bg-[#1d1f27] p-4 rounded-xl border border-white/5">
                 <div>
                   <span className="text-[10px] uppercase text-[#10b981] font-bold tracking-wider block">
@@ -175,11 +175,10 @@ export default function CheckoutClient() {
                   <button
                     type="button"
                     onClick={() => setFulfillment("seat")}
-                    className={`px-3.5 py-1.5 rounded-lg sm:rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-                      fulfillment === "seat"
-                        ? "bg-[#ff4f72] text-white shadow-md shadow-[#ff4f72]/40"
-                        : "text-[#94a3b8] hover:text-white"
-                    }`}
+                    className={`px-3.5 py-1.5 rounded-lg sm:rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${fulfillment === "seat"
+                      ? "bg-[#ff4f72] text-white shadow-md shadow-[#ff4f72]/40"
+                      : "text-[#94a3b8] hover:text-white"
+                      }`}
                   >
                     <Armchair className="w-3.5 h-3.5" />
                     <span>Seat Delivery ({seatsParam})</span>
@@ -187,11 +186,10 @@ export default function CheckoutClient() {
                   <button
                     type="button"
                     onClick={() => setFulfillment("counter")}
-                    className={`px-3.5 py-1.5 rounded-lg sm:rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-                      fulfillment === "counter"
-                        ? "bg-[#ff4f72] text-white shadow-md shadow-[#ff4f72]/40"
-                        : "text-[#94a3b8] hover:text-white"
-                    }`}
+                    className={`px-3.5 py-1.5 rounded-lg sm:rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${fulfillment === "counter"
+                      ? "bg-[#ff4f72] text-white shadow-md shadow-[#ff4f72]/40"
+                      : "text-[#94a3b8] hover:text-white"
+                      }`}
                   >
                     <ShoppingBag className="w-3.5 h-3.5" />
                     <span>Express Counter</span>
@@ -414,7 +412,7 @@ export default function CheckoutClient() {
             </section>
 
             {/* 2. SprintProtect Refund Guarantee */}
-            <section className="bg-[#191b23] rounded-2xl p-6 border border-white/10 shadow-xl flex items-start gap-4">
+            <section className="bg-[#191b23] rounded-2xl md:p-6 p-4 border border-white/10 shadow-xl flex items-start gap-4 flex-wrap">
               <div className="p-3 bg-[#10b981]/15 text-[#10b981] rounded-xl shrink-0">
                 <ShieldCheck className="w-7 h-7" />
               </div>
@@ -455,7 +453,7 @@ export default function CheckoutClient() {
             </section>
 
             {/* 3. Promo Codes & Member Offers */}
-            <section className="bg-[#191b23] rounded-2xl p-6 border border-white/10 shadow-xl">
+            <section className="bg-[#191b23] rounded-2xl md:p-6 p-4 border border-white/10 shadow-xl">
               <div className="flex items-center gap-2 mb-3">
                 <Tag className="w-5 h-5 text-[#ff2e63]" />
                 <h3 className="font-heading font-bold text-base text-white">
@@ -463,7 +461,7 @@ export default function CheckoutClient() {
                 </h3>
               </div>
 
-              <div className="flex gap-2 mb-3">
+              <div className="flex gap-2 mb-3 flex-wrap">
                 <input
                   type="text"
                   value={promoCode}
@@ -512,8 +510,8 @@ export default function CheckoutClient() {
             </section>
 
             {/* 4. Payment Method & Details */}
-            <section className="bg-[#191b23] rounded-2xl p-6 border border-white/10 shadow-xl">
-              <div className="flex items-center justify-between mb-5">
+            <section className="bg-[#191b23] rounded-2xl md:p-6 p-4 border border-white/10 shadow-xl">
+              <div className="flex items-center justify-between mb-5 flex-wrap gap-2">
                 <div className="flex items-center gap-2">
                   <CreditCard className="w-5 h-5 text-[#ff2e63]" />
                   <h3 className="font-heading font-bold text-base text-white">
@@ -540,11 +538,10 @@ export default function CheckoutClient() {
                       key={item.id}
                       type="button"
                       onClick={() => setPaymentMethod(item.id)}
-                      className={`p-3 rounded-xl flex flex-col items-center justify-center gap-1.5 transition-all cursor-pointer text-center ${
-                        isActive
-                          ? "bg-[#1d1f27] border-2 border-[#ff4f72] shadow-md shadow-[#ff4f72]/20 text-white"
-                          : "bg-[#1d1f27]/60 border border-white/5 hover:bg-[#1d1f27] text-[#94a3b8] hover:text-white"
-                      }`}
+                      className={`p-3 rounded-xl flex flex-col items-center justify-center gap-1.5 transition-all cursor-pointer text-center ${isActive
+                        ? "bg-[#1d1f27] border-2 border-[#ff4f72] shadow-md shadow-[#ff4f72]/20 text-white"
+                        : "bg-[#1d1f27]/60 border border-white/5 hover:bg-[#1d1f27] text-[#94a3b8] hover:text-white"
+                        }`}
                     >
                       <Icon className="w-5 h-5 text-[#ff2e63]" />
                       <span className="text-xs font-bold leading-tight">
@@ -609,7 +606,7 @@ export default function CheckoutClient() {
 
           {/* Right Column: Sticky Order Summary (4-5 cols) */}
           <div className="lg:col-span-5 xl:col-span-4 sticky top-24">
-            <div className="bg-[#191b23] rounded-2xl p-6 border border-white/10 shadow-2xl space-y-5">
+            <div className="bg-[#191b23] rounded-2xl md:p-6 p-4 border border-white/10 shadow-2xl space-y-5">
               <div className="flex items-center justify-between pb-3 border-b border-white/10">
                 <div>
                   <span className="text-[10px] uppercase tracking-wider text-[#ff2e63] font-black">

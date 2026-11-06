@@ -346,11 +346,10 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                     type="button"
                     onClick={() => setIsBookmarked(!isBookmarked)}
                     aria-label="Bookmark movie"
-                    className={`h-11 sm:w-12 sm:h-12 px-4 sm:px-0 rounded-xl sm:rounded-full border border-white/15 flex items-center justify-center transition-colors cursor-pointer gap-2 ${
-                      isBookmarked
+                    className={`h-11 sm:w-12 sm:h-12 px-4 sm:px-0 rounded-xl sm:rounded-full border border-white/15 flex items-center justify-center transition-colors cursor-pointer gap-2 ${isBookmarked
                         ? "bg-[#ff2e63] text-white border-[#ff2e63]"
                         : "bg-[#282a31] hover:bg-[#33343c] text-white"
-                    }`}
+                      }`}
                   >
                     <Bookmark
                       className={`w-5 h-5 ${isBookmarked ? "fill-current" : ""}`}
@@ -532,11 +531,10 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                   key={idx}
                   type="button"
                   onClick={() => setSelectedDateIndex(idx)}
-                  className={`shrink-0 flex flex-col items-center justify-center w-24 py-3 px-2 rounded-xl transition-all cursor-pointer select-none font-semibold ${
-                    isActive
+                  className={`shrink-0 flex flex-col items-center justify-center w-24 py-3 px-2 rounded-xl transition-all cursor-pointer select-none font-semibold ${isActive
                       ? "bg-gradient-to-b from-[#ff4f72] to-[#bd0041] text-white shadow-lg shadow-[#ff4f72]/30 scale-105"
                       : "bg-[#1d1f27] hover:bg-[#282a31] text-[#94a3b8] hover:text-white border border-white/5"
-                  }`}
+                    }`}
                 >
                   <span className="text-[11px] uppercase tracking-wider font-bold opacity-90">
                     {date.label}
@@ -569,11 +567,10 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                     key={fmt.id}
                     type="button"
                     onClick={() => setSelectedFormat(fmt.id)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                      selectedFormat === fmt.id
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${selectedFormat === fmt.id
                         ? "bg-[#ff4f72] text-white shadow-md shadow-[#ff4f72]/30"
                         : "bg-[#282a31] text-[#94a3b8] hover:text-white hover:bg-[#33343c]"
-                    }`}
+                      }`}
                   >
                     {fmt.label}
                   </button>
@@ -597,11 +594,10 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                     key={time.id}
                     type="button"
                     onClick={() => setSelectedTimeWindow(time.id)}
-                    className={`py-1.5 px-1 rounded-lg text-center text-xs font-bold transition-colors cursor-pointer ${
-                      selectedTimeWindow === time.id
+                    className={`py-1.5 px-1 rounded-lg text-center text-xs font-bold transition-colors cursor-pointer ${selectedTimeWindow === time.id
                         ? "bg-[#ff4f72] text-white shadow-md shadow-[#ff4f72]/30"
                         : "bg-[#282a31] text-[#94a3b8] hover:text-white hover:bg-[#33343c]"
-                    }`}
+                      }`}
                   >
                     {time.label}
                   </button>
@@ -663,7 +659,7 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
         {venues.map((venue) => (
           <div
             key={venue.id}
-            className="flex flex-col bg-[#191b23] rounded-2xl p-6 sm:p-7 border border-white/10 shadow-xl transition-all"
+            className="flex flex-col bg-[#191b23] rounded-2xl md:p-6 p-4 sm:p-7 border border-white/10 shadow-xl transition-all"
           >
             {/* Venue Header */}
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-white/5">
@@ -703,15 +699,15 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                   slot.status === "available"
                     ? "bg-[#10b981]"
                     : slot.status === "filling"
-                    ? "bg-amber-400"
-                    : "bg-[#ff4f72] animate-pulse";
+                      ? "bg-amber-400"
+                      : "bg-[#ff4f72] animate-pulse";
 
                 const textHighlight =
                   slot.status === "available"
                     ? "text-[#10b981]"
                     : slot.status === "filling"
-                    ? "text-amber-400"
-                    : "text-[#ff2e63]";
+                      ? "text-amber-400"
+                      : "text-[#ff2e63]";
 
                 return (
                   <button
