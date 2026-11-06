@@ -43,16 +43,6 @@ const DEFAULT_UPCOMING_MOVIES = [
   },
 ];
 
-/**
- * UpcomingBuzzSection Component
- * "Upcoming Blockbusters & Buzz" section showcasing fan anticipation meters and drop notifications.
- *
- * @param {Array} items - List of upcoming movie objects
- * @param {string} badge - Top subtitle badge
- * @param {string} title - Section heading
- * @param {string} description - Explanatory subtitle text on the right
- * @param {string} className - Optional class
- */
 export default function UpcomingBuzzSection({
   items = DEFAULT_UPCOMING_MOVIES,
   badge = "FAN ANTICIPATION METER",
@@ -62,32 +52,32 @@ export default function UpcomingBuzzSection({
 }) {
   return (
     <section
-      className={`w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 lg:py-15 py-5 ${className}`}
+      className={`w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8 ${className}`}
     >
-      <div className="p-5 bg-[#191B23] rounded-2xl">
-        {/* 1. Section Header Area */}
-        <div className="w-full flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6">
+      <div className="p-4 sm:p-6 lg:p-7 bg-[#191B23] rounded-2xl border border-white/5">
+        {/* Section Header */}
+        <div className="w-full flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4 pb-5 sm:pb-6">
           {/* Left: Badge & Title */}
-          <div className="space-y-1.5">
-            <div className="flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-widest text-[#818CF8] ">
+          <div className="space-y-1">
+            <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-[#818CF8]">
               <TrendingUp className="w-3.5 h-3.5 text-[#818CF8]" />
               <span>{badge}</span>
             </div>
-            <h2 className="font-heading font-extrabold text-2xl sm:text-3xl text-white tracking-tight">
+            <h2 className="font-heading font-extrabold text-xl sm:text-2xl lg:text-3xl text-white tracking-tight">
               {title}
             </h2>
           </div>
 
           {/* Right: Description Text */}
           {description && (
-            <p className="font-sans text-xs sm:text-sm text-pinkT max-w-md md:text-left leading-relaxed">
+            <p className="font-sans text-xs sm:text-sm text-pinkT max-w-md leading-relaxed">
               {description}
             </p>
           )}
         </div>
 
-        {/* 2. Grid Cards Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 items-stretch">
+        {/* Grid Cards Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch">
           {items.map((item) => (
             <div key={item.id} className="h-full">
               <UpcomingCard item={item} className="h-full" />
@@ -95,8 +85,6 @@ export default function UpcomingBuzzSection({
           ))}
         </div>
       </div>
-
     </section>
   );
 }
-

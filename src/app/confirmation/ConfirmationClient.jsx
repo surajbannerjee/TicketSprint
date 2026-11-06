@@ -127,9 +127,9 @@ export default function ConfirmationClient() {
               </div>
 
               {/* Ticket Core Details Strip */}
-              <div className="p-6 flex flex-col gap-5">
+              <div className="p-4 sm:p-6 flex flex-col gap-4 sm:gap-5">
                 {/* 4-Item Metadata Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 rounded-2xl bg-[#1d1f27] border border-white/5">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-3.5 sm:p-4 rounded-2xl bg-[#1d1f27] border border-white/5">
                   <div className="flex flex-col">
                     <span className="text-[10px] uppercase text-[#94a3b8] font-bold">
                       Date
@@ -234,7 +234,7 @@ export default function ConfirmationClient() {
               </div>
 
               {/* Scannable Dynamic QR Pass Section */}
-              <div className="p-8 flex flex-col items-center text-center bg-[#191b23]">
+              <div className="p-5 sm:p-8 flex flex-col items-center text-center bg-[#191b23]">
                 <div className="flex items-center gap-2 mb-4">
                   <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse" />
                   <span className="text-xs text-[#10b981] uppercase tracking-wider font-extrabold">
@@ -247,8 +247,8 @@ export default function ConfirmationClient() {
                 </div>
 
                 {/* High Contrast QR Code with Scan Laser Line */}
-                <div className="relative p-5 bg-white rounded-3xl shadow-2xl flex flex-col items-center">
-                  <div className="relative w-48 h-48 sm:w-56 sm:h-56 bg-white flex items-center justify-center p-2 overflow-hidden rounded-xl">
+                <div className="relative p-4 sm:p-5 bg-white rounded-3xl shadow-2xl flex flex-col items-center max-w-full">
+                  <div className="relative w-44 h-44 sm:w-56 sm:h-56 bg-white flex items-center justify-center p-2 overflow-hidden rounded-xl">
                     <svg
                       className="w-full h-full text-black"
                       fill="currentColor"
@@ -566,13 +566,14 @@ export default function ConfirmationClient() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3 w-full md:w-auto">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
             <ActionButton
               title="Explore More Movies"
               link="/"
               variant="secondary"
               size="md"
               icon={null}
+              className="w-full sm:w-auto justify-center"
             />
             <ActionButton
               title="View Rewards"
@@ -580,6 +581,7 @@ export default function ConfirmationClient() {
               variant="primary"
               size="md"
               icon={null}
+              className="w-full sm:w-auto justify-center"
             />
           </div>
         </section>

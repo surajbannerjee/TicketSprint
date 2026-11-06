@@ -181,10 +181,10 @@ export default function SeatSelectionClient() {
       </section>
 
       {/* 2. Interactive Auditorium Workspace */}
-      <section className="w-full px-4 sm:px-6 lg:px-8 py-8 max-w-7xl mx-auto flex flex-col gap-10">
+      <section className="w-full px-4 sm:px-6 lg:px-8 py-8 max-w-7xl mx-auto flex flex-col gap-6 sm:gap-10">
         {/* Legend Quick-Strip */}
-        <div className="w-full bg-[#191b23]/90 backdrop-blur-md rounded-xl p-4 flex flex-wrap items-center justify-between gap-4 border border-white/10 shadow-sm">
-          <div className="flex flex-wrap items-center gap-6 text-xs">
+        <div className="w-full bg-[#191b23]/90 backdrop-blur-md rounded-xl p-4 flex flex-wrap items-center justify-between gap-3 sm:gap-4 border border-white/10 shadow-sm">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-xs">
             {/* Available */}
             <div className="flex items-center gap-2">
               <span className="w-5 h-5 rounded-md bg-[#282a31] border border-white/20 flex items-center justify-center" />
@@ -216,14 +216,19 @@ export default function SeatSelectionClient() {
               <span className="w-5 h-5 rounded-md bg-amber-600/30 text-amber-300 flex items-center justify-center border border-amber-600/50 animate-pulse">
                 <Lock className="w-3 h-3" />
               </span>
-              <span className="text-[#94a3b8]">Temporarily Held</span>
+              <span className="text-[#94a3b8]">Held</span>
             </div>
           </div>
 
           <div className="flex items-center gap-2 text-xs text-[#94a3b8]">
             <ShieldCheck className="w-4 h-4 text-[#10b981]" />
-            <span>Laser Projection Aligned (Aspect 1.43:1)</span>
+            <span>Laser Projection (1.43:1)</span>
           </div>
+        </div>
+
+        {/* Mobile Horizontal Scroll Indicator Prompt */}
+        <div className="md:hidden flex items-center justify-center gap-2 text-xs text-[#94a3b8] bg-[#191b23] py-2 px-4 rounded-full mx-auto w-fit border border-white/10 shadow-sm animate-pulse">
+          <span>↔️ Swipe horizontally to view all auditorium seats</span>
         </div>
 
         {/* Curved Laser Screen Graphic */}

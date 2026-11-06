@@ -171,11 +171,11 @@ export default function CheckoutClient() {
                   </span>
                 </div>
 
-                <div className="flex items-center bg-[#11131a] p-1 rounded-full border border-white/5">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-[#11131a] p-1 rounded-xl sm:rounded-full border border-white/5 gap-1 sm:gap-0">
                   <button
                     type="button"
                     onClick={() => setFulfillment("seat")}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                    className={`px-3.5 py-1.5 rounded-lg sm:rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                       fulfillment === "seat"
                         ? "bg-[#ff4f72] text-white shadow-md shadow-[#ff4f72]/40"
                         : "text-[#94a3b8] hover:text-white"
@@ -187,7 +187,7 @@ export default function CheckoutClient() {
                   <button
                     type="button"
                     onClick={() => setFulfillment("counter")}
-                    className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                    className={`px-3.5 py-1.5 rounded-lg sm:rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                       fulfillment === "counter"
                         ? "bg-[#ff4f72] text-white shadow-md shadow-[#ff4f72]/40"
                         : "text-[#94a3b8] hover:text-white"

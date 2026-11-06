@@ -270,10 +270,10 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                 </div>
 
                 {/* Acclaim Bar */}
-                <div className="flex flex-wrap items-center gap-6 bg-[#191b23]/80 backdrop-blur-lg p-4 rounded-2xl border border-white/10 max-w-2xl">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 bg-[#191b23]/80 backdrop-blur-lg p-4 rounded-2xl border border-white/10 max-w-2xl divide-y sm:divide-y-0 sm:divide-x divide-white/10">
                   {/* Rotten Tomatoes Critic */}
-                  <div className="flex items-center gap-3 pr-6 border-r border-white/10">
-                    <div className="w-10 h-10 rounded-full bg-[#ff2e63]/20 flex items-center justify-center text-[#ff2e63]">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-[#ff2e63]/20 flex items-center justify-center text-[#ff2e63] shrink-0">
                       <ShieldCheck className="w-6 h-6 stroke-[2.5]" />
                     </div>
                     <div className="flex flex-col">
@@ -290,8 +290,8 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                   </div>
 
                   {/* Popcorn Audience */}
-                  <div className="flex items-center gap-3 pr-6 border-r border-white/10">
-                    <div className="w-10 h-10 rounded-full bg-[#00a572]/20 flex items-center justify-center text-[#10b981]">
+                  <div className="flex items-center gap-3 pt-3 sm:pt-0 sm:pl-4">
+                    <div className="w-10 h-10 rounded-full bg-[#00a572]/20 flex items-center justify-center text-[#10b981] shrink-0">
                       <Sparkles className="w-5 h-5 fill-current" />
                     </div>
                     <div className="flex flex-col">
@@ -308,8 +308,8 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                   </div>
 
                   {/* IMDb */}
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-[#282a31] flex items-center justify-center text-amber-400 font-black text-xs tracking-tighter">
+                  <div className="flex items-center gap-3 pt-3 sm:pt-0 sm:pl-4">
+                    <div className="w-10 h-10 rounded-lg bg-[#282a31] flex items-center justify-center text-amber-400 font-black text-xs tracking-tighter shrink-0">
                       IMDb
                     </div>
                     <div className="flex flex-col">
@@ -325,14 +325,14 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                 </div>
 
                 {/* Primary Action Buttons */}
-                <div className="flex flex-wrap items-center gap-4 pt-2">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2">
                   <ActionButton
                     title="Quick Jump to Showtimes"
                     link="#showtimes-section"
                     variant="primary"
                     icon={<Ticket className="w-5 h-5 -rotate-12" />}
                     size="md"
-                    className="shadow-lg shadow-[#ff4f72]/30"
+                    className="w-full sm:w-auto justify-center shadow-lg shadow-[#ff4f72]/30"
                   />
                   <ActionButton
                     title="Watch Official Trailer (3:02)"
@@ -340,12 +340,13 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                     variant="secondary"
                     icon={<Play className="w-4 h-4 fill-current" />}
                     size="md"
+                    className="w-full sm:w-auto justify-center"
                   />
                   <button
                     type="button"
                     onClick={() => setIsBookmarked(!isBookmarked)}
                     aria-label="Bookmark movie"
-                    className={`w-12 h-12 rounded-full border border-white/15 flex items-center justify-center transition-colors cursor-pointer ${
+                    className={`h-11 sm:w-12 sm:h-12 px-4 sm:px-0 rounded-xl sm:rounded-full border border-white/15 flex items-center justify-center transition-colors cursor-pointer gap-2 ${
                       isBookmarked
                         ? "bg-[#ff2e63] text-white border-[#ff2e63]"
                         : "bg-[#282a31] hover:bg-[#33343c] text-white"
@@ -354,6 +355,9 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                     <Bookmark
                       className={`w-5 h-5 ${isBookmarked ? "fill-current" : ""}`}
                     />
+                    <span className="sm:hidden text-xs font-bold uppercase tracking-wider">
+                      {isBookmarked ? "Saved to Watchlist" : "Save to Watchlist"}
+                    </span>
                   </button>
                 </div>
               </div>
