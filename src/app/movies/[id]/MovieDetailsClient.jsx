@@ -779,3 +779,4 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
     </div>
   );
 }
+

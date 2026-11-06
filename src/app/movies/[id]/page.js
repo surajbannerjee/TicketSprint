@@ -22,3 +22,4 @@ export default async function MovieDetailsPage({ params }) {
   const resolvedParams = await params;
   return <MovieDetailsClient movieId={resolvedParams?.id || "dune-part-two"} />;
 }
+
