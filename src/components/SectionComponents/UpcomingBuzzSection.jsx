@@ -1,89 +1,74 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import UpcomingCard from "@/components/Common/UpcomingCard";
 import { TrendingUp } from "lucide-react";
-
-const DEFAULT_UPCOMING_MOVIES = [
-  {
-    id: "valkyrie-eclipse",
-    title: "Valkyrie: Eclipse",
-    meta: "Epic Fantasy • Dir. Elena Thorne",
-    image:
-      "https://www.movy.sx/img/w780/lV1uc72FkvHqzY9rDeAQXWaSFOi.jpg/q65.webp",
-    releaseBadge: "RELEASES IN 4 DAYS",
-    badgeColor: "pink",
-    fansWaiting: "42.8k fans waiting",
-    buzzIndex: 92,
-    meterTheme: "emerald",
-  },
-  {
-    id: "chronicles-of-aeris",
-    title: "Chronicles of Aeris",
-    meta: "Animation / Adventure • All Ages",
-    image:
-      "https://www.movy.sx/img/w780/bgMD95c7IUVgzAWYbcoxRXidtFI.jpg/q65.webp",
-    releaseBadge: "RELEASES IN 12 DAYS",
-    badgeColor: "blue",
-    fansWaiting: "28.1k fans waiting",
-    buzzIndex: 78,
-    meterTheme: "indigo",
-  },
-  {
-    id: "the-echo-chamber",
-    title: "The Echo Chamber",
-    meta: "Psychological Horror • Rated R",
-    image:
-      "https://www.movy.sx/img/w780/cd8AggcjG4kW4Lb6voA54UhwgFZ.jpg/q65.webp",
-    releaseBadge: "RELEASES IN 19 DAYS",
-    badgeColor: "dark",
-    fansWaiting: "51.4k fans waiting",
-    buzzIndex: 97,
-    meterTheme: "pink",
-  },
-];
+import { UPCOMING_MOVIES } from "@/data/apiData";
 
 export default function UpcomingBuzzSection({
-  items = DEFAULT_UPCOMING_MOVIES,
   badge = "FAN ANTICIPATION METER",
   title = "Upcoming Blockbusters & Buzz",
   description = "Set instant advance notifications. Tickets unlock 48 hours prior to official premiere drops for registered fans.",
   className = "",
 }) {
+  const [items, setItems] = useState(UPCOMING_MOVIES);
+
+  // Fetch upcoming movies dynamically from /api/movies?type=upcoming
+  useEffect(() => {
+    async function fetchUpcoming() {
+      try {
+        const res = await fetch("/api/movies?type=upcoming");
+        if (res.ok) {
+          const json = await res.json();
+          if (json.success && json.data) {
+            setItems(json.data);
+          }
+        }
+      } catch (e) {
+        console.warn("API upcoming fetch error:", e);
+      }
+    }
+    fetchUpcoming();
+  }, []);
+
   return (
     <section
-      className={`w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8 ${className}`}
+      className={`w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 ${className}`}
     >
-      <div className="p-4 sm:p-6 lg:p-7 bg-[#191B23] rounded-2xl border border-white/5">
-        {/* Section Header */}
-        <div className="w-full flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4 pb-5 sm:pb-6">
-          {/* Left: Badge & Title */}
-          <div className="space-y-1">
-            <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-[#818CF8]">
-              <TrendingUp className="w-3.5 h-3.5 text-[#818CF8]" />
-              <span>{badge}</span>
-            </div>
-            <h2 className="font-heading font-extrabold text-xl sm:text-2xl lg:text-3xl text-white tracking-tight">
-              {title}
-            </h2>
+      {/* 1. Header with Badge, Title, and Description */}
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 sm:pb-8 border-b border-white/5">
+        <div className="space-y-1.5 max-w-2xl">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#10B981]/15 text-[#10B981] border border-[#10B981]/30 text-[10px] sm:text-xs font-black tracking-wider uppercase">
+            <TrendingUp className="w-3 h-3 stroke-[2.5]" />
+            <span>{badge}</span>
           </div>
 
-          {/* Right: Description Text */}
-          {description && (
-            <p className="font-sans text-xs sm:text-sm text-pinkT max-w-md leading-relaxed">
-              {description}
-            </p>
-          )}
-        </div>
+          <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-white">
+            {title}
+          </h2>
 
-        {/* Grid Cards Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch">
-          {items.map((item) => (
-            <div key={item.id} className="h-full">
-              <UpcomingCard item={item} className="h-full" />
-            </div>
-          ))}
+          <p className="text-xs sm:text-sm text-pinkT leading-relaxed">
+            {description}
+          </p>
         </div>
+      </div>
+
+      {/* 2. Grid of Upcoming Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 pt-6 sm:pt-8">
+        {items.map((movie) => (
+          <UpcomingCard
+            key={movie.id}
+            id={movie.id}
+            title={movie.title}
+            meta={movie.meta}
+            image={movie.image}
+            releaseBadge={movie.releaseBadge}
+            badgeColor={movie.badgeColor}
+            fansWaiting={movie.fansWaiting}
+            buzzIndex={movie.buzzIndex}
+            meterTheme={movie.meterTheme}
+          />
+        ))}
       </div>
     </section>
   );
