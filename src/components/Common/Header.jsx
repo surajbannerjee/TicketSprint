@@ -191,7 +191,7 @@ export default function Header() {
             <div className="relative" ref={searchContainerRef}>
               <div
                 onClick={() => setSearchModalOpen(true)}
-                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#151928] hover:bg-[#191e32] border border-white/10 hover:border-[#FF2E63]/60 transition-all cursor-pointer group w-64 xl:w-72 shadow-inner"
+                className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#151928] hover:bg-[#191e32] border border-white/10 hover:border-[#FF2E63]/60 transition-all cursor-pointer group w-20 xl:w-40 shadow-inner"
               >
                 <Search className="w-3.5 h-3.5 text-pinkT group-hover:scale-110 transition-transform shrink-0" />
                 <span className="text-[9px] font-extrabold tracking-wide uppercase px-1.5 py-0.5 rounded-full bg-[#20253b] text-slate-200 shrink-0">

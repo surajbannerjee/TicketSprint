@@ -2,10 +2,10 @@
  * TMDB API Client Utility
  * Seamless integration with The Movie Database API
  * Supports both API Key (v3) and Bearer Access Token (v4).
- * Gracefully falls back to high-res curated data if key is not yet set.
+ * Fetches Now Playing, Trending/New, Top Rated, and Classic Old Movies.
  */
 
-import { MOVIES, UPCOMING_MOVIES } from "@/data/apiData";
+import { MOVIES, UPCOMING_MOVIES, TOP_RATED_MOVIES, CLASSIC_OLD_MOVIES } from "@/data/apiData";
 
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const TMDB_API_KEY = process.env.TMDB_API_KEY || "";
@@ -35,9 +35,6 @@ const GENRE_MAP = {
   37: "Western",
 };
 
-/**
- * Helper to build fetch options with Authorization headers if Bearer token present
- */
 function getFetchOptions() {
   const headers = {
     "Content-Type": "application/json",
@@ -45,12 +42,9 @@ function getFetchOptions() {
   if (TMDB_ACCESS_TOKEN && TMDB_ACCESS_TOKEN !== "your_tmdb_api_key_here") {
     headers["Authorization"] = `Bearer ${TMDB_ACCESS_TOKEN}`;
   }
-  return { headers, next: { revalidate: 3600 } }; // Cache for 1 hr
+  return { headers, next: { revalidate: 3600 } };
 }
 
-/**
- * Check if a valid TMDB key or token is configured
- */
 export function isTmdbConfigured() {
   return (
     (Boolean(TMDB_API_KEY) && TMDB_API_KEY !== "your_tmdb_api_key_here") ||
@@ -58,10 +52,7 @@ export function isTmdbConfigured() {
   );
 }
 
-/**
- * Map TMDB raw movie item to TicketSprint unified schema
- */
-function transformTmdbMovie(item, format = "IMAX") {
+function transformTmdbMovie(item, format = "IMAX", category = "now-showing") {
   const posterPath = item.poster_path
     ? `${TMDB_IMAGE_BASE}/w500${item.poster_path}`
     : "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=500&auto=format&fit=crop&q=80";
@@ -79,7 +70,6 @@ function transformTmdbMovie(item, format = "IMAX") {
     ? `${Math.round(item.vote_average * 10)}%`
     : "92%";
 
-  // Slugified movie id
   const slugId = item.title
     ? item.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")
     : `movie-${item.id}`;
@@ -91,7 +81,8 @@ function transformTmdbMovie(item, format = "IMAX") {
     posterImage: posterPath,
     backdropImage: backdropPath,
     format: format,
-    isNowShowing: true,
+    category: category,
+    isNowShowing: category === "now-showing" || category === "new",
     rating: ratingPct,
     criticScore: ratingPct,
     imdbRating: item.vote_average ? item.vote_average.toFixed(1) : "8.5",
@@ -100,8 +91,8 @@ function transformTmdbMovie(item, format = "IMAX") {
     showtimes: "12 Showtimes Today",
     genre: primaryGenre,
     synopsis: item.overview || "Experience this cinematic masterpiece in high-definition IMAX and Dolby Atmos.",
-    bookLink: `/movies/dune-part-two`,
-    trailerLink: "#watch-trailer",
+    bookLink: `/seat-selection?movie=${slugId}`,
+    trailerLink: `/movies/${slugId}#trailer`,
     priceRange: "₹220 - ₹550",
     releaseDate: item.release_date,
     popularity: item.popularity,
@@ -109,7 +100,7 @@ function transformTmdbMovie(item, format = "IMAX") {
 }
 
 /**
- * Fetch Now Playing / Trending Movies from TMDB
+ * Fetch Now Playing Movies from TMDB (Up to 20 movies across pages)
  */
 export async function fetchTmdbNowPlaying() {
   if (!isTmdbConfigured()) {
@@ -125,19 +116,14 @@ export async function fetchTmdbNowPlaying() {
     url.searchParams.set("page", "1");
 
     const res = await fetch(url.toString(), getFetchOptions());
-    if (!res.ok) {
-      console.warn(`TMDB now_playing returned ${res.status}, falling back to curated list.`);
-      return MOVIES;
-    }
+    if (!res.ok) return MOVIES;
 
     const data = await res.json();
-    if (!data.results || data.results.length === 0) {
-      return MOVIES;
-    }
+    if (!data.results || data.results.length === 0) return MOVIES;
 
     const formats = ["IMAX", "4DX", "Dolby", "ScreenX", "VIP"];
-    return data.results.slice(0, 10).map((item, idx) =>
-      transformTmdbMovie(item, formats[idx % formats.length])
+    return data.results.map((item, idx) =>
+      transformTmdbMovie(item, formats[idx % formats.length], "now-showing")
     );
   } catch (err) {
     console.error("Error fetching from TMDB now_playing:", err);
@@ -146,7 +132,39 @@ export async function fetchTmdbNowPlaying() {
 }
 
 /**
- * Fetch Upcoming Movies from TMDB for Fan Anticipation Meter
+ * Fetch Top Rated All-Time Movies from TMDB
+ */
+export async function fetchTmdbTopRated() {
+  if (!isTmdbConfigured()) {
+    return TOP_RATED_MOVIES;
+  }
+
+  try {
+    const url = new URL(`${TMDB_BASE_URL}/movie/top_rated`);
+    if (TMDB_API_KEY && TMDB_API_KEY !== "your_tmdb_api_key_here") {
+      url.searchParams.set("api_key", TMDB_API_KEY);
+    }
+    url.searchParams.set("language", "en-US");
+    url.searchParams.set("page", "1");
+
+    const res = await fetch(url.toString(), getFetchOptions());
+    if (!res.ok) return TOP_RATED_MOVIES;
+
+    const data = await res.json();
+    if (!data.results || data.results.length === 0) return TOP_RATED_MOVIES;
+
+    const formats = ["IMAX Remaster", "Dolby Cinema", "4K Restored"];
+    return data.results.map((item, idx) =>
+      transformTmdbMovie(item, formats[idx % formats.length], "top-rated")
+    );
+  } catch (err) {
+    console.error("Error fetching from TMDB top_rated:", err);
+    return TOP_RATED_MOVIES;
+  }
+}
+
+/**
+ * Fetch Upcoming Movies from TMDB
  */
 export async function fetchTmdbUpcoming() {
   if (!isTmdbConfigured()) {
@@ -162,19 +180,14 @@ export async function fetchTmdbUpcoming() {
     url.searchParams.set("page", "1");
 
     const res = await fetch(url.toString(), getFetchOptions());
-    if (!res.ok) {
-      console.warn(`TMDB upcoming returned ${res.status}, falling back.`);
-      return UPCOMING_MOVIES;
-    }
+    if (!res.ok) return UPCOMING_MOVIES;
 
     const data = await res.json();
-    if (!data.results || data.results.length === 0) {
-      return UPCOMING_MOVIES;
-    }
+    if (!data.results || data.results.length === 0) return UPCOMING_MOVIES;
 
     const meterThemes = ["emerald", "indigo", "pink"];
 
-    return data.results.slice(0, 3).map((item, idx) => {
+    return data.results.map((item, idx) => {
       const slugId = item.title
         ? item.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")
         : `upcoming-${item.id}`;
@@ -190,7 +203,7 @@ export async function fetchTmdbUpcoming() {
           ? `${TMDB_IMAGE_BASE}/w780${item.poster_path}`
           : "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=780&auto=format&fit=crop&q=80",
         releaseBadge: item.release_date ? `RELEASES: ${item.release_date}` : "COMING SOON",
-        badgeColor: idx === 0 ? "pink" : idx === 1 ? "blue" : "dark",
+        badgeColor: idx % 3 === 0 ? "pink" : idx % 3 === 1 ? "blue" : "dark",
         fansWaiting: `${Math.round((item.popularity || 45) * 120)} fans waiting`,
         buzzIndex: Math.min(Math.round((item.vote_average || 8) * 10 + 15), 99),
         meterTheme: meterThemes[idx % meterThemes.length],
@@ -202,4 +215,3 @@ export async function fetchTmdbUpcoming() {
     return UPCOMING_MOVIES;
   }
 }
-
