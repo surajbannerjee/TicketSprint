@@ -6,6 +6,7 @@ import { AppProvider } from "@/context/AppContext";
 import LoginModal from "@/components/Common/LoginModal";
 import LocationModal from "@/components/Common/LocationModal";
 import NotificationDrawer from "@/components/Common/NotificationDrawer";
+import WebNotificationPrompt from "@/components/Common/WebNotificationPrompt";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -46,6 +47,7 @@ export default function RootLayout({ children }) {
           <LoginModal />
           <LocationModal />
           <NotificationDrawer />
+          <WebNotificationPrompt />
         </AppProvider>
       </body>
     </html>
