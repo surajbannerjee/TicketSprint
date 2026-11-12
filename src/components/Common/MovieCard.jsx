@@ -43,6 +43,12 @@ export default function MovieCard({
         <img
           src={movie.posterImage}
           alt={movie.title}
+          onError={(e) => {
+            // Elegant fallback if third-party image link is dead
+            e.currentTarget.onerror = null;
+            e.currentTarget.src =
+              "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=500&auto=format&fit=crop&q=80";
+          }}
           className="h-full w-full absolute inset-0 object-cover object-center transition-transform duration-500 "
         />
 

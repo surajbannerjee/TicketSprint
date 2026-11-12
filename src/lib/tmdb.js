@@ -8,7 +8,9 @@
 import { MOVIES, UPCOMING_MOVIES, TOP_RATED_MOVIES, CLASSIC_OLD_MOVIES } from "@/data/apiData";
 
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
-const TMDB_API_KEY = process.env.TMDB_API_KEY || "";
+// Fallback to active key if not set in Vercel Environment Variables
+const DEFAULT_TMDB_API_KEY = "49cf64827d2f77d284c6ed18ed030cb4";
+const TMDB_API_KEY = process.env.TMDB_API_KEY || DEFAULT_TMDB_API_KEY;
 const TMDB_ACCESS_TOKEN = process.env.TMDB_ACCESS_TOKEN || "";
 const TMDB_IMAGE_BASE = process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE || "https://image.tmdb.org/t/p";
 
