@@ -1,3 +1,4 @@
+import React from "react";
 import MovieDetailsClient from "./MovieDetailsClient";
 
 export async function generateStaticParams() {
@@ -13,13 +14,12 @@ export async function generateStaticParams() {
 }
 
 export const metadata = {
-  title: "Dune: Part Two (IMAX 70mm) - TicketSprint",
+  title: "Movie Experience & Showtimes - TicketSprint",
   description:
-    "Book IMAX 70mm seats and showtimes for Dune: Part Two in San Francisco on TicketSprint.",
+    "Book IMAX 70mm, 4DX, and Dolby Atmos seats and showtimes on TicketSprint.",
 };
 
 export default async function MovieDetailsPage({ params }) {
   const resolvedParams = await params;
   return <MovieDetailsClient movieId={resolvedParams?.id || "dune-part-two"} />;
 }
-

@@ -24,7 +24,7 @@ export default function TrendingBlockbusters({
   title = "Trending Blockbusters",
   badge = "IN THEATERS NOW",
   seeAllText = "See all",
-  seeAllLink = "#",
+  seeAllLink = "/movies",
   className = "",
 }) {
   const [moviesList, setMoviesList] = useState(MOVIES);
@@ -79,8 +79,8 @@ export default function TrendingBlockbusters({
         filterOptions={GENRE_OPTIONS}
         activeFilter={selectedGenre}
         onFilterSelect={(genre) => setSelectedGenre(genre)}
-        seeAllText={`${seeAllText} (${filteredMovies.length})`}
-        seeAllLink={seeAllLink}
+        seeAllText={seeAllText}
+        seeAllLink="/movies"
         prevButtonId={prevButtonId}
         nextButtonId={nextButtonId}
       />
@@ -88,8 +88,8 @@ export default function TrendingBlockbusters({
       {/* 2. Swiper Carousel or Loading State */}
       <div className="relative w-full">
         {loading ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 py-8">
-            {[...Array(6)].map((_, i) => (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 py-8">
+            {[...Array(5)].map((_, i) => (
               <div key={i} className="aspect-[2/3] rounded-2xl bg-white/5 animate-pulse" />
             ))}
           </div>
@@ -101,27 +101,28 @@ export default function TrendingBlockbusters({
               nextEl: `#${nextButtonId}`,
             }}
             autoplay={{
-              delay: 5000,
+              delay: 4500,
               disableOnInteraction: false,
               pauseOnMouseEnter: true,
             }}
+            loop={filteredMovies.length > 5}
             spaceBetween={16}
             slidesPerView={1.2}
             breakpoints={{
               380: {
-                slidesPerView: 1.5,
+                slidesPerView: 1.6,
                 spaceBetween: 14,
               },
               480: {
-                slidesPerView: 2,
+                slidesPerView: 2.2,
                 spaceBetween: 14,
               },
               640: {
-                slidesPerView: 2.5,
+                slidesPerView: 2.8,
                 spaceBetween: 16,
               },
               768: {
-                slidesPerView: 3.2,
+                slidesPerView: 3.5,
                 spaceBetween: 18,
               },
               1024: {
@@ -129,12 +130,12 @@ export default function TrendingBlockbusters({
                 spaceBetween: 20,
               },
               1280: {
-                slidesPerView: 5,
+                slidesPerView: 5, // Exactly 5 cards visible on desktop matching user screenshot
                 spaceBetween: 20,
               },
               1440: {
-                slidesPerView: 6,
-                spaceBetween: 24,
+                slidesPerView: 5,
+                spaceBetween: 22,
               },
             }}
             className="w-full !overflow-visible md:!overflow-hidden"
@@ -146,8 +147,8 @@ export default function TrendingBlockbusters({
             ))}
           </Swiper>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {filteredMovies.slice(0, 6).map((movie) => (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {filteredMovies.slice(0, 5).map((movie) => (
               <MovieCard key={movie.id} movie={movie} />
             ))}
           </div>

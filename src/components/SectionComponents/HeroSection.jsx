@@ -2,13 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import ActionButton from "@/components/Common/ActionButton";
-import { Star, Volume2, Armchair, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star, Volume2, Armchair, ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { useApp } from "@/context/AppContext";
 
 /**
  * Reusable & Dynamic HeroSection Component
  * Connects directly to /api/movies (TMDB & Local API).
  * Rotates movies dynamically or shows the current featured blockbuster.
+ * Banner buttons dynamically link to specific booking & trailer targets.
  */
 export default function HeroSection({
   formats = [
@@ -46,17 +47,25 @@ export default function HeroSection({
     loadBannerMovies();
   }, []);
 
+  // Filter movies by selected format if selected
+  const activeMovies = selectedFormat === "all"
+    ? moviesList
+    : moviesList.filter((m) => m.format?.toLowerCase() === selectedFormat.toLowerCase());
+
+  const currentPool = activeMovies.length > 0 ? activeMovies : moviesList;
+
   // Auto-slide banner every 7 seconds
   useEffect(() => {
-    if (moviesList.length <= 1) return;
+    if (currentPool.length <= 1) return;
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % moviesList.length);
+      setCurrentIndex((prev) => (prev + 1) % currentPool.length);
     }, 7000);
     return () => clearInterval(interval);
-  }, [moviesList]);
+  }, [currentPool]);
 
   // Current movie data fallback
   const fallbackMovie = {
+    id: "dune-part-two",
     title: "DUNE: PART TWO",
     highlight: "IMAX",
     watermark: "THE SPRINT EXPERIENCE",
@@ -71,19 +80,19 @@ export default function HeroSection({
     criticScore: "95%",
     imdbRating: "8.6",
     audioVisualSpec: "Dolby Atmos • 70mm Dual Laser",
-    ticketButton: {
-      title: "BOOK TICKETS NOW",
-      link: "/movies/dune-part-two",
-    },
-    trailerButton: {
-      title: "WATCH TRAILER",
-      link: "/movies/dune-part-two",
-    },
+    bookLink: "/movies/dune-part-two",
+    trailerLink: "https://www.youtube.com/results?search_query=dune+part+two+trailer",
   };
 
-  const activeRawMovie = moviesList[currentIndex] || fallbackMovie;
+  const activeRawMovie = currentPool[currentIndex] || fallbackMovie;
+
+  // Fully dynamic button links specific to active movie
+  const movieSlug = activeRawMovie.id || "dune-part-two";
+  const dynamicBookLink = `/seat-selection?movie=${movieSlug}`;
+  const dynamicTrailerLink = `/movies/${movieSlug}#trailer`;
 
   const movie = {
+    id: movieSlug,
     title: activeRawMovie.title,
     highlight: activeRawMovie.highlight || activeRawMovie.format || "IMAX",
     watermark: activeRawMovie.watermark || "NOW PLAYING IN AUDITORIA",
@@ -98,11 +107,11 @@ export default function HeroSection({
     audioVisualSpec: activeRawMovie.audioVisualSpec || "Dolby Atmos • Laser 4K",
     ticketButton: {
       title: "BOOK TICKETS NOW",
-      link: activeRawMovie.bookLink || `/movies/dune-part-two`,
+      link: dynamicBookLink,
     },
     trailerButton: {
       title: "WATCH TRAILER",
-      link: activeRawMovie.trailerLink || `/movies/dune-part-two`,
+      link: dynamicTrailerLink,
     },
   };
 
@@ -110,18 +119,19 @@ export default function HeroSection({
 
   const handleFormatClick = (id) => {
     setSelectedFormat(id);
+    setCurrentIndex(0);
     if (onFormatChange) onFormatChange(id);
   };
 
   const handleNextSlide = () => {
-    if (moviesList.length > 0) {
-      setCurrentIndex((prev) => (prev + 1) % moviesList.length);
+    if (currentPool.length > 0) {
+      setCurrentIndex((prev) => (prev + 1) % currentPool.length);
     }
   };
 
   const handlePrevSlide = () => {
-    if (moviesList.length > 0) {
-      setCurrentIndex((prev) => (prev - 1 + moviesList.length) % moviesList.length);
+    if (currentPool.length > 0) {
+      setCurrentIndex((prev) => (prev - 1 + currentPool.length) % currentPool.length);
     }
   };
 
@@ -145,7 +155,7 @@ export default function HeroSection({
       <div className="absolute inset-0 bg-gradient-to-r from-[#0B0D14] via-[#0B0D14]/70 to-transparent w-full md:w-3/4 pointer-events-none" />
 
       {/* Slide Navigation Arrows (Desktop) */}
-      {moviesList.length > 1 && (
+      {currentPool.length > 1 && (
         <div className="absolute right-6 top-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col gap-2">
           <button
             type="button"
@@ -225,19 +235,19 @@ export default function HeroSection({
             {movie.description}
           </p>
 
-          {/* Action Buttons Row */}
+          {/* Fully Dynamic Action Buttons Row */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2">
             <ActionButton
-              title={movie.ticketButton?.title || "BOOK TICKETS NOW"}
-              link={movie.ticketButton?.link || "/movies/dune-part-two"}
+              title={movie.ticketButton.title}
+              link={movie.ticketButton.link}
               variant="primary"
               size="md"
               className="w-full sm:w-auto"
             />
 
             <ActionButton
-              title={movie.trailerButton?.title || "WATCH TRAILER"}
-              link={movie.trailerButton?.link || "/movies/dune-part-two"}
+              title={movie.trailerButton.title}
+              link={movie.trailerButton.link}
               variant="secondary"
               size="md"
               className="w-full sm:w-auto"
@@ -254,9 +264,9 @@ export default function HeroSection({
           </div>
 
           {/* Slide Indicator Dots */}
-          {moviesList.length > 1 && (
+          {currentPool.length > 1 && (
             <div className="flex items-center gap-1.5 pt-2">
-              {moviesList.slice(0, 6).map((_, idx) => (
+              {currentPool.slice(0, 8).map((_, idx) => (
                 <button
                   key={idx}
                   type="button"
@@ -274,7 +284,7 @@ export default function HeroSection({
         </div>
       </div>
 
-      {/* 3. Bottom Format Filters Bar */}
+      {/* 3. Bottom Format Filters Bar (Clicking changes pool dynamically) */}
       <div className="relative z-10 w-full bg-[#0B0D14]/90 border-t border-white/10 backdrop-blur-md py-3">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
           {/* Format Selection Pills */}
