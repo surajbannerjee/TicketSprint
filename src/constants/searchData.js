@@ -195,3 +195,4 @@ export const SEARCH_INDEX = [
     keywords: ["pass", "sprintpass", "vip", "membership", "free tickets"],
   },
 ];
+

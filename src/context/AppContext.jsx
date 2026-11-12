@@ -399,12 +399,12 @@ const INITIAL_NOTIFICATIONS = [
 ];
 
 export function AppProvider({ children }) {
-  // 1. Auth State - Default configured to Suraj Banerjee
+  // 1. Auth State - Default configured to Suraj Banerjee (Standard User)
   const [user, setUser] = useState({
     name: "Suraj Banerjee",
     email: "surajbanerjee255@gmail.com",
     avatar: PRESET_AVATARS[0].url,
-    isVip: true,
+    isVip: false, // Standard User by default
   });
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [pendingAction, setPendingAction] = useState(null);
@@ -459,7 +459,7 @@ export function AppProvider({ children }) {
       name: userData.name || "Suraj Banerjee",
       email: userData.email || "surajbanerjee255@gmail.com",
       avatar: userData.avatar || PRESET_AVATARS[0].url,
-      isVip: userData.isVip !== undefined ? userData.isVip : true,
+      isVip: Boolean(userData.isVip),
     };
     setUser(fullUser);
     try {
