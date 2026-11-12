@@ -30,10 +30,37 @@ export default function CheckoutClient() {
   const searchParams = useSearchParams();
 
   const movie = searchParams.get("movie") || "dune-part-two";
-  const venue = searchParams.get("venue") || "AMC Metreon 16";
+  const venue = searchParams.get("venue") || "INOX South City Mall & IMAX";
   const time = searchParams.get("time") || "07:45 PM";
   const date = searchParams.get("date") || "Fri, May 17";
   const seatsParam = searchParams.get("seats") || "E8,E9";
+
+  // Dynamic movie details
+  const [movieData, setMovieData] = useState(null);
+
+  useEffect(() => {
+    fetch(`/api/movies?id=${encodeURIComponent(movie)}`)
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.success && json.data) {
+          setMovieData(json.data);
+        }
+      })
+      .catch((err) => console.error(err));
+  }, [movie]);
+
+  const displayTitle =
+    movieData?.title ||
+    movie
+      .split("-")
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
+
+  const displayPoster =
+    movieData?.posterImage ||
+    "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=500&auto=format&fit=crop&q=80";
+
+  const displayFormat = movieData?.format || "IMAX Laser";
 
   const selectedSeatList = seatsParam ? seatsParam.split(",") : ["E8", "E9"];
   const ticketCount = selectedSeatList.length;
@@ -123,7 +150,7 @@ export default function CheckoutClient() {
 
   return (
     <div className="w-full bg-[#11131a] text-[#e2e2ec] font-sans min-h-screen py-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto  px-4 sm:px-6 lg:px-8">
         {/* Step Indicator Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
           <div className="space-y-1">
@@ -625,20 +652,20 @@ export default function CheckoutClient() {
               <div className="bg-[#1d1f27] p-3.5 rounded-xl border border-white/5 flex gap-3 items-center">
                 <div className="w-12 h-16 rounded-lg overflow-hidden shrink-0 bg-[#11131a]">
                   <img
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEizJ5WR79y5Q-xAOLgNhv1aL5xHV3qmgMJOuu8pNtisNUDw1pmOaWBgmp2f2aul2lnnp-mCHuKoTdyXAH_4UMQLy0TQd-ZwAERKooywAn6w1-84JGMUR1Bc1XFGcPMBQY2k3HiqY0g8Hfb_ozzrks6iGuULhoPk24ALa--LIuKhGStex6pZcafQrLFL6amdkehS2USqbaWF_y41xEtWCfEszPX_oLl96IRBWIIZTj"
-                    alt="Dune Part Two"
+                    src={displayPoster}
+                    alt={displayTitle}
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="min-w-0">
                   <div className="flex items-center gap-1.5 mb-0.5">
                     <span className="text-[9px] uppercase px-1.5 py-0.2 rounded bg-[#3131c0]/40 text-[#c0c1ff] font-bold">
-                      IMAX Laser
+                      {displayFormat}
                     </span>
-                    <span className="text-[9px] text-[#94a3b8]">PG-13</span>
+                    <span className="text-[9px] text-[#94a3b8]">UA 13+</span>
                   </div>
                   <h3 className="font-heading font-bold text-sm text-white truncate">
-                    Dune: Part Two
+                    {displayTitle}
                   </h3>
                   <p className="text-xs text-[#94a3b8] truncate">
                     {venue} • Screen 1

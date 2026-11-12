@@ -78,7 +78,7 @@ export default function CinemasPage() {
         <div className="pointer-events-none absolute -top-24 right-1/4 w-96 h-96 bg-[#10B981]/15 blur-[130px] rounded-full" />
         <div className="pointer-events-none absolute top-1/2 -left-20 w-80 h-80 bg-[#FF2E63]/15 blur-[120px] rounded-full" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-[1440px] mx-auto  px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="space-y-3 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#6366F1]/15 border border-[#6366F1]/30 text-[#6366F1] text-xs font-bold uppercase tracking-wider">
               <Film className="w-3.5 h-3.5" />
@@ -111,27 +111,24 @@ export default function CinemasPage() {
                 <button
                   type="button"
                   onClick={() => setPriceSort("none")}
-                  className={`px-2.5 py-1.5 rounded-lg font-semibold transition-all cursor-pointer ${
-                    priceSort === "none" ? "bg-[#FF2E63] text-white" : "text-slate-400 hover:text-white"
-                  }`}
+                  className={`px-2.5 py-1.5 rounded-lg font-semibold transition-all cursor-pointer ${priceSort === "none" ? "bg-[#FF2E63] text-white" : "text-slate-400 hover:text-white"
+                    }`}
                 >
                   Default
                 </button>
                 <button
                   type="button"
                   onClick={() => setPriceSort("asc")}
-                  className={`px-2.5 py-1.5 rounded-lg font-semibold transition-all cursor-pointer ${
-                    priceSort === "asc" ? "bg-[#10B981] text-white" : "text-slate-400 hover:text-white"
-                  }`}
+                  className={`px-2.5 py-1.5 rounded-lg font-semibold transition-all cursor-pointer ${priceSort === "asc" ? "bg-[#10B981] text-white" : "text-slate-400 hover:text-white"
+                    }`}
                 >
                   Lowest Price
                 </button>
                 <button
                   type="button"
                   onClick={() => setPriceSort("desc")}
-                  className={`px-2.5 py-1.5 rounded-lg font-semibold transition-all cursor-pointer ${
-                    priceSort === "desc" ? "bg-[#6366F1] text-white" : "text-slate-400 hover:text-white"
-                  }`}
+                  className={`px-2.5 py-1.5 rounded-lg font-semibold transition-all cursor-pointer ${priceSort === "desc" ? "bg-[#6366F1] text-white" : "text-slate-400 hover:text-white"
+                    }`}
                 >
                   Premium
                 </button>
@@ -158,11 +155,10 @@ export default function CinemasPage() {
                 key={tech.id}
                 type="button"
                 onClick={() => setSelectedTech(tech.id)}
-                className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                  selectedTech === tech.id
+                className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${selectedTech === tech.id
                     ? "bg-[#10B981] text-[#052E16] font-extrabold shadow-md shadow-[#10B981]/25"
                     : "bg-[#191b23] text-slate-300 hover:text-white hover:bg-[#20253b] border border-white/5"
-                }`}
+                  }`}
               >
                 {tech.label}
               </button>
@@ -172,7 +168,7 @@ export default function CinemasPage() {
       </section>
 
       {/* 2. Venues Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+      <section className="max-w-[1440px] mx-auto  px-4 sm:px-6 lg:px-8 pt-10">
         <div className="flex items-center justify-between mb-6">
           <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
             Displaying {filteredCinemas.length} Venues

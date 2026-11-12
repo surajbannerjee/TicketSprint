@@ -16,7 +16,7 @@ export default function WishlistPage() {
         <div className="pointer-events-none absolute -top-24 right-1/4 w-96 h-96 bg-[#FF2E63]/15 blur-[120px] rounded-full" />
         <div className="pointer-events-none absolute top-1/2 -left-20 w-80 h-80 bg-[#6366F1]/10 blur-[120px] rounded-full" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-[1440px] mx-auto  px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div className="space-y-2">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF2E63]/15 border border-[#FF2E63]/30 text-[#FF2E63] text-xs font-bold uppercase tracking-wider">
@@ -50,7 +50,7 @@ export default function WishlistPage() {
       </section>
 
       {/* 2. Wishlist Grid Canvas */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <section className="max-w-[1440px] mx-auto  px-4 sm:px-6 lg:px-8 py-10">
         {wishlist.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {wishlist.map((item) => (

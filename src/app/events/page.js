@@ -73,7 +73,7 @@ export default function EventsPage() {
         <div className="pointer-events-none absolute -top-20 -left-20 w-80 h-80 bg-[#FF2E63]/15 blur-[120px] rounded-full" />
         <div className="pointer-events-none absolute top-1/3 -right-20 w-96 h-96 bg-[#6366F1]/15 blur-[130px] rounded-full" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-[1440px] mx-auto  px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="space-y-3 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF2E63]/15 border border-[#FF2E63]/30 text-[#FF2E63] text-xs font-bold uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5" />
@@ -120,11 +120,10 @@ export default function EventsPage() {
                 key={cat.id}
                 type="button"
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
-                  selectedCategory === cat.id
+                className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${selectedCategory === cat.id
                     ? "bg-[#FF2E63] text-white shadow-md shadow-[#FF2E63]/30"
                     : "bg-[#191b23] text-slate-300 hover:text-white hover:bg-[#20253b] border border-white/5"
-                }`}
+                  }`}
               >
                 {cat.label}
               </button>
@@ -134,7 +133,7 @@ export default function EventsPage() {
       </section>
 
       {/* 2. Events Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+      <section className="max-w-[1440px] mx-auto  px-4 sm:px-6 lg:px-8 pt-10">
         <div className="flex items-center justify-between mb-6">
           <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
             Showing {filteredEvents.length} Spectacles
@@ -171,11 +170,10 @@ export default function EventsPage() {
 
                     {/* Tag badge */}
                     <span
-                      className={`absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider shadow-md ${
-                        event.badgeColor === "green"
+                      className={`absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider shadow-md ${event.badgeColor === "green"
                           ? "bg-[#10B981] text-[#052E16]"
                           : "bg-[#FF2E63] text-white"
-                      }`}
+                        }`}
                     >
                       {event.badge}
                     </span>
@@ -199,9 +197,8 @@ export default function EventsPage() {
                       title={bookmarked ? "Remove from Watchlist" : "Save to Watchlist"}
                     >
                       <Bookmark
-                        className={`w-4 h-4 ${
-                          bookmarked ? "fill-[#FF2E63] text-[#FF2E63]" : ""
-                        }`}
+                        className={`w-4 h-4 ${bookmarked ? "fill-[#FF2E63] text-[#FF2E63]" : ""
+                          }`}
                       />
                     </button>
                   </div>

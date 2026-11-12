@@ -27,12 +27,61 @@ import {
 
 export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
   const router = useRouter();
-  const { toggleWishlist, isInWishlist } = useApp();
+  const { toggleWishlist, isInWishlist, currentCity, selectedHall } = useApp();
   const [selectedDateIndex, setSelectedDateIndex] = useState(0);
   const [selectedFormat, setSelectedFormat] = useState("all");
   const [selectedTimeWindow, setSelectedTimeWindow] = useState("all");
   const [maxPrice, setMaxPrice] = useState(35);
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
+
+  // Dynamic movie state
+  const [movieData, setMovieData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  React.useEffect(() => {
+    let isMounted = true;
+    setLoading(true);
+    fetch(`/api/movies?id=${encodeURIComponent(movieId)}`)
+      .then((res) => res.json())
+      .then((json) => {
+        if (isMounted && json.success && json.data) {
+          setMovieData(json.data);
+        }
+      })
+      .catch((err) => console.error("Error fetching movie details:", err))
+      .finally(() => {
+        if (isMounted) setLoading(false);
+      });
+    return () => {
+      isMounted = false;
+    };
+  }, [movieId]);
+
+  // Dynamic fallback values
+  const title =
+    movieData?.title ||
+    movieId
+      .split("-")
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
+
+  const posterImage =
+    movieData?.posterImage ||
+    "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=500&auto=format&fit=crop&q=80";
+
+  const backdropImage =
+    movieData?.backdropImage ||
+    "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1440&auto=format&fit=crop&q=80";
+
+  const format = movieData?.format || "IMAX";
+  const duration = movieData?.duration || "2h 25m";
+  const genre = movieData?.genre || "Action • Sci-Fi";
+  const rating = movieData?.rating || "94%";
+  const criticScore = movieData?.criticScore || rating;
+  const imdbRating = movieData?.imdbRating || "8.4";
+  const synopsis =
+    movieData?.synopsis ||
+    `Experience ${title} with high-definition laser projection, immersive Dolby Atmos sound, and comfortable plush recliner seating.`;
 
   const isBookmarked = isInWishlist(movieId);
 
@@ -185,8 +234,7 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
           <div
             className="absolute inset-0 bg-cover bg-center mix-blend-screen opacity-35 scale-105 transform duration-1000 ease-out transition-transform"
             style={{
-              backgroundImage:
-                "url('https://lh3.googleusercontent.com/aida-public/AB6AXuC4ItMxUE5q-RAXK1cAk_fGWpOZEzimpS4N0G5xMM_mosMtB59-R7t6o3pMoE_Mmb5vLSoiNs0c_F7SgMs0FBIa4IydrpuU4MwfSiWszCagxxTTQn-gQKzhDytM4uPpU9yQCm5V0EoOCrrCMs_f2g9mENMJOodq3eTGlcNNL9l2Vm0CWiBHiwn7WkXMlqg_UdnkozKZ9bQAMSL0rhaLZFAnx3gYjUZUT6ug1d9J-bhl')",
+              backgroundImage: `url('${backdropImage}')`,
             }}
           />
           {/* Gradient Scrims */}
@@ -194,21 +242,21 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
           <div className="absolute inset-0 bg-gradient-to-r from-[#11131a] via-[#11131a]/70 to-transparent" />
 
           {/* Hero Main Content */}
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12">
+          <div className="relative z-10 w-full max-w-[1440px] mx-auto  px-4 sm:px-6 lg:px-8 pt-28 pb-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
               {/* Left Column: Movie Poster & Buzz Pill */}
               <div className="lg:col-span-4 xl:col-span-3 flex flex-col gap-4">
                 <div className="relative aspect-[2/3] w-full max-w-[280px] mx-auto lg:mx-0 rounded-2xl overflow-hidden shadow-2xl shadow-black/80 bg-[#1d1f27] border border-white/10 group">
                   <img
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCoeHMNXe-VR_JMaytIg02crQ0qN9q2-QeMwwNmpvj6zn7RZVzoP70YITMc9x7rDxGkTqlO5R6QEsA8E71z7rfMOYaPycQuLATpvxc0cQvLNzPDTPisVZySFUCJ4eagz0zrFUjXWIIfW1MUA7s2FmAeBomNrQfMiELm57wowUpgKBwd-HFAQefOyVfftA6r6y2Vnr2n7cRUbFd1GLYzqD2zV_xsi49AOoKENFV7qWS"
-                    alt="Dune: Part Two"
+                    src={posterImage}
+                    alt={title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
 
                   {/* Top Badges */}
                   <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
                     <span className="px-2.5 py-1 rounded-full bg-[#0c0e15]/90 backdrop-blur-md text-[#ff2e63] text-[10px] uppercase tracking-widest font-extrabold border border-[#ff2e63]/30">
-                      IMAX 70mm
+                      {format}
                     </span>
                     <span className="px-2.5 py-1 rounded-full bg-[#00a572]/90 text-white text-[10px] font-bold uppercase tracking-wider">
                       Exclusive Run
@@ -239,7 +287,7 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                       <span className="w-2 h-2 rounded-full bg-[#ff2e63] animate-ping" />
                     </div>
                     <span className="text-[11px] text-[#ff2e63] font-semibold">
-                      Extremely High Demand in SF
+                      Extremely High Demand in {currentCity || "Kolkata"}
                     </span>
                   </div>
                 </div>
@@ -253,22 +301,22 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                     UA 13+
                   </span>
                   <span>•</span>
-                  <span>2h 46m</span>
+                  <span>{duration}</span>
                   <span>•</span>
-                  <span>Sci-Fi • Adventure • Action</span>
+                  <span>{genre}</span>
                   <span>•</span>
                   <span className="text-[#10b981] font-semibold">
-                    Released March 1, 2024
+                    Now Playing Across WB
                   </span>
                 </div>
 
                 {/* Title */}
                 <div className="space-y-1">
                   <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white uppercase leading-none">
-                    Dune: Part Two
+                    {title}
                   </h1>
                   <p className="text-lg sm:text-xl text-[#c0c1ff] font-semibold tracking-wide">
-                    The IMAX 70mm Special Presentation
+                    The {format} Special Presentation
                   </p>
                 </div>
 
@@ -282,13 +330,13 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                     <div className="flex flex-col">
                       <div className="flex items-baseline gap-1">
                         <span className="font-heading font-extrabold text-xl text-white">
-                          95%
+                          {criticScore}
                         </span>
                         <span className="text-[10px] text-[#ff2e63] uppercase font-bold tracking-wider">
                           Fresh
                         </span>
                       </div>
-                      <span className="text-[11px] text-[#94a3b8]">420+ Critics</span>
+                      <span className="text-[11px] text-[#94a3b8]">Verified Reviews</span>
                     </div>
                   </div>
 
@@ -300,13 +348,13 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                     <div className="flex flex-col">
                       <div className="flex items-baseline gap-1">
                         <span className="font-heading font-extrabold text-xl text-white">
-                          95%
+                          {rating}
                         </span>
                         <span className="text-[10px] text-[#10b981] uppercase font-bold tracking-wider">
-                          Popcorn
+                          Audience
                         </span>
                       </div>
-                      <span className="text-[11px] text-[#94a3b8]">50,000+ ratings</span>
+                      <span className="text-[11px] text-[#94a3b8]">12,500+ Verified Fans</span>
                     </div>
                   </div>
 
@@ -318,11 +366,11 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                     <div className="flex flex-col">
                       <div className="flex items-baseline gap-1">
                         <span className="font-heading font-extrabold text-xl text-white">
-                          8.6
+                          {imdbRating}
                         </span>
                         <span className="text-xs text-[#94a3b8]">/10</span>
                       </div>
-                      <span className="text-[11px] text-[#94a3b8]">510k votes</span>
+                      <span className="text-[11px] text-[#94a3b8]">Global Critics</span>
                     </div>
                   </div>
                 </div>
@@ -338,7 +386,7 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                     className="w-full sm:w-auto justify-center shadow-lg shadow-[#ff4f72]/30"
                   />
                   <ActionButton
-                    title="Watch Official Trailer (3:02)"
+                    title="Watch Official Trailer"
                     onClick={() => setIsTrailerOpen(true)}
                     variant="secondary"
                     icon={<Play className="w-4 h-4 fill-current" />}
@@ -350,22 +398,20 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                     onClick={() =>
                       toggleWishlist({
                         id: movieId,
-                        title: "Dune: Part Two",
-                        posterImage:
-                          "https://lh3.googleusercontent.com/aida-public/AB6AXuDCoeHMNXe-VR_JMaytIg02crQ0qN9q2-QeMwwNmpvj6zn7RZVzoP70YITMc9x7rDxGkTqlO5R6QEsA8E71z7rfMOYaPycQuLATpvxc0cQvLNzPDTPisVZySFUCJ4eagz0zrFUjXWIIfW1MUA7s2FmAeBomNrQfMiELm57wowUpgKBwd-HFAQefOyVfftA6r6y2Vnr2n7cRUbFd1GLYzqD2zV_xsi49AOoKENFV7qWS",
-                        format: "IMAX 70mm",
-                        rating: "95%",
-                        duration: "2h 46m",
-                        genre: "Sci-Fi • Adventure • Action",
+                        title: title,
+                        posterImage: posterImage,
+                        format: format,
+                        rating: rating,
+                        duration: duration,
+                        genre: genre,
                         link: `/movies/${movieId}`,
                       })
                     }
                     aria-label="Bookmark movie"
-                    className={`h-11 sm:w-12 sm:h-12 px-4 sm:px-0 rounded-xl sm:rounded-full border border-white/15 flex items-center justify-center transition-colors cursor-pointer gap-2 ${
-                      isBookmarked
+                    className={`h-11 sm:w-12 sm:h-12 px-4 sm:px-0 rounded-xl sm:rounded-full border border-white/15 flex items-center justify-center transition-colors cursor-pointer gap-2 ${isBookmarked
                         ? "bg-[#ff2e63] text-white border-[#ff2e63] shadow-md shadow-[#ff2e63]/30"
                         : "bg-[#282a31] hover:bg-[#33343c] text-white"
-                    }`}
+                      }`}
                   >
                     <Bookmark
                       className={`w-5 h-5 ${isBookmarked ? "fill-current" : ""}`}
@@ -382,7 +428,7 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
       </section>
 
       {/* 2. Synopsis & Cast Strip Bento */}
-      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <section className="w-full max-w-[1440px] mx-auto  px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Synopsis & Key Features */}
           <div className="lg:col-span-7 flex flex-col gap-5">
@@ -393,10 +439,7 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
               </span>
             </div>
             <p className="text-base text-[#e2e2ec] leading-relaxed">
-              Paul Atreides unites with Chani and the Fremen while seeking revenge
-              against the conspirators who destroyed his family. Facing a choice
-              between the love of his life and the fate of the known universe, he
-              endeavors to prevent a terrible future only he can foresee.
+              {synopsis}
             </p>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
@@ -523,7 +566,7 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
         id="showtimes-section"
         className="w-full bg-[#191b23] py-10 border-y border-white/10"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-6">
+        <div className="max-w-[1440px] mx-auto  px-4 sm:px-6 lg:px-8 flex flex-col gap-6">
           {/* Header Row */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="flex items-center gap-2">
@@ -548,8 +591,8 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                   type="button"
                   onClick={() => setSelectedDateIndex(idx)}
                   className={`shrink-0 flex flex-col items-center justify-center w-24 py-3 px-2 rounded-xl transition-all cursor-pointer select-none font-semibold ${isActive
-                      ? "bg-gradient-to-b from-[#ff4f72] to-[#bd0041] text-white shadow-lg shadow-[#ff4f72]/30 scale-105"
-                      : "bg-[#1d1f27] hover:bg-[#282a31] text-[#94a3b8] hover:text-white border border-white/5"
+                    ? "bg-gradient-to-b from-[#ff4f72] to-[#bd0041] text-white shadow-lg shadow-[#ff4f72]/30 scale-105"
+                    : "bg-[#1d1f27] hover:bg-[#282a31] text-[#94a3b8] hover:text-white border border-white/5"
                     }`}
                 >
                   <span className="text-[11px] uppercase tracking-wider font-bold opacity-90">
@@ -584,8 +627,8 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                     type="button"
                     onClick={() => setSelectedFormat(fmt.id)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${selectedFormat === fmt.id
-                        ? "bg-[#ff4f72] text-white shadow-md shadow-[#ff4f72]/30"
-                        : "bg-[#282a31] text-[#94a3b8] hover:text-white hover:bg-[#33343c]"
+                      ? "bg-[#ff4f72] text-white shadow-md shadow-[#ff4f72]/30"
+                      : "bg-[#282a31] text-[#94a3b8] hover:text-white hover:bg-[#33343c]"
                       }`}
                   >
                     {fmt.label}
@@ -611,8 +654,8 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                     type="button"
                     onClick={() => setSelectedTimeWindow(time.id)}
                     className={`py-1.5 px-1 rounded-lg text-center text-xs font-bold transition-colors cursor-pointer ${selectedTimeWindow === time.id
-                        ? "bg-[#ff4f72] text-white shadow-md shadow-[#ff4f72]/30"
-                        : "bg-[#282a31] text-[#94a3b8] hover:text-white hover:bg-[#33343c]"
+                      ? "bg-[#ff4f72] text-white shadow-md shadow-[#ff4f72]/30"
+                      : "bg-[#282a31] text-[#94a3b8] hover:text-white hover:bg-[#33343c]"
                       }`}
                   >
                     {time.label}
@@ -649,7 +692,7 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
       </section>
 
       {/* 4. CINEMA VENUES & SHOWTIME LISTINGS */}
-      <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 flex flex-col gap-8">
+      <section className="w-full max-w-[1440px] mx-auto  px-4 sm:px-6 lg:px-8 py-14 flex flex-col gap-8">
         {/* Availability Guide Strip */}
         <div className="flex flex-wrap items-center justify-between gap-4 p-4 bg-[#191b23] rounded-xl border border-white/5">
           <span className="text-xs font-semibold text-[#94a3b8]">

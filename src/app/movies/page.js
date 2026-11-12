@@ -131,7 +131,7 @@ export default function AllMoviesPage() {
         <div className="pointer-events-none absolute -top-20 -left-20 w-80 h-80 bg-[#FF2E63]/15 blur-[120px] rounded-full" />
         <div className="pointer-events-none absolute top-1/3 -right-20 w-96 h-96 bg-[#6366F1]/15 blur-[130px] rounded-full" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-[1440px] mx-auto  px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="space-y-3 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF2E63]/15 border border-[#FF2E63]/30 text-[#FF2E63] text-xs font-bold uppercase tracking-wider">
               <Film className="w-3.5 h-3.5" />
@@ -173,11 +173,10 @@ export default function AllMoviesPage() {
             <button
               type="button"
               onClick={() => setActiveTab("all-theaters")}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${
-                activeTab === "all-theaters"
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${activeTab === "all-theaters"
                   ? "bg-[#FF2E63] text-white shadow-lg shadow-[#FF2E63]/30"
                   : "bg-[#191b23] text-slate-400 hover:text-white"
-              }`}
+                }`}
             >
               <Film className="w-4 h-4" />
               <span>In Theaters ({nowShowingMovies.length})</span>
@@ -186,11 +185,10 @@ export default function AllMoviesPage() {
             <button
               type="button"
               onClick={() => setActiveTab("new")}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${
-                activeTab === "new"
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${activeTab === "new"
                   ? "bg-[#FF2E63] text-white shadow-lg shadow-[#FF2E63]/30"
                   : "bg-[#191b23] text-slate-400 hover:text-white"
-              }`}
+                }`}
             >
               <Flame className="w-4 h-4 text-amber-400" />
               <span>New Movies</span>
@@ -199,11 +197,10 @@ export default function AllMoviesPage() {
             <button
               type="button"
               onClick={() => setActiveTab("top-rated")}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${
-                activeTab === "top-rated"
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${activeTab === "top-rated"
                   ? "bg-[#6366F1] text-white shadow-lg shadow-[#6366F1]/30"
                   : "bg-[#191b23] text-slate-400 hover:text-white"
-              }`}
+                }`}
             >
               <Award className="w-4 h-4 text-amber-400" />
               <span>Top Rated ({topRatedMovies.length})</span>
@@ -212,11 +209,10 @@ export default function AllMoviesPage() {
             <button
               type="button"
               onClick={() => setActiveTab("old")}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${
-                activeTab === "old"
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${activeTab === "old"
                   ? "bg-[#F59E0B] text-black font-extrabold shadow-lg shadow-[#F59E0B]/30"
                   : "bg-[#191b23] text-slate-400 hover:text-white"
-              }`}
+                }`}
             >
               <History className="w-4 h-4" />
               <span>Old Classics ({oldMovies.length})</span>
@@ -225,11 +221,10 @@ export default function AllMoviesPage() {
             <button
               type="button"
               onClick={() => setActiveTab("upcoming")}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${
-                activeTab === "upcoming"
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${activeTab === "upcoming"
                   ? "bg-[#10B981] text-[#052E16] font-extrabold shadow-lg shadow-[#10B981]/30"
                   : "bg-[#191b23] text-slate-400 hover:text-white"
-              }`}
+                }`}
             >
               <TrendingUp className="w-4 h-4" />
               <span>Upcoming & Buzz ({upcomingMovies.length})</span>
@@ -245,11 +240,10 @@ export default function AllMoviesPage() {
                   key={g}
                   type="button"
                   onClick={() => setSelectedGenre(g)}
-                  className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
-                    selectedGenre === g
+                  className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer ${selectedGenre === g
                       ? "bg-white text-black font-bold"
                       : "bg-[#191b23] text-slate-300 hover:text-white"
-                  }`}
+                    }`}
                 >
                   {g}
                 </button>
@@ -263,11 +257,10 @@ export default function AllMoviesPage() {
                   key={f}
                   type="button"
                   onClick={() => setSelectedFormat(f)}
-                  className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
-                    selectedFormat === f
+                  className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer ${selectedFormat === f
                       ? "bg-[#FF2E63] text-white font-bold"
                       : "bg-[#191b23] text-slate-300 hover:text-white"
-                  }`}
+                    }`}
                 >
                   {f}
                 </button>
@@ -278,7 +271,7 @@ export default function AllMoviesPage() {
       </section>
 
       {/* 2. Grid Catalog Section (Exactly 1 col on mobile, 2 sm, 3 md, 4 lg, 5 xl/desktop) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+      <section className="max-w-[1440px] mx-auto  px-4 sm:px-6 lg:px-8 pt-10">
         <div className="flex items-center justify-between mb-6">
           <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
             {activeDisplay.title} ({activeDisplay.list.length})

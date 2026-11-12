@@ -87,7 +87,7 @@ export default function OffersPage() {
         <div className="pointer-events-none absolute -top-24 right-1/4 w-96 h-96 bg-[#FF2E63]/20 blur-[130px] rounded-full" />
         <div className="pointer-events-none absolute top-1/2 -left-20 w-80 h-80 bg-[#10B981]/15 blur-[120px] rounded-full" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-[1440px] mx-auto  px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="space-y-3 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF2E63]/15 border border-[#FF2E63]/30 text-[#FF2E63] text-xs font-bold uppercase tracking-wider">
               <Tag className="w-3.5 h-3.5" />
@@ -126,9 +126,8 @@ export default function OffersPage() {
 
           {redeemStatus && (
             <div
-              className={`mt-3 text-xs font-semibold flex items-center gap-1.5 ${
-                redeemStatus.success ? "text-[#10B981]" : "text-[#FF4F72]"
-              }`}
+              className={`mt-3 text-xs font-semibold flex items-center gap-1.5 ${redeemStatus.success ? "text-[#10B981]" : "text-[#FF4F72]"
+                }`}
             >
               {redeemStatus.success ? (
                 <CheckCircle className="w-4 h-4" />
@@ -142,7 +141,7 @@ export default function OffersPage() {
       </section>
 
       {/* 2. Featured SprintPass Unlimited Banner */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <section className="max-w-[1440px] mx-auto  px-4 sm:px-6 lg:px-8 py-10">
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#191b23] via-[#121624] to-[#0c0e15] border border-white/15 p-6 sm:p-10 shadow-2xl">
           <div className="pointer-events-none absolute -right-20 -top-20 w-80 h-80 bg-[#FF2E63]/25 blur-[100px] rounded-full" />
 
@@ -216,7 +215,7 @@ export default function OffersPage() {
       </section>
 
       {/* 3. Promo Codes Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <section className="max-w-[1440px] mx-auto  px-4 sm:px-6 lg:px-8 py-4">
         <div className="flex items-center justify-between mb-6">
           <span className="font-heading font-extrabold text-xl text-white">
             Active Promo Codes
@@ -279,7 +278,7 @@ export default function OffersPage() {
       </section>
 
       {/* 4. Partner Cards Banner */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+      <section className="max-w-[1440px] mx-auto  px-4 sm:px-6 lg:px-8 pt-8">
         <div className="p-6 rounded-2xl bg-[#191b23] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <CreditCard className="w-8 h-8 text-[#6366F1] shrink-0" />

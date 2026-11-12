@@ -23,13 +23,54 @@ import {
 export default function SeatSelectionClient() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { currentCity, selectedHall } = useApp();
 
   // Query values with sensible defaults
   const movieParam = searchParams.get("movie") || "dune-part-two";
-  const venueParam = searchParams.get("venue") || "AMC Metreon 16";
+  const defaultVenue = selectedHall?.name ? `${selectedHall.name} - ${currentCity || "Kolkata"}` : "INOX South City Mall & IMAX";
+  const venueParam = searchParams.get("venue") || defaultVenue;
   const timeParam = searchParams.get("time") || "07:45 PM";
   const dateParam = searchParams.get("date") || "Fri, 17 May 2025";
   const formatParam = searchParams.get("format") || "IMAX Laser";
+
+  // Dynamic Movie Data Fetching
+  const [movieData, setMovieData] = useState(null);
+  const [isLoadingMovie, setIsLoadingMovie] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+    setIsLoadingMovie(true);
+    fetch(`/api/movies?id=${encodeURIComponent(movieParam)}`)
+      .then((res) => res.json())
+      .then((json) => {
+        if (isMounted && json.success && json.data) {
+          setMovieData(json.data);
+        }
+      })
+      .catch((err) => console.error("Error loading movie:", err))
+      .finally(() => {
+        if (isMounted) setIsLoadingMovie(false);
+      });
+    return () => {
+      isMounted = false;
+    };
+  }, [movieParam]);
+
+  // Derived Title and Poster with elegant fallback
+  const displayTitle =
+    movieData?.title ||
+    movieParam
+      .split("-")
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
+
+  const displayPoster =
+    movieData?.posterImage ||
+    "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=500&auto=format&fit=crop&q=80";
+
+  const displayFormat = movieData?.format || formatParam;
+  const displayDuration = movieData?.duration || "2h 30m";
+  const displayGenre = movieData?.genre || "Blockbuster";
 
   // Countdown timer: 10 minutes (600 seconds)
   const [timeLeft, setTimeLeft] = useState(582);
@@ -127,13 +168,13 @@ export default function SeatSelectionClient() {
     <div className="w-full bg-[#11131a] text-[#e2e2ec] font-sans min-h-screen lg:pb-32 md:pb-15 pb-7">
       {/* 1. Top Cinema Event Metadata Strip */}
       <section className="w-full bg-[#191b23] px-4 sm:px-6 lg:px-8 py-4 border-b border-white/10 shadow-lg">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div className="max-w-[1440px] mx-auto  flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           {/* Movie Poster & Metadata */}
           <div className="flex items-center gap-4">
             <div className="relative shrink-0 w-16 h-20 rounded-lg overflow-hidden shadow-lg bg-[#282a31] border border-white/10">
               <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE19eL8iVrD99auajOK9lPusO14lyIQBwWuaJJveG2yStFNjQ7goMbTlvxevFBNQwPAjX2Up2DXVAh2Rp_xwzRF7ixmofdmBp1knMLMAq6fsN3G-olPNJwRXseuufWknh9Huu_uYNUj7OfceZct1oJiDa73HmKqSg2NGOWiTEnlWfslZ2q_n6BldCzwJInXRfFbSz74Lmk2tHXIiUj9L3JhHHGDHu2UauWvgmGR8EJ"
-                alt="Dune: Part Two"
+                src={displayPoster}
+                alt={displayTitle}
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
@@ -142,13 +183,13 @@ export default function SeatSelectionClient() {
             <div className="flex flex-col gap-1">
               <div className="flex flex-wrap items-center gap-2">
                 <h1 className="font-heading text-xl sm:text-2xl font-bold text-white">
-                  Dune: Part Two
+                  {displayTitle}
                 </h1>
                 <span className="px-2 py-0.5 rounded-full bg-[#3131c0]/40 text-[#c0c1ff] text-[10px] font-extrabold uppercase tracking-wider border border-[#3131c0]/50">
-                  {formatParam}
+                  {displayFormat}
                 </span>
                 <span className="px-2 py-0.5 rounded-full bg-[#282a31] text-[#10b981] text-[10px] font-bold">
-                  PG-13 • 2h 46m
+                  UA 13+ • {displayDuration}
                 </span>
               </div>
 
@@ -359,11 +400,10 @@ export default function SeatSelectionClient() {
                               key={num}
                               type="button"
                               onClick={() => toggleSeat(row, num, "vip", 24)}
-                              className={`w-[18px] xs:w-[22px] sm:w-8 md:w-9 h-[22px] xs:h-[26px] sm:h-8 md:h-9 rounded-t-[4px] sm:rounded-t-lg rounded-b-[2px] text-[8px] xs:text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all cursor-pointer active:scale-95 ${
-                                isSelected
+                              className={`w-[18px] xs:w-[22px] sm:w-8 md:w-9 h-[22px] xs:h-[26px] sm:h-8 md:h-9 rounded-t-[4px] sm:rounded-t-lg rounded-b-[2px] text-[8px] xs:text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all cursor-pointer active:scale-95 ${isSelected
                                   ? "bg-gradient-to-t from-[#bd0041] via-[#ff2e63] to-[#ff4f72] text-white shadow-[0_0_12px_rgba(255,79,114,0.9)] ring-1.5 sm:ring-2 ring-white/60 scale-105 z-10"
                                   : "bg-[#242838] hover:bg-[#2e3447] text-white border-t-2 border-amber-400/40 border-x border-b border-white/5 hover:border-amber-400/70"
-                              }`}
+                                }`}
                             >
                               {isSelected ? (
                                 <Check className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 stroke-[3]" />
@@ -460,11 +500,10 @@ export default function SeatSelectionClient() {
                               key={num}
                               type="button"
                               onClick={() => toggleSeat(row, num, "club", 18.5)}
-                              className={`w-[17px] xs:w-[20px] sm:w-[26px] md:w-[30px] h-[20px] xs:h-[24px] sm:h-[28px] md:h-[32px] rounded-t-[4px] sm:rounded-t-[6px] rounded-b-[2px] sm:rounded-b-xs text-[8px] xs:text-[9px] sm:text-xs font-bold flex items-center justify-center transition-all cursor-pointer active:scale-95 ${
-                                isSelected
+                              className={`w-[17px] xs:w-[20px] sm:w-[26px] md:w-[30px] h-[20px] xs:h-[24px] sm:h-[28px] md:h-[32px] rounded-t-[4px] sm:rounded-t-[6px] rounded-b-[2px] sm:rounded-b-xs text-[8px] xs:text-[9px] sm:text-xs font-bold flex items-center justify-center transition-all cursor-pointer active:scale-95 ${isSelected
                                   ? "bg-gradient-to-t from-[#bd0041] via-[#ff2e63] to-[#ff4f72] text-white shadow-[0_0_12px_rgba(255,79,114,0.9)] ring-1.5 sm:ring-2 ring-white/60 scale-105 z-10"
                                   : "bg-[#202535] hover:bg-[#2b3145] text-white border-t-2 border-[#ff4f72]/40 border-x border-b border-white/5 hover:border-[#ff4f72]/80 hover:scale-105"
-                              }`}
+                                }`}
                             >
                               {isSelected ? (
                                 <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 stroke-[3]" />
@@ -529,11 +568,10 @@ export default function SeatSelectionClient() {
                               onClick={() =>
                                 toggleSeat(row, num, "standard", 14.0)
                               }
-                              className={`w-[17px] xs:w-[20px] sm:w-[26px] md:w-[30px] h-[20px] xs:h-[24px] sm:h-[28px] md:h-[32px] rounded-t-[4px] sm:rounded-t-[6px] rounded-b-[2px] sm:rounded-b-xs text-[8px] xs:text-[9px] sm:text-xs font-bold flex items-center justify-center transition-all cursor-pointer active:scale-95 ${
-                                isSelected
+                              className={`w-[17px] xs:w-[20px] sm:w-[26px] md:w-[30px] h-[20px] xs:h-[24px] sm:h-[28px] md:h-[32px] rounded-t-[4px] sm:rounded-t-[6px] rounded-b-[2px] sm:rounded-b-xs text-[8px] xs:text-[9px] sm:text-xs font-bold flex items-center justify-center transition-all cursor-pointer active:scale-95 ${isSelected
                                   ? "bg-gradient-to-t from-[#bd0041] via-[#ff2e63] to-[#ff4f72] text-white shadow-[0_0_12px_rgba(255,79,114,0.9)] ring-1.5 sm:ring-2 ring-white/60 scale-105 z-10"
                                   : "bg-[#202535] hover:bg-[#2b3145] text-white border-t-2 border-[#6366f1]/40 border-x border-b border-white/5 hover:border-[#6366f1]/80 hover:scale-105"
-                              }`}
+                                }`}
                             >
                               {isSelected ? (
                                 <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 stroke-[3]" />
@@ -559,7 +597,7 @@ export default function SeatSelectionClient() {
 
       {/* 4. Sticky Bottom Checkout Bar */}
       <div className="fixed bottom-0 inset-x-0 z-40 bg-[#121624]/95 backdrop-blur-xl border-t border-white/10 shadow-2xl py-3.5 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="max-w-[1440px] mx-auto  flex flex-col sm:flex-row items-center justify-between gap-4">
           {/* Selected Seat Badges & Price Summary */}
           <div className="flex items-center gap-5 w-full sm:w-auto justify-between sm:justify-start">
             <div className="flex flex-col">

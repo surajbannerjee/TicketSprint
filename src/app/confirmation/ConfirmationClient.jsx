@@ -30,12 +30,42 @@ export default function ConfirmationClient() {
   const searchParams = useSearchParams();
 
   const movie = searchParams.get("movie") || "dune-part-two";
-  const venue = searchParams.get("venue") || "AMC Metreon 16";
+  const venue = searchParams.get("venue") || "INOX South City Mall & IMAX";
   const time = searchParams.get("time") || "07:45 PM";
   const date = searchParams.get("date") || "Fri, May 17";
   const seatsParam = searchParams.get("seats") || "E8,E9";
   const total = searchParams.get("total") || "58.13";
   const fnb = searchParams.get("fnb") || "IMAX Mega Combo (1x)";
+
+  // Dynamic movie details
+  const [movieData, setMovieData] = useState(null);
+
+  useEffect(() => {
+    fetch(`/api/movies?id=${encodeURIComponent(movie)}`)
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.success && json.data) {
+          setMovieData(json.data);
+        }
+      })
+      .catch((err) => console.error(err));
+  }, [movie]);
+
+  const displayTitle =
+    movieData?.title ||
+    movie
+      .split("-")
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
+
+  const displayPoster =
+    movieData?.posterImage ||
+    movieData?.backdropImage ||
+    "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1440&auto=format&fit=crop&q=80";
+
+  const displayFormat = movieData?.format || "IMAX Laser";
+  const displayGenre = movieData?.genre || "Blockbuster";
+  const displayDuration = movieData?.duration || "2h 30m";
 
   // QR dynamic security refresh countdown (30s loop)
   const [qrCountdown, setQrCountdown] = useState(24);
@@ -54,7 +84,7 @@ export default function ConfirmationClient() {
       <div className="pointer-events-none absolute top-96 -right-32 w-[400px] max-w-full h-[400px] bg-[#ff4f72]/10 blur-[140px] rounded-full" />
       <div className="pointer-events-none absolute top-[640px] -left-32 w-[400px] max-w-full h-[400px] bg-[#3131c0]/20 blur-[130px] rounded-full" />
 
-      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 relative z-10 pt-6 sm:pt-10">
+      <div className="max-w-[1440px] mx-auto  px-3.5 sm:px-6 lg:px-8 relative z-10 pt-6 sm:pt-10">
         {/* Booking Success Header */}
         <section className="flex flex-col items-center text-center max-w-2xl mx-auto mb-8 sm:mb-12">
           {/* Glowing Animated Icon */}
@@ -95,8 +125,8 @@ export default function ConfirmationClient() {
               {/* Top Cinematic Backdrop Header */}
               <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-black">
                 <img
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxt1zu5W6pzIb2zc4BXIeExfOWCW0-R_xvk_x1G7sBzlRNrbrGCFgFbOo0vVWfwqoRezPSewsM9NbSkqHpHOnvC9d7HjHY7RhvdK3q5wjF_Ki0TUNb1Q0_6c_5FtU6bHcUv3BhrTWBkFCZcj-9zgitZv-XLMqAADLKQtCOv8TRD8PgK8gMpibP1wzIYXYTzsHIxNybTkPTy50Qz_3mqmXMk5DiS8rC9MCJA4EqeBd7"
-                  alt="Dune Part Two"
+                  src={displayPoster}
+                  alt={displayTitle}
                   className="w-full h-full object-cover object-center filter brightness-90"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#191b23] via-[#191b23]/70 to-transparent" />
@@ -104,7 +134,7 @@ export default function ConfirmationClient() {
                 {/* Top Badges */}
                 <div className="absolute top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-4 flex flex-wrap items-center justify-between gap-2 z-10">
                   <span className="px-2.5 sm:px-3 py-1 rounded-full bg-[#3131c0]/90 backdrop-blur-md text-[#c0c1ff] text-[10px] sm:text-xs uppercase tracking-wider font-extrabold border border-[#3131c0]/50 shadow-md">
-                    IMAX with Laser • 4K
+                    {displayFormat} • 4K
                   </span>
                   <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-[#0c0e15]/90 backdrop-blur-md text-[#10b981] text-[10px] sm:text-xs font-bold border border-[#10b981]/30 shadow-md">
                     <Sparkles className="w-3 sm:w-3.5 h-3 sm:h-3.5 fill-current" /> Instant Gate Pass
@@ -114,14 +144,14 @@ export default function ConfirmationClient() {
                 {/* Movie Title & Venue */}
                 <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 space-y-1">
                   <span className="text-[10px] uppercase tracking-widest text-[#ff2e63] font-black block">
-                    Sci-Fi Epic • PG-13 • 2h 46m
+                    {displayGenre} • UA 13+ • {displayDuration}
                   </span>
                   <h2 className="font-heading text-xl sm:text-3xl font-black text-white tracking-tight uppercase drop-shadow-md leading-tight">
-                    DUNE: PART TWO
+                    {displayTitle}
                   </h2>
                   <p className="text-xs text-[#94a3b8] flex items-center gap-1.5">
                     <MapPin className="w-3.5 h-3.5 text-[#10b981] shrink-0" />
-                    <span className="truncate">{venue} • Auditorium 1, San Francisco, CA</span>
+                    <span className="truncate">{venue} • Screen 1</span>
                   </p>
                 </div>
               </div>
