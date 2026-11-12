@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { fetchTmdbNowPlaying, fetchTmdbUpcoming, isTmdbConfigured } from "@/lib/tmdb";
 import { MOVIES, UPCOMING_MOVIES } from "@/data/apiData";
 
 export async function GET(request) {
@@ -8,35 +9,42 @@ export async function GET(request) {
   const format = searchParams.get("format");
   const id = searchParams.get("id");
 
+  // Single movie lookup
   if (id) {
-    const movie = MOVIES.find((m) => m.id === id);
+    const allMovies = await fetchTmdbNowPlaying();
+    const movie = allMovies.find((m) => m.id === id) || MOVIES.find((m) => m.id === id);
     if (!movie) {
       return NextResponse.json({ success: false, message: "Movie not found" }, { status: 404 });
     }
-    return NextResponse.json({ success: true, data: movie });
+    return NextResponse.json({ success: true, isTmdb: isTmdbConfigured(), data: movie });
   }
 
+  // Upcoming Buzz movies
   if (type === "upcoming") {
+    const upcomingList = await fetchTmdbUpcoming();
     return NextResponse.json({
       success: true,
-      total: UPCOMING_MOVIES.length,
-      data: UPCOMING_MOVIES,
+      isTmdb: isTmdbConfigured(),
+      total: upcomingList.length,
+      data: upcomingList,
     });
   }
 
-  let filtered = [...MOVIES];
+  // Now Playing Movies (live from TMDB if key set)
+  let moviesList = await fetchTmdbNowPlaying();
 
   if (genre && genre !== "all") {
-    filtered = filtered.filter((m) => m.genre.toLowerCase() === genre.toLowerCase());
+    moviesList = moviesList.filter((m) => m.genre.toLowerCase() === genre.toLowerCase());
   }
 
   if (format && format !== "all") {
-    filtered = filtered.filter((m) => m.format.toLowerCase() === format.toLowerCase());
+    moviesList = moviesList.filter((m) => m.format.toLowerCase() === format.toLowerCase());
   }
 
   return NextResponse.json({
     success: true,
-    total: filtered.length,
-    data: filtered,
+    isTmdb: isTmdbConfigured(),
+    total: moviesList.length,
+    data: moviesList,
   });
 }

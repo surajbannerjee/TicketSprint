@@ -26,3 +26,4 @@ export async function GET(request) {
     data: results.slice(0, 10),
   });
 }
+

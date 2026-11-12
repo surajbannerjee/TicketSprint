@@ -359,3 +359,4 @@ export const CINEMAS = [
     cheapestPrice: 140,
   },
 ];
+
