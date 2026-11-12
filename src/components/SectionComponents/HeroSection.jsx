@@ -1,39 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ActionButton from "@/components/Common/ActionButton";
-import { Star, Volume2, Armchair } from "lucide-react";
+import { Star, Volume2, Armchair, ChevronLeft, ChevronRight } from "lucide-react";
 import { useApp } from "@/context/AppContext";
 
 /**
- * Reusable HeroSection Component
- * Full-screen edge-to-edge cinematic banner with responsive layout.
+ * Reusable & Dynamic HeroSection Component
+ * Connects directly to /api/movies (TMDB & Local API).
+ * Rotates movies dynamically or shows the current featured blockbuster.
  */
 export default function HeroSection({
-  movie = {
-    title: "CYBER RUNNER",
-    highlight: "2099",
-    watermark: "THE ROGUE CHRONICLES",
-    description:
-      "In a fractured neo-megacity, an augmented black-ops runner uncovers an artificial consciousness syndicate threatening to dismantle humanity's neural grid.",
-    backdropImage:
-      "https://www.movy.sx/img/original/58v1KFe3rxvHrYM1hLH5ScpwqNR.jpg/w780-h1092-q72-fx50-fy28.webp",
-    exclusiveBadge: "IMAX 3D EXCLUSIVE",
-    certificate: "UA 16+",
-    genre: "Sci-Fi / Action / Thriller",
-    duration: "2h 38m",
-    criticScore: "96%",
-    imdbRating: "8.9",
-    audioVisualSpec: "Dolby Atmos • 70mm Dual Laser",
-    ticketButton: {
-      title: "BOOK TICKETS NOW",
-      link: "/movies/dune-part-two",
-    },
-    trailerButton: {
-      title: "WATCH TRAILER",
-      link: "/movies/dune-part-two",
-    },
-  },
   formats = [
     { id: "all", label: "All Formats" },
     { id: "imax", label: "IMAX 3D" },
@@ -48,6 +25,87 @@ export default function HeroSection({
 }) {
   const { currentCity } = useApp();
   const [selectedFormat, setSelectedFormat] = useState(formats[0]?.id || "all");
+  const [moviesList, setMoviesList] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Fetch movies from /api/movies dynamically
+  useEffect(() => {
+    async function loadBannerMovies() {
+      try {
+        const res = await fetch("/api/movies");
+        if (res.ok) {
+          const json = await res.json();
+          if (json.success && json.data && json.data.length > 0) {
+            setMoviesList(json.data);
+          }
+        }
+      } catch (e) {
+        console.warn("HeroSection fetch error, using default:", e);
+      }
+    }
+    loadBannerMovies();
+  }, []);
+
+  // Auto-slide banner every 7 seconds
+  useEffect(() => {
+    if (moviesList.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % moviesList.length);
+    }, 7000);
+    return () => clearInterval(interval);
+  }, [moviesList]);
+
+  // Current movie data fallback
+  const fallbackMovie = {
+    title: "DUNE: PART TWO",
+    highlight: "IMAX",
+    watermark: "THE SPRINT EXPERIENCE",
+    description:
+      "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family in a breathtaking visual spectacle.",
+    backdropImage:
+      "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1440&auto=format&fit=crop&q=80",
+    exclusiveBadge: "IMAX 70MM EXCLUSIVE",
+    certificate: "UA 16+",
+    genre: "Sci-Fi / Adventure",
+    duration: "2h 46m",
+    criticScore: "95%",
+    imdbRating: "8.6",
+    audioVisualSpec: "Dolby Atmos • 70mm Dual Laser",
+    ticketButton: {
+      title: "BOOK TICKETS NOW",
+      link: "/movies/dune-part-two",
+    },
+    trailerButton: {
+      title: "WATCH TRAILER",
+      link: "/movies/dune-part-two",
+    },
+  };
+
+  const activeRawMovie = moviesList[currentIndex] || fallbackMovie;
+
+  const movie = {
+    title: activeRawMovie.title,
+    highlight: activeRawMovie.highlight || activeRawMovie.format || "IMAX",
+    watermark: activeRawMovie.watermark || "NOW PLAYING IN AUDITORIA",
+    description: activeRawMovie.synopsis || activeRawMovie.description || fallbackMovie.description,
+    backdropImage: activeRawMovie.backdropImage || fallbackMovie.backdropImage,
+    exclusiveBadge: activeRawMovie.exclusiveBadge || `${activeRawMovie.format || "IMAX"} EXCLUSIVE`,
+    certificate: activeRawMovie.certificate || "UA 16+",
+    genre: activeRawMovie.genre || "Sci-Fi",
+    duration: activeRawMovie.duration || "2h 30m",
+    criticScore: activeRawMovie.criticScore || activeRawMovie.rating || "94%",
+    imdbRating: activeRawMovie.imdbRating || "8.5",
+    audioVisualSpec: activeRawMovie.audioVisualSpec || "Dolby Atmos • Laser 4K",
+    ticketButton: {
+      title: "BOOK TICKETS NOW",
+      link: activeRawMovie.bookLink || `/movies/dune-part-two`,
+    },
+    trailerButton: {
+      title: "WATCH TRAILER",
+      link: activeRawMovie.trailerLink || `/movies/dune-part-two`,
+    },
+  };
+
   const displayLocation = locationStatus || `Showing real-time availability in ${currentCity}`;
 
   const handleFormatClick = (id) => {
@@ -55,13 +113,26 @@ export default function HeroSection({
     if (onFormatChange) onFormatChange(id);
   };
 
+  const handleNextSlide = () => {
+    if (moviesList.length > 0) {
+      setCurrentIndex((prev) => (prev + 1) % moviesList.length);
+    }
+  };
+
+  const handlePrevSlide = () => {
+    if (moviesList.length > 0) {
+      setCurrentIndex((prev) => (prev - 1 + moviesList.length) % moviesList.length);
+    }
+  };
+
   return (
     <section
       className={`relative w-full min-h-[calc(100vh-64px)] sm:min-h-[660px] lg:min-h-[740px] flex flex-col justify-between overflow-hidden bg-[#0B0D14] border-b border-white/10 ${className}`}
     >
-      {/* 1. Full-Screen Background Image */}
+      {/* 1. Full-Screen Dynamic Background Image */}
       <div
-        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat transition-transform duration-1000 ease-out"
+        key={movie.backdropImage}
+        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-out animate-in fade-in zoom-in-105"
         style={{
           backgroundImage: `url('${movie.backdropImage}')`,
         }}
@@ -72,6 +143,28 @@ export default function HeroSection({
       {/* Multi-layered Vignette Gradients for High Contrast */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#0B0D14] via-[#0B0D14]/80 to-transparent pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-r from-[#0B0D14] via-[#0B0D14]/70 to-transparent w-full md:w-3/4 pointer-events-none" />
+
+      {/* Slide Navigation Arrows (Desktop) */}
+      {moviesList.length > 1 && (
+        <div className="absolute right-6 top-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col gap-2">
+          <button
+            type="button"
+            onClick={handlePrevSlide}
+            className="w-10 h-10 rounded-full bg-black/60 hover:bg-[#FF2E63] text-white border border-white/10 hover:border-transparent flex items-center justify-center transition-all cursor-pointer backdrop-blur-md shadow-lg"
+            aria-label="Previous Banner Movie"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            type="button"
+            onClick={handleNextSlide}
+            className="w-10 h-10 rounded-full bg-black/60 hover:bg-[#FF2E63] text-white border border-white/10 hover:border-transparent flex items-center justify-center transition-all cursor-pointer backdrop-blur-md shadow-lg"
+            aria-label="Next Banner Movie"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+      )}
 
       {/* 2. Main Hero Content Constrained Inside Container */}
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col justify-end pt-20 pb-8 sm:pb-12">
@@ -119,16 +212,16 @@ export default function HeroSection({
             </div>
           )}
 
-          {/* Main Title */}
+          {/* Main Dynamic Title */}
           <h1 className="font-heading font-black text-3xl sm:text-5xl lg:text-6xl tracking-tight text-white leading-tight uppercase">
             {movie.title}{" "}
             {movie.highlight && (
-              <span className="text-pink">{movie.highlight}</span>
+              <span className="text-[#FF2E63]">{movie.highlight}</span>
             )}
           </h1>
 
           {/* Synopsis Description */}
-          <p className="font-sans text-pinkT text-xs sm:text-sm lg:text-base leading-relaxed max-w-xl">
+          <p className="font-sans text-pinkT text-xs sm:text-sm lg:text-base leading-relaxed max-w-xl line-clamp-3 sm:line-clamp-none">
             {movie.description}
           </p>
 
@@ -159,6 +252,25 @@ export default function HeroSection({
               </div>
             )}
           </div>
+
+          {/* Slide Indicator Dots */}
+          {moviesList.length > 1 && (
+            <div className="flex items-center gap-1.5 pt-2">
+              {moviesList.slice(0, 6).map((_, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => setCurrentIndex(idx)}
+                  className={`h-1.5 rounded-full transition-all cursor-pointer ${
+                    currentIndex === idx
+                      ? "w-7 bg-[#FF2E63]"
+                      : "w-2 bg-white/20 hover:bg-white/40"
+                  }`}
+                  aria-label={`Slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
