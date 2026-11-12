@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import ActionButton from "@/components/Common/ActionButton";
+import { useApp } from "@/context/AppContext";
 import {
   Calendar,
   Clock,
@@ -96,19 +97,30 @@ export default function SeatSelectionClient() {
     return selectedSeats.some((s) => s.row === row && s.num === num);
   };
 
+  const { user, openLoginModal } = useApp();
+
   const totalPrice = selectedSeats.reduce((acc, s) => acc + s.price, 0);
 
   const handleProceed = () => {
-    const seatsStr = selectedSeats.map((s) => `${s.row}${s.num}`).join(",");
-    const query = new URLSearchParams({
-      movie: movieParam,
-      venue: venueParam,
-      time: timeParam,
-      date: dateParam,
-      seats: seatsStr,
-      total: totalPrice.toFixed(2),
-    }).toString();
-    router.push(`/checkout?${query}`);
+    const doProceed = () => {
+      const seatsStr = selectedSeats.map((s) => `${s.row}${s.num}`).join(",");
+      const query = new URLSearchParams({
+        movie: movieParam,
+        venue: venueParam,
+        time: timeParam,
+        date: dateParam,
+        seats: seatsStr,
+        total: totalPrice.toFixed(2),
+      }).toString();
+      router.push(`/checkout?${query}`);
+    };
+
+    if (!user) {
+      openLoginModal(doProceed);
+      return;
+    }
+
+    doProceed();
   };
 
   return (

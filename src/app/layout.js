@@ -2,6 +2,10 @@ import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Common/Header";
 import Footer from "@/components/Common/Footer";
+import { AppProvider } from "@/context/AppContext";
+import LoginModal from "@/components/Common/LoginModal";
+import LocationModal from "@/components/Common/LocationModal";
+import NotificationDrawer from "@/components/Common/NotificationDrawer";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -35,9 +39,14 @@ export default function RootLayout({ children }) {
       className={`${plusJakartaSans.variable} ${inter.variable} dark h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground overflow-x-hidden">
-        <Header />
-        <div className="flex-1 w-full overflow-x-hidden">{children}</div>
-        <Footer />
+        <AppProvider>
+          <Header />
+          <div className="flex-1 w-full overflow-x-hidden">{children}</div>
+          <Footer />
+          <LoginModal />
+          <LocationModal />
+          <NotificationDrawer />
+        </AppProvider>
       </body>
     </html>
   );

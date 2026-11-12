@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import ActionButton from "@/components/Common/ActionButton";
+import { useApp } from "@/context/AppContext";
 import {
   Bookmark,
   Play,
@@ -26,12 +27,14 @@ import {
 
 export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
   const router = useRouter();
+  const { toggleWishlist, isInWishlist } = useApp();
   const [selectedDateIndex, setSelectedDateIndex] = useState(0);
   const [selectedFormat, setSelectedFormat] = useState("all");
   const [selectedTimeWindow, setSelectedTimeWindow] = useState("all");
   const [maxPrice, setMaxPrice] = useState(35);
-  const [isBookmarked, setIsBookmarked] = useState(false);
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
+
+  const isBookmarked = isInWishlist(movieId);
 
   const dates = [
     { label: "Today", day: "15", month: "May" },
@@ -344,12 +347,25 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                   />
                   <button
                     type="button"
-                    onClick={() => setIsBookmarked(!isBookmarked)}
+                    onClick={() =>
+                      toggleWishlist({
+                        id: movieId,
+                        title: "Dune: Part Two",
+                        posterImage:
+                          "https://lh3.googleusercontent.com/aida-public/AB6AXuDCoeHMNXe-VR_JMaytIg02crQ0qN9q2-QeMwwNmpvj6zn7RZVzoP70YITMc9x7rDxGkTqlO5R6QEsA8E71z7rfMOYaPycQuLATpvxc0cQvLNzPDTPisVZySFUCJ4eagz0zrFUjXWIIfW1MUA7s2FmAeBomNrQfMiELm57wowUpgKBwd-HFAQefOyVfftA6r6y2Vnr2n7cRUbFd1GLYzqD2zV_xsi49AOoKENFV7qWS",
+                        format: "IMAX 70mm",
+                        rating: "95%",
+                        duration: "2h 46m",
+                        genre: "Sci-Fi • Adventure • Action",
+                        link: `/movies/${movieId}`,
+                      })
+                    }
                     aria-label="Bookmark movie"
-                    className={`h-11 sm:w-12 sm:h-12 px-4 sm:px-0 rounded-xl sm:rounded-full border border-white/15 flex items-center justify-center transition-colors cursor-pointer gap-2 ${isBookmarked
-                        ? "bg-[#ff2e63] text-white border-[#ff2e63]"
+                    className={`h-11 sm:w-12 sm:h-12 px-4 sm:px-0 rounded-xl sm:rounded-full border border-white/15 flex items-center justify-center transition-colors cursor-pointer gap-2 ${
+                      isBookmarked
+                        ? "bg-[#ff2e63] text-white border-[#ff2e63] shadow-md shadow-[#ff2e63]/30"
                         : "bg-[#282a31] hover:bg-[#33343c] text-white"
-                      }`}
+                    }`}
                   >
                     <Bookmark
                       className={`w-5 h-5 ${isBookmarked ? "fill-current" : ""}`}

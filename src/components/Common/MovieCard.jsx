@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { Bookmark, Play, Calendar } from "lucide-react";
 import ActionButton from "./ActionButton";
+import { useApp } from "@/context/AppContext";
 
 /**
  * MovieCard Component
@@ -30,7 +31,8 @@ export default function MovieCard({
   },
   className = "",
 }) {
-  const [bookmarked, setBookmarked] = useState(false);
+  const { toggleWishlist, isInWishlist } = useApp();
+  const bookmarked = isInWishlist(movie.id);
 
   return (
     <div
@@ -78,15 +80,16 @@ export default function MovieCard({
             aria-label="Save to watchlist"
             onClick={(e) => {
               e.preventDefault();
-              setBookmarked(!bookmarked);
+              toggleWishlist(movie);
             }}
-            className="p-1.5 rounded-lg bg-black/40 hover:bg-black/60 border border-white/10 text-white transition-colors backdrop-blur-md"
+            className="p-1.5 rounded-lg bg-black/40 hover:bg-black/60 border border-white/10 text-white transition-colors backdrop-blur-md cursor-pointer"
           >
             <Bookmark
-              className={`w-3.5 h-3.5 transition-colors ${bookmarked
-                ? "fill-[#FF2E63] text-[#FF2E63]"
-                : "text-white hover:text-[#FF2E63]"
-                }`}
+              className={`w-3.5 h-3.5 transition-colors ${
+                bookmarked
+                  ? "fill-[#FF2E63] text-[#FF2E63]"
+                  : "text-white hover:text-[#FF2E63]"
+              }`}
             />
           </button>
         </div>
