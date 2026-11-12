@@ -20,7 +20,7 @@ import { useApp } from "@/context/AppContext";
 const PROMO_CODES = [
   {
     code: "CHASE5",
-    discount: "$5.00 OFF",
+    discount: "₹150 OFF",
     title: "Chase Sapphire VIP Discount",
     desc: "Valid on all IMAX 70mm and Dolby Atmos premium tickets this month.",
     expires: "Expires Nov 30, 2025",
@@ -190,7 +190,7 @@ export default function OffersPage() {
                 </span>
                 <div className="flex items-baseline justify-center gap-1">
                   <span className="font-heading text-3xl sm:text-4xl font-black text-white">
-                    $14.99
+                    ₹499
                   </span>
                   <span className="text-xs text-[#94a3b8]">/month</span>
                 </div>

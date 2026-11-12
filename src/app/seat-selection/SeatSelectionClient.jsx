@@ -92,8 +92,8 @@ export default function SeatSelectionClient() {
 
   // Selected seats state: defaults to E8 & E9 as shown in Stitch design
   const [selectedSeats, setSelectedSeats] = useState([
-    { row: "E", num: 8, tier: "club", price: 18.5 },
-    { row: "E", num: 9, tier: "club", price: 18.5 },
+    { row: "E", num: 8, tier: "club", price: 350 },
+    { row: "E", num: 9, tier: "club", price: 350 },
   ]);
 
   // Booked seat registry
@@ -327,7 +327,7 @@ export default function SeatSelectionClient() {
 
         {/* 3. Seating Tiers Grid Canvas (Fluid Responsive - Zero Horizontal Scroll) */}
         <div className="w-full max-w-full flex flex-col gap-5 sm:gap-7 items-center">
-          {/* TIER 1: VIP Ultra Recliners ($24.00) */}
+          {/* TIER 1: VIP Ultra Recliners (₹490.00) */}
           <div className="w-full max-w-3xl flex flex-col gap-2.5 sm:gap-3 bg-[#191b23]/70 rounded-2xl p-2.5 xs:p-3.5 sm:p-5 border border-amber-500/20 shadow-lg">
             <div className="flex flex-wrap items-center justify-between gap-1.5 px-1 pb-1">
               <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
@@ -340,7 +340,7 @@ export default function SeatSelectionClient() {
                 </span>
               </div>
               <span className="text-sm sm:text-base text-[#ff2e63] font-extrabold">
-                $24.00
+                ₹490.00
               </span>
             </div>
 
@@ -386,7 +386,7 @@ export default function SeatSelectionClient() {
                               <button
                                 key={num}
                                 type="button"
-                                onClick={() => toggleSeat(row, num, "vip", 24)}
+                                onClick={() => toggleSeat(row, num, "vip", 490)}
                                 className="w-[18px] xs:w-[22px] sm:w-8 md:w-9 h-[22px] xs:h-[26px] sm:h-8 md:h-9 rounded-t-[4px] sm:rounded-t-lg rounded-b-[2px] bg-[#242661] text-[#c0c1ff] border border-[#484cdb] flex items-center justify-center hover:scale-105 active:scale-95 transition cursor-pointer text-[8px] xs:text-[10px] sm:text-xs shadow-sm"
                                 title="Wheelchair Accessible"
                               >
@@ -399,7 +399,7 @@ export default function SeatSelectionClient() {
                             <button
                               key={num}
                               type="button"
-                              onClick={() => toggleSeat(row, num, "vip", 24)}
+                              onClick={() => toggleSeat(row, num, "vip", 490)}
                               className={`w-[18px] xs:w-[22px] sm:w-8 md:w-9 h-[22px] xs:h-[26px] sm:h-8 md:h-9 rounded-t-[4px] sm:rounded-t-lg rounded-b-[2px] text-[8px] xs:text-[10px] sm:text-xs font-bold flex items-center justify-center transition-all cursor-pointer active:scale-95 ${isSelected
                                   ? "bg-gradient-to-t from-[#bd0041] via-[#ff2e63] to-[#ff4f72] text-white shadow-[0_0_12px_rgba(255,79,114,0.9)] ring-1.5 sm:ring-2 ring-white/60 scale-105 z-10"
                                   : "bg-[#242838] hover:bg-[#2e3447] text-white border-t-2 border-amber-400/40 border-x border-b border-white/5 hover:border-amber-400/70"
@@ -430,7 +430,7 @@ export default function SeatSelectionClient() {
             </div>
           </div>
 
-          {/* TIER 2: Premium Club ($18.50) [SWEET SPOT] */}
+          {/* TIER 2: Premium Club (₹350.00) [SWEET SPOT] */}
           <div className="w-full max-w-3xl flex flex-col gap-2.5 sm:gap-3 bg-[#191b23] rounded-2xl p-2.5 xs:p-3.5 sm:p-5 border border-white/10 shadow-xl relative">
             {/* Sweet Spot Marker */}
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#ff4f72] to-[#bd0041] text-white px-3 sm:px-4 py-0.5 rounded-full text-[9px] sm:text-[10px] uppercase font-black tracking-wider shadow-[0_0_15px_rgba(255,79,114,0.6)] flex items-center gap-1.5 whitespace-nowrap z-10">
@@ -449,7 +449,7 @@ export default function SeatSelectionClient() {
                 </span>
               </div>
               <span className="text-sm sm:text-base text-[#ff2e63] font-extrabold">
-                $18.50
+                ₹350.00
               </span>
             </div>
 
@@ -499,7 +499,7 @@ export default function SeatSelectionClient() {
                             <button
                               key={num}
                               type="button"
-                              onClick={() => toggleSeat(row, num, "club", 18.5)}
+                              onClick={() => toggleSeat(row, num, "club", 350)}
                               className={`w-[17px] xs:w-[20px] sm:w-[26px] md:w-[30px] h-[20px] xs:h-[24px] sm:h-[28px] md:h-[32px] rounded-t-[4px] sm:rounded-t-[6px] rounded-b-[2px] sm:rounded-b-xs text-[8px] xs:text-[9px] sm:text-xs font-bold flex items-center justify-center transition-all cursor-pointer active:scale-95 ${isSelected
                                   ? "bg-gradient-to-t from-[#bd0041] via-[#ff2e63] to-[#ff4f72] text-white shadow-[0_0_12px_rgba(255,79,114,0.9)] ring-1.5 sm:ring-2 ring-white/60 scale-105 z-10"
                                   : "bg-[#202535] hover:bg-[#2b3145] text-white border-t-2 border-[#ff4f72]/40 border-x border-b border-white/5 hover:border-[#ff4f72]/80 hover:scale-105"
@@ -531,7 +531,7 @@ export default function SeatSelectionClient() {
             </div>
           </div>
 
-          {/* TIER 3: Standard Reserve ($14.00) */}
+          {/* TIER 3: Standard Reserve (₹220.00) */}
           <div className="w-full max-w-3xl flex flex-col gap-2.5 sm:gap-3 bg-[#191b23]/70 rounded-2xl p-2.5 xs:p-3.5 sm:p-5 border border-white/5 shadow-md">
             <div className="flex flex-wrap items-center justify-between gap-1.5 px-1 pb-1">
               <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
@@ -544,7 +544,7 @@ export default function SeatSelectionClient() {
                 </span>
               </div>
               <span className="text-sm sm:text-base text-[#ff2e63] font-extrabold">
-                $14.00
+                ₹220.00
               </span>
             </div>
 
@@ -566,7 +566,7 @@ export default function SeatSelectionClient() {
                             <button
                               type="button"
                               onClick={() =>
-                                toggleSeat(row, num, "standard", 14.0)
+                                toggleSeat(row, num, "standard", 220.0)
                               }
                               className={`w-[17px] xs:w-[20px] sm:w-[26px] md:w-[30px] h-[20px] xs:h-[24px] sm:h-[28px] md:h-[32px] rounded-t-[4px] sm:rounded-t-[6px] rounded-b-[2px] sm:rounded-b-xs text-[8px] xs:text-[9px] sm:text-xs font-bold flex items-center justify-center transition-all cursor-pointer active:scale-95 ${isSelected
                                   ? "bg-gradient-to-t from-[#bd0041] via-[#ff2e63] to-[#ff4f72] text-white shadow-[0_0_12px_rgba(255,79,114,0.9)] ring-1.5 sm:ring-2 ring-white/60 scale-105 z-10"
@@ -630,7 +630,7 @@ export default function SeatSelectionClient() {
                 Total Price
               </span>
               <span className="font-heading text-xl sm:text-2xl font-black text-white">
-                ${totalPrice.toFixed(2)}
+                ₹{totalPrice.toFixed(2)}
               </span>
             </div>
           </div>

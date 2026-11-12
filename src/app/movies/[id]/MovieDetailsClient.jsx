@@ -31,7 +31,7 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
   const [selectedDateIndex, setSelectedDateIndex] = useState(0);
   const [selectedFormat, setSelectedFormat] = useState("all");
   const [selectedTimeWindow, setSelectedTimeWindow] = useState("all");
-  const [maxPrice, setMaxPrice] = useState(35);
+  const [maxPrice, setMaxPrice] = useState(700);
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
 
   // Dynamic movie state
@@ -112,28 +112,28 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
         {
           time: "01:15 PM",
           format: "IMAX 70mm • Laser",
-          price: "$26.50",
+          price: "₹450.00",
           status: "available",
           statusText: "Available",
         },
         {
           time: "04:30 PM",
           format: "IMAX 70mm • Laser",
-          price: "$27.50",
+          price: "₹480.00",
           status: "filling",
           statusText: "8 seats left!",
         },
         {
           time: "07:45 PM",
           format: "IMAX 70mm • Prime Eve",
-          price: "$28.50",
+          price: "₹520.00",
           status: "almost-sold",
           statusText: "Front row only",
         },
         {
           time: "10:30 PM",
           format: "IMAX 70mm • Laser",
-          price: "$24.50",
+          price: "₹420.00",
           status: "available",
           statusText: "Available",
         },
@@ -154,21 +154,21 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
         {
           time: "02:00 PM",
           format: "Dolby Cinema",
-          price: "$21.00",
+          price: "₹380.00",
           status: "available",
           statusText: "Available",
         },
         {
           time: "05:15 PM",
           format: "Dolby Cinema",
-          price: "$23.50",
+          price: "₹420.00",
           status: "available",
           statusText: "Available",
         },
         {
           time: "08:30 PM",
           format: "Dolby Cinema",
-          price: "$24.00",
+          price: "₹450.00",
           status: "filling",
           statusText: "5 seats left!",
         },
@@ -189,21 +189,21 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
         {
           time: "03:30 PM",
           format: "35mm Analog",
-          price: "$22.00",
+          price: "₹320.00",
           status: "available",
           statusText: "Available",
         },
         {
           time: "06:45 PM",
           format: "35mm Analog",
-          price: "$25.00",
+          price: "₹380.00",
           status: "filling",
           statusText: "2 seats left!",
         },
         {
           time: "09:50 PM",
           format: "35mm Analog",
-          price: "$22.00",
+          price: "₹320.00",
           status: "available",
           statusText: "Available",
         },
@@ -671,20 +671,21 @@ export default function MovieDetailsClient({ movieId = "dune-part-two" }) {
                   Max Price / Seat
                 </label>
                 <span className="text-xs font-black text-[#ff2e63]">
-                  ${maxPrice}.00
+                  ₹{maxPrice}.00
                 </span>
               </div>
               <div className="flex items-center gap-2 pt-1">
-                <span className="text-xs text-[#94a3b8]">$15</span>
+                <span className="text-xs text-[#94a3b8]">₹200</span>
                 <input
                   type="range"
-                  min="15"
-                  max="35"
+                  min="200"
+                  max="1000"
+                  step="50"
                   value={maxPrice}
                   onChange={(e) => setMaxPrice(Number(e.target.value))}
                   className="w-full accent-[#ff2e63] bg-[#33343c] h-2 rounded-lg cursor-pointer"
                 />
-                <span className="text-xs text-[#94a3b8]">$35</span>
+                <span className="text-xs text-[#94a3b8]">₹1000</span>
               </div>
             </div>
           </div>

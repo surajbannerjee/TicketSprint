@@ -64,7 +64,7 @@ export default function CheckoutClient() {
 
   const selectedSeatList = seatsParam ? seatsParam.split(",") : ["E8", "E9"];
   const ticketCount = selectedSeatList.length;
-  const ticketUnitPrice = 18.5;
+  const ticketUnitPrice = 350.0;
   const ticketsSubtotal = ticketCount * ticketUnitPrice;
 
   // Session timer (6 mins = 360s)
@@ -90,10 +90,10 @@ export default function CheckoutClient() {
 
   // Concession quantities
   const [fnbQty, setFnbQty] = useState({
-    combo: 1, // IMAX Mega Combo ($16.50)
-    caramel: 0, // Caramel Popcorn ($8.50)
-    nachos: 0, // Artisan Loaded Nachos ($9.00)
-    tin: 0, // Dune 2 Collector Tin ($14.00)
+    combo: 1, // IMAX Mega Combo (₹450)
+    caramel: 0, // Caramel Popcorn (₹240)
+    nachos: 0, // Artisan Loaded Nachos (₹280)
+    tin: 0, // Dune 2 Collector Tin (₹399)
   });
 
   const updateQty = (key, delta) => {
@@ -103,7 +103,7 @@ export default function CheckoutClient() {
     }));
   };
 
-  // SprintProtect ($1.99 per ticket)
+  // SprintProtect (₹49 per ticket)
   const [protectEnabled, setProtectEnabled] = useState(true);
 
   // Promo Code
@@ -114,16 +114,16 @@ export default function CheckoutClient() {
   const [paymentMethod, setPaymentMethod] = useState("card");
 
   // Calculations
-  const comboPrice = fnbQty.combo * 16.5;
-  const caramelPrice = fnbQty.caramel * 8.5;
-  const nachosPrice = fnbQty.nachos * 9.0;
-  const tinPrice = fnbQty.tin * 14.0;
+  const comboPrice = fnbQty.combo * 450.0;
+  const caramelPrice = fnbQty.caramel * 240.0;
+  const nachosPrice = fnbQty.nachos * 280.0;
+  const tinPrice = fnbQty.tin * 399.0;
   const fnbSubtotal = comboPrice + caramelPrice + nachosPrice + tinPrice;
 
-  const protectPrice = protectEnabled ? ticketCount * 1.99 : 0;
-  const convenienceFee = 3.2;
-  const taxes = 2.45;
-  const promoDiscount = promoApplied ? 5.0 : 0.0;
+  const protectPrice = protectEnabled ? ticketCount * 49.0 : 0;
+  const convenienceFee = 45.0;
+  const taxes = 38.5;
+  const promoDiscount = promoApplied ? 150.0 : 0.0;
 
   const grandTotal = Math.max(
     0,
@@ -241,10 +241,10 @@ export default function CheckoutClient() {
                     </div>
                     <div className="absolute bottom-2 left-2 right-2 flex justify-between items-baseline">
                       <span className="text-[10px] bg-black/80 backdrop-blur-md px-2 py-0.5 rounded text-[#10b981] font-semibold">
-                        Saves $4.50
+                        Saves ₹120
                       </span>
                       <span className="font-heading text-lg font-black text-[#ff2e63]">
-                        $16.50
+                        ₹450
                       </span>
                     </div>
                   </div>
@@ -297,7 +297,7 @@ export default function CheckoutClient() {
                     </div>
                     <div className="absolute bottom-2 right-2">
                       <span className="font-heading text-lg font-black text-white">
-                        $8.50
+                        ₹240
                       </span>
                     </div>
                   </div>
@@ -345,7 +345,7 @@ export default function CheckoutClient() {
                     />
                     <div className="absolute bottom-2 right-2">
                       <span className="font-heading text-lg font-black text-white">
-                        $9.00
+                        ₹280
                       </span>
                     </div>
                   </div>
@@ -398,7 +398,7 @@ export default function CheckoutClient() {
                     </div>
                     <div className="absolute bottom-2 right-2">
                       <span className="font-heading text-lg font-black text-white">
-                        $14.00
+                        ₹399
                       </span>
                     </div>
                   </div>
@@ -454,7 +454,7 @@ export default function CheckoutClient() {
                     </span>
                   </div>
                   <span className="text-xs font-bold text-[#ff2e63]">
-                    +$1.99 / ticket
+                    +₹49 / ticket
                   </span>
                 </div>
                 <p className="text-xs text-[#94a3b8] mb-3">
@@ -464,7 +464,7 @@ export default function CheckoutClient() {
                 <div className="flex items-center justify-between bg-[#1d1f27] p-3 rounded-xl border border-white/5">
                   <span className="text-xs text-white font-medium flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-[#10b981]" />
-                    Covering {ticketCount} Tickets (${(ticketCount * 1.99).toFixed(2)} total)
+                    Covering {ticketCount} Tickets (₹{(ticketCount * 49).toFixed(2)} total)
                   </span>
                   <label className="relative inline-flex items-center cursor-pointer">
                     <input
@@ -521,7 +521,7 @@ export default function CheckoutClient() {
                         </span>
                       </div>
                       <span className="text-[11px] text-[#94a3b8]">
-                        $5.00 instant concession & IMAX discount deducted.
+                        ₹150 instant concession & IMAX discount deducted.
                       </span>
                     </div>
                   </div>
@@ -553,10 +553,10 @@ export default function CheckoutClient() {
               {/* 4 Payment Methods Selector */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-5">
                 {[
-                  { id: "express", label: "Apple / Google Pay", icon: Smartphone },
-                  { id: "card", label: "Credit Card", icon: CreditCard },
-                  { id: "bank", label: "Instant Bank / UPI", icon: Building },
-                  { id: "wallet", label: "SprintWallet ($15)", icon: Wallet },
+                  { id: "express", label: "UPI / Google Pay", icon: Smartphone },
+                  { id: "card", label: "Credit / Debit Card", icon: CreditCard },
+                  { id: "bank", label: "Net Banking", icon: Building },
+                  { id: "wallet", label: "SprintWallet (₹500)", icon: Wallet },
                 ].map((item) => {
                   const Icon = item.icon;
                   const isActive = paymentMethod === item.id;
@@ -684,11 +684,11 @@ export default function CheckoutClient() {
                       Club Premium Tickets
                     </span>
                     <span className="text-[11px]">
-                      Seats {seatsParam} ({ticketCount}x ${ticketUnitPrice.toFixed(2)})
+                      Seats {seatsParam} ({ticketCount}x ₹{ticketUnitPrice.toFixed(2)})
                     </span>
                   </div>
                   <span className="text-white font-bold">
-                    ${ticketsSubtotal.toFixed(2)}
+                    ₹{ticketsSubtotal.toFixed(2)}
                   </span>
                 </div>
 
@@ -698,10 +698,10 @@ export default function CheckoutClient() {
                       <span className="text-white font-medium block">
                         IMAX Mega Combo
                       </span>
-                      <span className="text-[11px]">{fnbQty.combo}x $16.50</span>
+                      <span className="text-[11px]">{fnbQty.combo}x ₹450</span>
                     </div>
                     <span className="text-white font-bold">
-                      ${comboPrice.toFixed(2)}
+                      ₹{comboPrice.toFixed(2)}
                     </span>
                   </div>
                 )}
@@ -712,10 +712,10 @@ export default function CheckoutClient() {
                       <span className="text-white font-medium block">
                         Caramel Popcorn Tub
                       </span>
-                      <span className="text-[11px]">{fnbQty.caramel}x $8.50</span>
+                      <span className="text-[11px]">{fnbQty.caramel}x ₹240</span>
                     </div>
                     <span className="text-white font-bold">
-                      ${caramelPrice.toFixed(2)}
+                      ₹{caramelPrice.toFixed(2)}
                     </span>
                   </div>
                 )}
@@ -726,10 +726,10 @@ export default function CheckoutClient() {
                       <span className="text-white font-medium block">
                         Artisan Loaded Nachos
                       </span>
-                      <span className="text-[11px]">{fnbQty.nachos}x $9.00</span>
+                      <span className="text-[11px]">{fnbQty.nachos}x ₹280</span>
                     </div>
                     <span className="text-white font-bold">
-                      ${nachosPrice.toFixed(2)}
+                      ₹{nachosPrice.toFixed(2)}
                     </span>
                   </div>
                 )}
@@ -740,10 +740,10 @@ export default function CheckoutClient() {
                       <span className="text-white font-medium block">
                         Dune 2 Collector Tin
                       </span>
-                      <span className="text-[11px]">{fnbQty.tin}x $14.00</span>
+                      <span className="text-[11px]">{fnbQty.tin}x ₹399</span>
                     </div>
                     <span className="text-white font-bold">
-                      ${tinPrice.toFixed(2)}
+                      ₹{tinPrice.toFixed(2)}
                     </span>
                   </div>
                 )}
@@ -755,31 +755,31 @@ export default function CheckoutClient() {
                         <ShieldCheck className="w-3.5 h-3.5" /> SprintProtect™
                       </span>
                       <span className="text-[11px] text-[#94a3b8]">
-                        {ticketCount}x $1.99 Guarantee
+                        {ticketCount}x ₹49 Guarantee
                       </span>
                     </div>
-                    <span className="font-bold">${protectPrice.toFixed(2)}</span>
+                    <span className="font-bold">₹{protectPrice.toFixed(2)}</span>
                   </div>
                 )}
 
                 <div className="flex justify-between">
                   <span>Convenience Fee</span>
                   <span className="text-white font-medium">
-                    ${convenienceFee.toFixed(2)}
+                    ₹{convenienceFee.toFixed(2)}
                   </span>
                 </div>
 
                 <div className="flex justify-between">
-                  <span>Taxes & Surcharge</span>
+                  <span>Taxes & GST (18%)</span>
                   <span className="text-white font-medium">
-                    ${taxes.toFixed(2)}
+                    ₹{taxes.toFixed(2)}
                   </span>
                 </div>
 
                 {promoApplied && (
                   <div className="flex justify-between text-[#ff2e63] font-bold">
                     <span>CHASE5 Promo Discount</span>
-                    <span>-${promoDiscount.toFixed(2)}</span>
+                    <span>-₹{promoDiscount.toFixed(2)}</span>
                   </div>
                 )}
               </div>
@@ -795,13 +795,13 @@ export default function CheckoutClient() {
                   </span>
                 </div>
                 <span className="font-heading text-2xl font-black text-white">
-                  ${grandTotal.toFixed(2)}
+                  ₹{grandTotal.toFixed(2)}
                 </span>
               </div>
 
               {/* Confirm Action Button */}
               <ActionButton
-                title={`Confirm & Pay $${grandTotal.toFixed(2)}`}
+                title={`Confirm & Pay ₹${grandTotal.toFixed(2)}`}
                 onClick={handlePay}
                 variant="primary"
                 size="lg"
