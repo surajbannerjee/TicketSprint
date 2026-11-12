@@ -29,6 +29,7 @@ export default function Header() {
     logout,
     openLoginModal,
     currentCity,
+    selectedHall,
     openLocationModal,
     wishlist,
     unreadCount,
@@ -102,8 +103,8 @@ export default function Header() {
                 AUTO GPS
               </span>
               <div className="flex items-center gap-1 mt-0.5">
-                <span className="text-xs font-medium text-white truncate max-w-[120px]">
-                  {currentCity}
+                <span className="text-xs font-medium text-white truncate max-w-[140px]">
+                  {selectedHall ? selectedHall.name : currentCity}
                 </span>
                 <ChevronDown className="w-3 h-3 text-pinkT group-hover:translate-y-0.5 transition-transform shrink-0" />
               </div>
@@ -328,8 +329,8 @@ export default function Header() {
                 <div className="text-[9px] font-bold text-[#10B981] uppercase tracking-wider">
                   CURRENT LOCATION
                 </div>
-                <div className="text-xs font-semibold text-white">
-                  {currentCity}
+                <div className="text-xs font-semibold text-white truncate max-w-[200px]">
+                  {selectedHall ? `${selectedHall.name} (${currentCity})` : currentCity}
                 </div>
               </div>
             </div>

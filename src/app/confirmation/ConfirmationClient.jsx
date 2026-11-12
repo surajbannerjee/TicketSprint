@@ -81,8 +81,8 @@ export default function ConfirmationClient() {
           </h1>
           <p className="text-xs sm:text-base text-[#94a3b8] max-w-lg leading-relaxed px-2">
             Sent directly to{" "}
-            <strong className="text-white break-all">alex.rivera@example.com</strong> and{" "}
-            <strong className="text-white whitespace-nowrap">+1 (415) 555-0192</strong> via SMS &
+            <strong className="text-white break-all">surajbanerjee255@gmail.com</strong> and{" "}
+            <strong className="text-white whitespace-nowrap">+91 98765 43210</strong> via SMS &
             WhatsApp.
           </p>
         </section>
@@ -555,7 +555,7 @@ export default function ConfirmationClient() {
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2">
                 <h3 className="font-heading text-base sm:text-lg font-bold text-white">
-                  Alex, you earned 340 SprintPoints
+                  Suraj, you earned 340 SprintPoints
                 </h3>
                 <span className="px-2 py-0.5 rounded-full bg-[#ff2e63]/20 text-[#ff2e63] text-[10px] font-bold uppercase shrink-0">
                   +VIP Tier Locked

@@ -8,8 +8,8 @@ export default function LoginModal() {
   const { isLoginModalOpen, closeLoginModal, login } = useApp();
 
   const [activeTab, setActiveTab] = useState("signin"); // "signin" | "signup"
-  const [name, setName] = useState("Alex");
-  const [email, setEmail] = useState("alex.rivera@example.com");
+  const [name, setName] = useState("Suraj Banerjee");
+  const [email, setEmail] = useState("surajbanerjee255@gmail.com");
   const [password, setPassword] = useState("••••••••");
   const [selectedAvatar, setSelectedAvatar] = useState(PRESET_AVATARS[0].url);
   const [customAvatarUrl, setCustomAvatarUrl] = useState("");
@@ -20,25 +20,25 @@ export default function LoginModal() {
   const handleSubmit = (e) => {
     e.preventDefault();
     login({
-      name: activeTab === "signup" ? (name || "Alex") : (name || "Alex"),
-      email: email || "alex.rivera@example.com",
+      name: activeTab === "signup" ? (name || "Suraj Banerjee") : (name || "Suraj Banerjee"),
+      email: email || "surajbanerjee255@gmail.com",
       avatar: customAvatarUrl.trim() || selectedAvatar,
       isVip,
     });
   };
 
   const handleQuickDemo = (demoType) => {
-    if (demoType === "alex-vip") {
+    if (demoType === "suraj-vip") {
       login({
-        name: "Alex",
-        email: "alex.rivera@example.com",
+        name: "Suraj Banerjee",
+        email: "surajbanerjee255@gmail.com",
         avatar: PRESET_AVATARS[0].url,
         isVip: true,
       });
     } else {
       login({
-        name: "Jordan",
-        email: "jordan.k@example.com",
+        name: "Suraj Banerjee",
+        email: "surajbanerjee255@gmail.com",
         avatar: PRESET_AVATARS[1].url,
         isVip: false,
       });
@@ -111,7 +111,7 @@ export default function LoginModal() {
 
         {/* Modal Scrollable Body */}
         <form onSubmit={handleSubmit} className="relative z-10 p-5 sm:p-6 overflow-y-auto space-y-4">
-          {/* Avatar Selection (Available for Sign Up or custom profile) */}
+          {/* Avatar Selection */}
           {activeTab === "signup" && (
             <div className="space-y-2 pb-1">
               <label className="text-xs font-bold text-white flex items-center justify-between">
@@ -175,7 +175,7 @@ export default function LoginModal() {
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Alex Rivera"
+                  placeholder="e.g. Suraj Banerjee"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full bg-[#191b23] border border-white/10 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#FF2E63]"
@@ -192,7 +192,7 @@ export default function LoginModal() {
               <input
                 type="email"
                 required
-                placeholder="name@example.com"
+                placeholder="surajbanerjee255@gmail.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-[#191b23] border border-white/10 rounded-xl pl-9 pr-3 py-2.5 text-xs text-white focus:outline-none focus:border-[#FF2E63]"
@@ -242,19 +242,19 @@ export default function LoginModal() {
             <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
-                onClick={() => handleQuickDemo("alex-vip")}
+                onClick={() => handleQuickDemo("suraj-vip")}
                 className="py-1.5 px-2 rounded-lg bg-[#191b23] hover:bg-[#20253b] border border-white/10 text-[11px] text-white font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
               >
                 <span className="w-2 h-2 rounded-full bg-[#FF2E63]" />
-                <span>Alex (VIP Pass)</span>
+                <span>Suraj Banerjee (VIP)</span>
               </button>
               <button
                 type="button"
-                onClick={() => handleQuickDemo("guest")}
+                onClick={() => handleQuickDemo("standard")}
                 className="py-1.5 px-2 rounded-lg bg-[#191b23] hover:bg-[#20253b] border border-white/10 text-[11px] text-slate-300 font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
               >
                 <span className="w-2 h-2 rounded-full bg-[#10B981]" />
-                <span>Jordan (Standard)</span>
+                <span>Standard Pass</span>
               </button>
             </div>
           </div>

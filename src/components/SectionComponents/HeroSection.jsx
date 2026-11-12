@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import ActionButton from "@/components/Common/ActionButton";
 import { Star, Volume2, Armchair } from "lucide-react";
+import { useApp } from "@/context/AppContext";
 
 /**
  * Reusable HeroSection Component
@@ -41,11 +42,13 @@ export default function HeroSection({
     { id: "screenx", label: "ScreenX 270°" },
     { id: "vip", label: "VIP Recliner", hasIcon: true },
   ],
-  locationStatus = "Showing real-time availability in San Francisco",
+  locationStatus,
   onFormatChange,
   className = "",
 }) {
+  const { currentCity } = useApp();
   const [selectedFormat, setSelectedFormat] = useState(formats[0]?.id || "all");
+  const displayLocation = locationStatus || `Showing real-time availability in ${currentCity}`;
 
   const handleFormatClick = (id) => {
     setSelectedFormat(id);
@@ -191,13 +194,13 @@ export default function HeroSection({
           </div>
 
           {/* Real-time Status Notification */}
-          {locationStatus && (
+          {displayLocation && (
             <div className="flex items-center gap-2 text-[11px] sm:text-xs text-pinkT shrink-0 self-start sm:self-auto">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10B981]"></span>
               </span>
-              <span>{locationStatus}</span>
+              <span>{displayLocation}</span>
             </div>
           )}
         </div>

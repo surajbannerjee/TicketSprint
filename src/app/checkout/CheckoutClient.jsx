@@ -560,7 +560,7 @@ export default function CheckoutClient() {
                   </label>
                   <input
                     type="text"
-                    defaultValue="Alex Rivera"
+                    defaultValue="Suraj Banerjee"
                     className="w-full bg-[#11131a] text-white text-xs rounded-lg px-3.5 py-2.5 border border-white/10 focus:outline-none focus:border-[#ff2e63]"
                   />
                 </div>

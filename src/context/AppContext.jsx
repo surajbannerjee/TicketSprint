@@ -6,93 +6,326 @@ const AppContext = createContext();
 
 export const PRESET_AVATARS = [
   {
-    id: "alex",
-    name: "Alex (Default VIP)",
+    id: "suraj",
+    name: "Suraj Banerjee (VIP Pass)",
     url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&h=120&auto=format&fit=crop&q=80",
   },
   {
-    id: "jordan",
-    name: "Jordan (Cyber Neon)",
+    id: "neon-cyber",
+    name: "Cyber Neon Glow",
     url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&auto=format&fit=crop&q=80",
   },
   {
-    id: "taylor",
-    name: "Taylor (Studio Glow)",
-    url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&auto=format&fit=crop&q=80",
-  },
-  {
-    id: "marcus",
-    name: "Marcus (Cinematic Dark)",
+    id: "cine-gold",
+    name: "Cinematic Director",
     url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=120&auto=format&fit=crop&q=80",
   },
   {
-    id: "sam",
-    name: "Sam (Futuristic Minimal)",
+    id: "studio-purple",
+    name: "IMAX Elite Club",
+    url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&auto=format&fit=crop&q=80",
+  },
+  {
+    id: "minimalist",
+    name: "Futuristic Minimal",
     url: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&h=120&auto=format&fit=crop&q=80",
   },
   {
-    id: "elena",
-    name: "Elena (Indie Director)",
+    id: "indie-art",
+    name: "Indie Screenwriter",
     url: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&h=120&auto=format&fit=crop&q=80",
   },
 ];
 
 export const CITIES_LIST = [
   {
-    name: "San Francisco, CA",
-    short: "SF",
-    theatres: "16 Theatres",
-    distance: "Current GPS Location",
+    name: "Kolkata, WB",
+    short: "CCU",
+    theatres: "28 Cinemas Available",
+    distance: "Your Home Region",
     isPopular: true,
+    priceRange: "₹120 - ₹550",
+    avgPrice: "₹240",
+    halls: [
+      {
+        id: "inox-south-city",
+        name: "INOX South City Mall & IMAX",
+        area: "Prince Anwar Shah Rd, Jadavpur",
+        screens: "6 Screens (IMAX Laser)",
+        ticketPrice: 320,
+        priceTag: "Premium",
+        priceBadge: "₹280 - ₹550",
+        format: "IMAX 3D • Dolby Atmos",
+      },
+      {
+        id: "pvr-mani-square",
+        name: "PVR Mani Square",
+        area: "EM Bypass, Kankurgachi",
+        screens: "4 Screens (4DX & 3D)",
+        ticketPrice: 240,
+        priceTag: "Moderate",
+        priceBadge: "₹180 - ₹380",
+        format: "4DX • Dolby 7.1",
+      },
+      {
+        id: "cinepolis-acropolis",
+        name: "Cinepolis Acropolis Mall",
+        area: "Rajdanga Main Rd, Kasba",
+        screens: "4 Screens (VIP Recliner)",
+        ticketPrice: 220,
+        priceTag: "Best Value",
+        priceBadge: "₹150 - ₹320",
+        format: "RealD 3D • VIP",
+      },
+      {
+        id: "priya-cinema",
+        name: "Priya Cinema - Rashbehari",
+        area: "Rashbehari Avenue, Kalighat",
+        screens: "Heritage Single/Twin",
+        ticketPrice: 120,
+        priceTag: "Cheapest",
+        priceBadge: "₹100 - ₹180",
+        format: "Dolby Digital • Heritage",
+      },
+      {
+        id: "star-theatre",
+        name: "Star Theatre (Heritage Hall)",
+        area: "Bidhan Sarani, Hatibagan",
+        screens: "Classic Single Screen",
+        ticketPrice: 130,
+        priceTag: "Cheapest",
+        priceBadge: "₹110 - ₹170",
+        format: "2K Projection • Affordable",
+      },
+    ],
   },
   {
-    name: "New York, NY",
-    short: "NYC",
-    theatres: "34 Theatres",
-    distance: "2,570 miles away",
+    name: "Howrah, WB",
+    short: "HWH",
+    theatres: "12 Cinemas Available",
+    distance: "12 km away",
     isPopular: true,
+    priceRange: "₹110 - ₹350",
+    avgPrice: "₹190",
+    halls: [
+      {
+        id: "inox-forum-rangoli",
+        name: "INOX Forum Rangoli Mall",
+        area: "Belur, Howrah",
+        screens: "4 Screens",
+        ticketPrice: 190,
+        priceTag: "Moderate",
+        priceBadge: "₹140 - ₹290",
+        format: "Dolby Atmos • Laser",
+      },
+      {
+        id: "miraj-cinemas-avani",
+        name: "Miraj Cinemas - Avani Riverside Mall",
+        area: "Shibpur, Howrah",
+        screens: "4 Screens",
+        ticketPrice: 170,
+        priceTag: "Best Value",
+        priceBadge: "₹130 - ₹260",
+        format: "3D Digital • Surround",
+      },
+      {
+        id: "shanti-cinema",
+        name: "Shanti Cinema Howrah",
+        area: "G.T. Road, Howrah",
+        screens: "Single Screen",
+        ticketPrice: 110,
+        priceTag: "Cheapest",
+        priceBadge: "₹90 - ₹140",
+        format: "Standard 2K",
+      },
+    ],
   },
   {
-    name: "Los Angeles, CA",
-    short: "LA",
-    theatres: "28 Theatres",
-    distance: "380 miles away",
+    name: "Siliguri, WB",
+    short: "IXB",
+    theatres: "9 Cinemas Available",
+    distance: "North Bengal Hub",
     isPopular: true,
+    priceRange: "₹130 - ₹420",
+    avgPrice: "₹220",
+    halls: [
+      {
+        id: "inox-city-centre-siliguri",
+        name: "INOX City Centre",
+        area: "Uttorayon, Matigara",
+        screens: "4 Screens",
+        ticketPrice: 240,
+        priceTag: "Moderate",
+        priceBadge: "₹180 - ₹360",
+        format: "Dolby Atmos 7.1",
+      },
+      {
+        id: "carnival-cinemas-orbit",
+        name: "Carnival Cinemas - Orbit Mall",
+        area: "Sevoke Road, Siliguri",
+        screens: "3 Screens",
+        ticketPrice: 170,
+        priceTag: "Best Value",
+        priceBadge: "₹130 - ₹250",
+        format: "Digital 3D",
+      },
+    ],
   },
   {
-    name: "Chicago, IL",
-    short: "CHI",
-    theatres: "21 Theatres",
-    distance: "1,850 miles away",
-    isPopular: true,
-  },
-  {
-    name: "Austin, TX",
-    short: "ATX",
-    theatres: "12 Theatres",
-    distance: "1,500 miles away",
+    name: "Durgapur, WB",
+    short: "DGP",
+    theatres: "8 Cinemas Available",
+    distance: "Paschim Bardhaman",
     isPopular: false,
+    priceRange: "₹120 - ₹340",
+    avgPrice: "₹190",
+    halls: [
+      {
+        id: "bioscope-junction-mall",
+        name: "Bioscope Cinemas - Junction Mall",
+        area: "City Centre, Durgapur",
+        screens: "3 Screens",
+        ticketPrice: 210,
+        priceTag: "Moderate",
+        priceBadge: "₹160 - ₹320",
+        format: "Dolby Surround",
+      },
+      {
+        id: "inox-suhatta-mall",
+        name: "INOX Suhatta",
+        area: "Benachity, Durgapur",
+        screens: "3 Screens",
+        ticketPrice: 180,
+        priceTag: "Best Value",
+        priceBadge: "₹130 - ₹260",
+        format: "Digital Laser",
+      },
+    ],
   },
   {
-    name: "London, UK",
-    short: "LDN",
-    theatres: "40 Theatres",
-    distance: "5,350 miles away",
-    isPopular: true,
+    name: "Asansol, WB",
+    short: "ASN",
+    theatres: "7 Cinemas Available",
+    distance: "West Bengal Industrial Belt",
+    isPopular: false,
+    priceRange: "₹100 - ₹320",
+    avgPrice: "₹170",
+    halls: [
+      {
+        id: "galaxy-mall-asansol",
+        name: "Eylex Cinemas - Galaxy Mall",
+        area: "Burnpur Road, Asansol",
+        screens: "3 Screens",
+        ticketPrice: 180,
+        priceTag: "Moderate",
+        priceBadge: "₹140 - ₹280",
+        format: "Dolby Digital",
+      },
+      {
+        id: "durga-cinema-asansol",
+        name: "Durga Cinema Hall",
+        area: "G.T. Road, Asansol",
+        screens: "Single Screen",
+        ticketPrice: 100,
+        priceTag: "Cheapest",
+        priceBadge: "₹80 - ₹130",
+        format: "2K Projection",
+      },
+    ],
+  },
+  {
+    name: "Burdwan (Bardhaman), WB",
+    short: "BWN",
+    theatres: "6 Cinemas Available",
+    distance: "Purba Bardhaman",
+    isPopular: false,
+    priceRange: "₹90 - ₹280",
+    avgPrice: "₹150",
+    halls: [
+      {
+        id: "inox-burdwan-arcade",
+        name: "INOX Burdwan Arcade",
+        area: "Curzon Gate, Bardhaman",
+        screens: "3 Screens",
+        ticketPrice: 170,
+        priceTag: "Moderate",
+        priceBadge: "₹130 - ₹260",
+        format: "Dolby 7.1",
+      },
+      {
+        id: "chitrangada-cinema",
+        name: "Chitrangada Cinema",
+        area: "Station Bazar, Burdwan",
+        screens: "Single Screen",
+        ticketPrice: 90,
+        priceTag: "Cheapest",
+        priceBadge: "₹70 - ₹120",
+        format: "Standard Sound",
+      },
+    ],
+  },
+  {
+    name: "Kalyani, WB",
+    short: "KYI",
+    theatres: "5 Cinemas Available",
+    distance: "Nadia District",
+    isPopular: false,
+    priceRange: "₹110 - ₹260",
+    avgPrice: "₹160",
+    halls: [
+      {
+        id: "pvr-kalyani-central",
+        name: "PVR Kalyani Central",
+        area: "Central Park, Kalyani",
+        screens: "3 Screens",
+        ticketPrice: 180,
+        priceTag: "Moderate",
+        priceBadge: "₹140 - ₹260",
+        format: "Dolby Atmos",
+      },
+    ],
   },
   {
     name: "Mumbai, IN",
     short: "BOM",
-    theatres: "48 Theatres",
-    distance: "8,400 miles away",
+    theatres: "48 Cinemas Available",
+    distance: "Metro Hub",
     isPopular: true,
+    priceRange: "₹250 - ₹1200",
+    avgPrice: "₹450",
+    halls: [
+      {
+        id: "pvr-imax-lower-parel",
+        name: "PVR INOX Phoenix Palladium IMAX",
+        area: "Lower Parel, Mumbai",
+        screens: "7 Screens",
+        ticketPrice: 650,
+        priceTag: "Premium",
+        priceBadge: "₹450 - ₹1200",
+        format: "IMAX Laser • Atmos",
+      },
+    ],
   },
   {
-    name: "Tokyo, JP",
-    short: "TYO",
-    theatres: "32 Theatres",
-    distance: "5,150 miles away",
-    isPopular: false,
+    name: "Delhi NCR, IN",
+    short: "DEL",
+    theatres: "52 Cinemas Available",
+    distance: "Metro Hub",
+    isPopular: true,
+    priceRange: "₹220 - ₹1100",
+    avgPrice: "₹400",
+    halls: [
+      {
+        id: "pvr-director-cut-vasant-kunj",
+        name: "PVR Director's Cut - Ambience Mall",
+        area: "Vasant Kunj, New Delhi",
+        screens: "5 Screens",
+        ticketPrice: 700,
+        priceTag: "Premium",
+        priceBadge: "₹500 - ₹1100",
+        format: "Luxury Dine-In",
+      },
+    ],
   },
 ];
 
@@ -136,17 +369,17 @@ const INITIAL_NOTIFICATIONS = [
   {
     id: "notif-1",
     title: "M-Ticket Gate Pass Active",
-    message: "Dune: Part Two doors open at 07:15 PM at AMC Metreon 16 (Auditorium 1).",
+    message: "Dune: Part Two doors open at 07:15 PM at INOX South City Mall (IMAX Laser).",
     time: "10 mins ago",
     read: false,
     category: "ticket",
     actionLink: "/confirmation",
-    actionText: "View Pass",
+    actionText: "Open Pass",
   },
   {
     id: "notif-2",
-    title: "Flash Promo Applied: CHASE5",
-    message: "You have $5 off applied to your next IMAX ticket booking.",
+    title: "Flash SprintPromo: ₹150 OFF",
+    message: "Use code KOLKATA50 for ₹150 instant discount on tickets across West Bengal.",
     time: "1 hour ago",
     read: false,
     category: "promo",
@@ -155,8 +388,8 @@ const INITIAL_NOTIFICATIONS = [
   },
   {
     id: "notif-3",
-    title: "Upcoming Drop: Starlight World Tour",
-    message: "Tickets unlock in 48 hours for Chase Center San Francisco.",
+    title: "Upcoming Drop: Arijit Singh Live in Kolkata",
+    message: "Tickets unlock in 48 hours for Eco Park Kolkata.",
     time: "Yesterday",
     read: true,
     category: "drop",
@@ -166,13 +399,19 @@ const INITIAL_NOTIFICATIONS = [
 ];
 
 export function AppProvider({ children }) {
-  // 1. Auth State
-  const [user, setUser] = useState(null);
+  // 1. Auth State - Default configured to Suraj Banerjee
+  const [user, setUser] = useState({
+    name: "Suraj Banerjee",
+    email: "surajbanerjee255@gmail.com",
+    avatar: PRESET_AVATARS[0].url,
+    isVip: true,
+  });
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [pendingAction, setPendingAction] = useState(null);
 
-  // 2. Location State
-  const [currentCity, setCurrentCity] = useState("San Francisco, CA");
+  // 2. Location State - Default to Kolkata, WB
+  const [currentCity, setCurrentCity] = useState("Kolkata, WB");
+  const [selectedHall, setSelectedHall] = useState(null);
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
 
   // 3. Wishlist State
@@ -195,6 +434,11 @@ export function AppProvider({ children }) {
         setCurrentCity(savedCity);
       }
 
+      const savedHall = localStorage.getItem("ticketsprint_hall");
+      if (savedHall) {
+        setSelectedHall(JSON.parse(savedHall));
+      }
+
       const savedWishlist = localStorage.getItem("ticketsprint_wishlist");
       if (savedWishlist) {
         setWishlist(JSON.parse(savedWishlist));
@@ -212,8 +456,8 @@ export function AppProvider({ children }) {
   // Sync state helpers
   const login = (userData) => {
     const fullUser = {
-      name: userData.name || "Alex",
-      email: userData.email || "alex.rivera@example.com",
+      name: userData.name || "Suraj Banerjee",
+      email: userData.email || "surajbanerjee255@gmail.com",
       avatar: userData.avatar || PRESET_AVATARS[0].url,
       isVip: userData.isVip !== undefined ? userData.isVip : true,
     };
@@ -223,7 +467,6 @@ export function AppProvider({ children }) {
     } catch (e) {}
     setIsLoginModalOpen(false);
 
-    // Execute pending action (e.g. redirect to seat booking) if any
     if (pendingAction && typeof pendingAction === "function") {
       pendingAction();
       setPendingAction(null);
@@ -250,11 +493,9 @@ export function AppProvider({ children }) {
     } catch (e) {}
   };
 
-  const openLoginModal = (callbackOnSuccess = null) => {
-    if (callbackOnSuccess) {
-      setPendingAction(() => callbackOnSuccess);
-    } else {
-      setPendingAction(null);
+  const openLoginModal = (onSuccessAction = null) => {
+    if (onSuccessAction && typeof onSuccessAction === "function") {
+      setPendingAction(() => onSuccessAction);
     }
     setIsLoginModalOpen(true);
   };
@@ -269,33 +510,26 @@ export function AppProvider({ children }) {
     try {
       localStorage.setItem("ticketsprint_city", cityName);
     } catch (e) {}
-    setIsLocationModalOpen(false);
   };
 
-  // Wishlist toggle
-  const toggleWishlist = (movieItem) => {
-    if (!movieItem || !movieItem.id) return;
+  const setHall = (hallObj) => {
+    setSelectedHall(hallObj);
+    try {
+      localStorage.setItem("ticketsprint_hall", JSON.stringify(hallObj));
+    } catch (e) {}
+  };
+
+  const openLocationModal = () => setIsLocationModalOpen(true);
+  const closeLocationModal = () => setIsLocationModalOpen(false);
+
+  const toggleWishlist = (movie) => {
     setWishlist((prev) => {
-      const exists = prev.some((item) => item.id === movieItem.id);
+      const exists = prev.some((item) => item.id === movie.id);
       let updated;
       if (exists) {
-        updated = prev.filter((item) => item.id !== movieItem.id);
+        updated = prev.filter((item) => item.id !== movie.id);
       } else {
-        updated = [
-          ...prev,
-          {
-            id: movieItem.id,
-            title: movieItem.title || "Untitled Feature",
-            posterImage:
-              movieItem.posterImage ||
-              "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&auto=format&fit=crop&q=80",
-            format: movieItem.format || "IMAX",
-            rating: movieItem.rating || "94%",
-            duration: movieItem.duration || "2h 30m",
-            genre: movieItem.languages || movieItem.genre || "Action • Sci-Fi",
-            link: movieItem.link || `/movies/${movieItem.id}`,
-          },
-        ];
+        updated = [movie, ...prev];
       }
       try {
         localStorage.setItem("ticketsprint_wishlist", JSON.stringify(updated));
@@ -318,7 +552,6 @@ export function AppProvider({ children }) {
     });
   };
 
-  // Notification helpers
   const markAllAsRead = () => {
     setNotifications((prev) => {
       const updated = prev.map((n) => ({ ...n, read: true }));
@@ -330,6 +563,8 @@ export function AppProvider({ children }) {
   };
 
   const unreadCount = notifications.filter((n) => !n.read).length;
+  const openNotificationDrawer = () => setIsNotificationDrawerOpen(true);
+  const closeNotificationDrawer = () => setIsNotificationDrawerOpen(false);
 
   return (
     <AppContext.Provider
@@ -341,23 +576,26 @@ export function AppProvider({ children }) {
         isLoginModalOpen,
         openLoginModal,
         closeLoginModal,
+
         currentCity,
         setCity,
+        selectedHall,
+        setHall,
         isLocationModalOpen,
-        setIsLocationModalOpen,
-        openLocationModal: () => setIsLocationModalOpen(true),
-        closeLocationModal: () => setIsLocationModalOpen(false),
+        openLocationModal,
+        closeLocationModal,
+
         wishlist,
         toggleWishlist,
         isInWishlist,
         removeFromWishlist,
+
         notifications,
-        markAllAsRead,
         unreadCount,
+        markAllAsRead,
         isNotificationDrawerOpen,
-        setIsNotificationDrawerOpen,
-        openNotificationDrawer: () => setIsNotificationDrawerOpen(true),
-        closeNotificationDrawer: () => setIsNotificationDrawerOpen(false),
+        openNotificationDrawer,
+        closeNotificationDrawer,
       }}
     >
       {children}
